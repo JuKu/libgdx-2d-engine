@@ -12,7 +12,7 @@
 		<module>core</module>
 	</modules>
 
-	<name>LibGDX 2D Engine</name>
+	<name>Engine2D</name>
 	<description>A small libGDX 2d game engine</description>
 	<url>https://github.com/JuKu/libgdx-2d-engine</url>
 
