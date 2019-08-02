@@ -136,6 +136,8 @@ public class Config {
 
     /**
     * reload all loaded config files
+     *
+     * @throws IOException if a file could not be loaded
     */
     public static void reload () throws IOException {
         for (String filePath : loadedConfigFiles) {
