@@ -1,0 +1,62 @@
+package com.jukusoft.engine2d.core.utils;
+
+import org.junit.Test;
+
+import java.util.Random;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+public class GZipUtilsTest {
+
+    @Test
+    public void testConstructor () {
+        new GZipUtils();
+    }
+
+    @Test
+    public void testCompress () {
+        byte[] data = new byte[4096];
+
+        Random random = new Random();
+
+        //fill data with random values
+        random.nextBytes(data);
+
+        byte[] compressedData = GZipUtils.compress(data);
+        assertNotNull(compressedData);
+        assertEquals(true, compressedData.length > 0);
+    }
+
+    @Test (expected = IllegalStateException.class)
+    public void testDecompressInvalideData () {
+        byte[] compressedData = new byte[]{
+                0x00, 0x01, 0x02, 0x03
+        };
+
+        byte[] uncompressedData = GZipUtils.decompress(compressedData);
+    }
+
+    @Test
+    public void testDecompress () {
+        byte[] data = new byte[4096];
+
+        Random random = new Random();
+
+        //fill data with random values
+        random.nextBytes(data);
+
+        byte[] compressedData = GZipUtils.compress(data);
+        assertNotNull(compressedData);
+
+        byte[] uncompressedData = GZipUtils.decompress(compressedData);
+        assertNotNull(uncompressedData);
+        assertEquals(data.length, uncompressedData.length);
+
+        //check every byte in data
+        for (int i = 0; i < data.length; i++) {
+            assertEquals(data[i], uncompressedData[i]);
+        }
+    }
+
+}
