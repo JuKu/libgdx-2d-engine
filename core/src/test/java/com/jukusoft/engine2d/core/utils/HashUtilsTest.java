@@ -12,12 +12,12 @@ import static org.junit.Assert.assertEquals;
 public class HashUtilsTest {
 
     @Test
-    public void testConstructor () {
+    public void testConstructor() {
         new HashUtils();
     }
 
     @Test
-    public void testComputeMD5Hash () {
+    public void testComputeMD5Hash() {
         String text = "text";
 
         //expected hash calculated with PHP md5 function (so it should be compatible with PHP, so we can use this hash method also on website).
@@ -29,7 +29,7 @@ public class HashUtilsTest {
     }
 
     @Test
-    public void testComputeSHAHash () {
+    public void testComputeSHAHash() {
         String text = "text";
 
         //expected hash calculated with PHP sha1 function (so it should be compatible with PHP, so we can use this hash method also on website).
@@ -43,7 +43,7 @@ public class HashUtilsTest {
     }
 
     @Test
-    public void testComputeMD5FileHash () throws Exception {
+    public void testComputeMD5FileHash() throws Exception {
         //check, that hashes are always equal, also on other platforms
         assertEquals("098f6bcd4621d373cade4e832627b4f6", HashUtils.computeMD5FileHash(new File("../data/junit/hash-tests/test.txt")));
         assertEquals("ad0234829205b9033196ba818f7a872b", HashUtils.computeMD5FileHash(new File("../data/junit/hash-tests/test2.txt")));

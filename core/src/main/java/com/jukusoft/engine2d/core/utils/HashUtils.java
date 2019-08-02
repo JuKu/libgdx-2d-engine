@@ -1,11 +1,11 @@
 /*
-* Coypright (c) 2015 Justin Kuenzel
-* Apache 2.0 License
-*
-* This file doesnt belongs to the Pentaquin Project.
-* This class is owned by Justin Kuenzel and licensed under the Apache 2.0 license.
-* Many projects use this class.
-*/
+ * Coypright (c) 2015 Justin Kuenzel
+ * Apache 2.0 License
+ *
+ * This file doesnt belongs to the Pentaquin Project.
+ * This class is owned by Justin Kuenzel and licensed under the Apache 2.0 license.
+ * Many projects use this class.
+ */
 
 package com.jukusoft.engine2d.core.utils;
 
@@ -26,13 +26,13 @@ public class HashUtils {
 
     protected static final String LOG_TAG = "HashUtils";
 
-    protected HashUtils () {
+    protected HashUtils() {
         //
     }
 
     /**
-    * convert byte data to hex
-    */
+     * convert byte data to hex
+     */
     private static String convertToHex(byte[] data) {
         //create new instance of string buffer
         StringBuilder StringBuilder = new StringBuilder();
@@ -47,18 +47,16 @@ public class HashUtils {
     }
 
     /**
-    * generates SHA Hash
+     * generates SHA Hash
      *
      * @param password text
-     *
      * @return hash
-    */
+     */
     public static String computeSHAHash(String password) {
         MessageDigest mdSha1 = null;
         String SHAHash = "";
 
-        try
-        {
+        try {
             mdSha1 = MessageDigest.getInstance("SHA-1");
         } catch (NoSuchAlgorithmException e1) {
             Log.e(LOG_TAG, "NoSuchAlgorithmException: ", e1);
@@ -77,15 +75,13 @@ public class HashUtils {
      * generates SHA-512 Hash for passwords
      *
      * @param password text
-     *
      * @return hash
      */
     public static String computePasswordSHAHash(String password) {
         MessageDigest mdSha1 = null;
         String SHAHash = "";
 
-        try
-        {
+        try {
             mdSha1 = MessageDigest.getInstance("SHA-512");
         } catch (NoSuchAlgorithmException e1) {
             Log.e(LOG_TAG, "NoSuchAlgorithmException: ", e1);
@@ -103,12 +99,12 @@ public class HashUtils {
 
     /**
      * generates MD5 hash
-     *
+     * <p>
      * This method is compatible to PHP 5 and Java 8.
      *
      * @param password text
      * @return hash
-    */
+     */
     public static String computeMD5Hash(String password) {
         StringBuilder md5Hash = new StringBuilder();
 
@@ -118,8 +114,7 @@ public class HashUtils {
             digest.update(password.getBytes());
             byte[] messageDigest = digest.digest();
 
-            for (int i = 0; i < messageDigest.length; i++)
-            {
+            for (int i = 0; i < messageDigest.length; i++) {
                 String h = Integer.toHexString(0xFF & messageDigest[i]);
                 while (h.length() < 2)
                     h = "0" + h;
@@ -135,26 +130,25 @@ public class HashUtils {
     }
 
     /**
-    * generates an MD5 file hash, like an file checksum
+     * generates an MD5 file hash, like an file checksum
      *
      * @param file file
      * @return hash
-     *
      * @throws Exception if hash coulnd't be generated because of missing algorithm
-    */
-    public static String computeMD5FileHash (File file) throws Exception {
+     */
+    public static String computeMD5FileHash(File file) throws Exception {
         byte[] b = createFileChecksum(file);
         StringBuilder sb = new StringBuilder();
 
-        for (int i=0; i < b.length; i++) {
-            sb.append(Integer.toString( ( b[i] & 0xff ) + 0x100, 16).substring( 1 ));
+        for (int i = 0; i < b.length; i++) {
+            sb.append(Integer.toString((b[i] & 0xff) + 0x100, 16).substring(1));
         }
 
         return sb.toString();
     }
 
     private static byte[] createFileChecksum(File file) throws Exception {
-        try (InputStream fis =  new FileInputStream(file)) {
+        try (InputStream fis = new FileInputStream(file)) {
             byte[] buffer = new byte[1024];
             MessageDigest complete = MessageDigest.getInstance("MD5");
             int numRead;

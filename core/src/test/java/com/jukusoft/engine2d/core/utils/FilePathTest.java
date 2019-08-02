@@ -8,12 +8,12 @@ import static org.junit.Assert.assertNotNull;
 public class FilePathTest {
 
     @Test
-    public void testConstructor () {
+    public void testConstructor() {
         new FilePath();
     }
 
     @Test
-    public void testParse () {
+    public void testParse() {
         //test string without placeholder
         assertEquals("test", FilePath.parse("test"));
 
@@ -23,7 +23,7 @@ public class FilePathTest {
     }
 
     @Test
-    public void testGetterAndSetter () {
+    public void testGetterAndSetter() {
         FilePath.setDataDir("./data/");
         assertEquals("./data/", FilePath.getDataDir());
 
@@ -35,7 +35,7 @@ public class FilePathTest {
     }
 
     @Test
-    public void testGetSystemProperties () {
+    public void testGetSystemProperties() {
         for (String property : System.getProperties().stringPropertyNames()) {
             System.out.println("system property: " + property + ", value: " + System.getProperty(property));
         }

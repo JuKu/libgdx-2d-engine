@@ -11,13 +11,13 @@ public class GZipUtils {
     protected static final String LOG_TAG = "GZipUtils";
 
     /**
-    * default constructor
-    */
-    protected GZipUtils () {
+     * default constructor
+     */
+    protected GZipUtils() {
         //
     }
 
-    public static byte[] compress (byte[] uncompressedData) {
+    public static byte[] compress(byte[] uncompressedData) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
         try (GZIPOutputStream os = new GZIPOutputStream(baos)) {
@@ -29,7 +29,7 @@ public class GZipUtils {
         return baos.toByteArray();
     }
 
-    public static byte[] decompress (byte[] compressedData) {
+    public static byte[] decompress(byte[] compressedData) {
         byte[] buffer = new byte[1024];
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
 

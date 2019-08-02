@@ -11,15 +11,14 @@ public class JarUtils {
     }
 
     /**
-    * get file instance of jar file, loaded from class
-     *
+     * get file instance of jar file, loaded from class
+     * <p>
      * NOTE: If class is not loaded from a jar file (e.q. if you execute JUnit tests) null is returned
      *
      * @param cls class
-     *
      * @return instance of jar file or null, if class wasnt loaded from a jar file
-    */
-    public static File getJarFileOfClass (Class<?> cls) {
+     */
+    public static File getJarFileOfClass(Class<?> cls) {
         if (cls == null) {
             throw new NullPointerException("class cannot be null.");
         }
@@ -37,7 +36,7 @@ public class JarUtils {
         return pathToFile(jarPath, classResource);
     }
 
-    protected static File pathToFile (String jarPath, String classResource) {
+    protected static File pathToFile(String jarPath, String classResource) {
         String path = "";
 
         jarPath = jarPath.replace("%20", " ");
@@ -66,17 +65,15 @@ public class JarUtils {
     }
 
     /**
-    * get file path to jar file of class
-     *
+     * get file path to jar file of class
+     * <p>
      * NOTE: If this is executed from JUnit tests, there isnt a jar file available yet
      *
-     * @throws URISyntaxException if uri isn't correct
-     *
      * @param cls class for searched path
-     *
      * @return path to jar file which contains class
-    */
-    public static String getJarPath (Class<?> cls) throws URISyntaxException {
+     * @throws URISyntaxException if uri isn't correct
+     */
+    public static String getJarPath(Class<?> cls) throws URISyntaxException {
         return new File(cls.getProtectionDomain().getCodeSource().getLocation().toURI()).getPath();
     }
 

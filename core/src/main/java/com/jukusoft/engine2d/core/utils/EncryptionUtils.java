@@ -18,15 +18,15 @@ public class EncryptionUtils {
     }
 
     /**
-    * set public key
+     * set public key
      *
      * @param pubKey RSA public key to encrypt data
-    */
-    public static void init (PublicKey pubKey) {
+     */
+    public static void init(PublicKey pubKey) {
         EncryptionUtils.pubKey = pubKey;
     }
 
-    public static boolean isInitialized () {
+    public static boolean isInitialized() {
         return pubKey != null;
     }
 
@@ -57,7 +57,7 @@ public class EncryptionUtils {
         return encrypt(pubKey, message);
     }
 
-    public static byte[] decryptToBytes(PrivateKey privateKey, byte [] encrypted) throws Exception {
+    public static byte[] decryptToBytes(PrivateKey privateKey, byte[] encrypted) throws Exception {
         if (privateKey == null) {
             throw new NullPointerException("private key cannot be empty.");
         }
@@ -76,20 +76,20 @@ public class EncryptionUtils {
         return cipher.doFinal(encrypted);
     }
 
-    public static String decrypt (PrivateKey privateKey, byte [] encrypted) throws Exception {
+    public static String decrypt(PrivateKey privateKey, byte[] encrypted) throws Exception {
         byte[] decrypted = decryptToBytes(privateKey, encrypted);
         return new String(decrypted, StandardCharsets.UTF_8);
     }
 
-    public static PublicKey getPubKeyFromArray (byte[] bytes) throws Exception {
+    public static PublicKey getPubKeyFromArray(byte[] bytes) throws Exception {
         return KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(bytes));
     }
 
-    public static byte[] convertPublicKeyToByteArray (PublicKey publicKey) {
+    public static byte[] convertPublicKeyToByteArray(PublicKey publicKey) {
         return publicKey.getEncoded();
     }
 
-    public static KeyPair generateKeyPair () throws NoSuchAlgorithmException {
+    public static KeyPair generateKeyPair() throws NoSuchAlgorithmException {
         final int keySize = 2048;
         KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("RSA");
         keyPairGenerator.initialize(keySize);

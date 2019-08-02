@@ -10,12 +10,12 @@ import static org.junit.Assert.assertNotNull;
 public class EncryptionUtilsTest {
 
     @Test
-    public void testConstructor () {
+    public void testConstructor() {
         new EncryptionUtils();
     }
 
     @Test
-    public void testInit () throws NoSuchAlgorithmException {
+    public void testInit() throws NoSuchAlgorithmException {
         //first, generate a key pair
         KeyPair keyPair = buildKeyPair();
 
@@ -31,13 +31,13 @@ public class EncryptionUtilsTest {
     }
 
     @Test
-    public void testIsInitialized () throws NoSuchAlgorithmException {
+    public void testIsInitialized() throws NoSuchAlgorithmException {
         EncryptionUtils.pubKey = null;
         assertEquals(false, EncryptionUtils.isInitialized());
     }
 
     @Test
-    public void testIsInitialized1 () throws NoSuchAlgorithmException {
+    public void testIsInitialized1() throws NoSuchAlgorithmException {
         EncryptionUtils.pubKey = null;
         assertEquals(false, EncryptionUtils.isInitialized());
 
@@ -50,23 +50,23 @@ public class EncryptionUtilsTest {
         EncryptionUtils.pubKey = null;
     }
 
-    @Test (expected = NullPointerException.class)
-    public void testEncryptNullPublicKey () throws Exception {
+    @Test(expected = NullPointerException.class)
+    public void testEncryptNullPublicKey() throws Exception {
         byte[] data = EncryptionUtils.encrypt(null, "test message");
     }
 
-    @Test (expected = NullPointerException.class)
-    public void testEncryptNullMessage () throws Exception {
+    @Test(expected = NullPointerException.class)
+    public void testEncryptNullMessage() throws Exception {
         byte[] data = EncryptionUtils.encrypt(generatePublicKey(), null);
     }
 
-    @Test (expected = IllegalArgumentException.class)
-    public void testEncryptEmptyMessage () throws Exception {
+    @Test(expected = IllegalArgumentException.class)
+    public void testEncryptEmptyMessage() throws Exception {
         byte[] data = EncryptionUtils.encrypt(generatePublicKey(), "");
     }
 
     @Test
-    public void testEncrypt () throws Exception {
+    public void testEncrypt() throws Exception {
         //first, generate a key pair
         KeyPair keyPair = buildKeyPair();
 
@@ -81,31 +81,31 @@ public class EncryptionUtilsTest {
         assertEquals(true, data.length > 0);
     }
 
-    @Test (expected = NullPointerException.class)
-    public void testDecryptNullKey () throws Exception {
+    @Test(expected = NullPointerException.class)
+    public void testDecryptNullKey() throws Exception {
         EncryptionUtils.decrypt(null, new byte[2]);
     }
 
-    @Test (expected = NullPointerException.class)
-    public void testDecryptNullArray () throws Exception {
+    @Test(expected = NullPointerException.class)
+    public void testDecryptNullArray() throws Exception {
         PrivateKey privateKey = generatePrivateKey();
         EncryptionUtils.decrypt(privateKey, null);
     }
 
-    @Test (expected = IllegalArgumentException.class)
-    public void testDecryptEmptyArray () throws Exception {
+    @Test(expected = IllegalArgumentException.class)
+    public void testDecryptEmptyArray() throws Exception {
         PrivateKey privateKey = generatePrivateKey();
         EncryptionUtils.decrypt(privateKey, new byte[0]);
     }
 
-    @Test (expected = IllegalStateException.class)
-    public void testEncryptWithoutInit () throws Exception {
+    @Test(expected = IllegalStateException.class)
+    public void testEncryptWithoutInit() throws Exception {
         EncryptionUtils.pubKey = null;
         EncryptionUtils.encrypt("test message");
     }
 
     @Test
-    public void testEncryptWithInit () throws Exception {
+    public void testEncryptWithInit() throws Exception {
         PublicKey publicKey = generatePublicKey();
         EncryptionUtils.init(publicKey);
 
@@ -113,7 +113,7 @@ public class EncryptionUtilsTest {
     }
 
     @Test
-    public void testEncryptAndDecrypt () throws Exception {
+    public void testEncryptAndDecrypt() throws Exception {
         //first, generate a key pair
         KeyPair keyPair = buildKeyPair();
 
@@ -128,7 +128,7 @@ public class EncryptionUtilsTest {
     }
 
     @Test
-    public void testConvertPublicKeyToBytes () throws Exception {
+    public void testConvertPublicKeyToBytes() throws Exception {
         //first, generate public key
         PublicKey publicKey = generatePublicKey();
 
@@ -140,7 +140,7 @@ public class EncryptionUtilsTest {
     }
 
     @Test
-    public void testGenerateKeyPair () throws NoSuchAlgorithmException {
+    public void testGenerateKeyPair() throws NoSuchAlgorithmException {
         KeyPair keyPair = EncryptionUtils.generateKeyPair();
         assertNotNull(keyPair);
         assertNotNull(keyPair.getPublic());
@@ -154,7 +154,7 @@ public class EncryptionUtilsTest {
         return keyPairGenerator.genKeyPair();
     }
 
-    protected static PublicKey generatePublicKey () throws NoSuchAlgorithmException {
+    protected static PublicKey generatePublicKey() throws NoSuchAlgorithmException {
         //first, generate a key pair
         KeyPair keyPair = buildKeyPair();
 
@@ -164,7 +164,7 @@ public class EncryptionUtilsTest {
         return pubKey;
     }
 
-    protected static PrivateKey generatePrivateKey () throws NoSuchAlgorithmException {
+    protected static PrivateKey generatePrivateKey() throws NoSuchAlgorithmException {
         //first, generate a key pair
         KeyPair keyPair = buildKeyPair();
 

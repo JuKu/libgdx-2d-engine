@@ -7,12 +7,12 @@ import static org.junit.Assert.assertEquals;
 public class PlatformTest {
 
     @Test
-    public void testConstructor () {
+    public void testConstructor() {
         new Platform();
     }
 
     @Test
-    public void testAdd () {
+    public void testAdd() {
         Platform.clearQueue();
 
         assertEquals(0, Platform.getQueueSize());
@@ -25,7 +25,7 @@ public class PlatformTest {
     }
 
     @Test
-    public void testExecute () {
+    public void testExecute() {
         Platform.clearQueue();
 
         assertEquals(0, Platform.getQueueSize());

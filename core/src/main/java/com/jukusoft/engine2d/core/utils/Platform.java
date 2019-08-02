@@ -7,15 +7,15 @@ public class Platform {
 
     protected static Queue<Runnable> queue = new ConcurrentLinkedQueue<>();
 
-    protected Platform () {
+    protected Platform() {
         //
     }
 
-    public static void runOnUIThread (Runnable runnable) {
+    public static void runOnUIThread(Runnable runnable) {
         queue.add(runnable);
     }
 
-    public static void executeQueue () {
+    public static void executeQueue() {
         while (true) {
             Runnable runnable = queue.poll();
 
@@ -27,11 +27,11 @@ public class Platform {
         }
     }
 
-    protected static void clearQueue () {
+    protected static void clearQueue() {
         queue.clear();
     }
 
-    protected static int getQueueSize () {
+    protected static int getQueueSize() {
         return queue.size();
     }
 

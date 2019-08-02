@@ -10,12 +10,12 @@ import static org.junit.Assert.assertNotNull;
 public class GZipUtilsTest {
 
     @Test
-    public void testConstructor () {
+    public void testConstructor() {
         new GZipUtils();
     }
 
     @Test
-    public void testCompress () {
+    public void testCompress() {
         byte[] data = new byte[4096];
 
         Random random = new Random();
@@ -28,8 +28,8 @@ public class GZipUtilsTest {
         assertEquals(true, compressedData.length > 0);
     }
 
-    @Test (expected = IllegalStateException.class)
-    public void testDecompressInvalideData () {
+    @Test(expected = IllegalStateException.class)
+    public void testDecompressInvalideData() {
         byte[] compressedData = new byte[]{
                 0x00, 0x01, 0x02, 0x03
         };
@@ -38,7 +38,7 @@ public class GZipUtilsTest {
     }
 
     @Test
-    public void testDecompress () {
+    public void testDecompress() {
         byte[] data = new byte[4096];
 
         Random random = new Random();

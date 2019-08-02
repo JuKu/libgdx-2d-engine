@@ -5,6 +5,6 @@ import java.io.File;
 @FunctionalInterface
 public interface FileListIterator {
 
-    public void iterate (File file, String relFilePath);
+    public void iterate(File file, String relFilePath);
 
 }

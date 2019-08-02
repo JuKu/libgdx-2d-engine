@@ -24,7 +24,7 @@ public class LogWriter implements Runnable {
     protected static LogListener logListener = null;
     protected CountDownLatch shutdownLatch = null;
 
-    protected LogWriter (final File file, final ConcurrentLinkedQueue<String> loggingQueue, CountDownLatch shutdownLatch) {
+    protected LogWriter(final File file, final ConcurrentLinkedQueue<String> loggingQueue, CountDownLatch shutdownLatch) {
         this.file = file;
         this.loggingQueue = loggingQueue;
         printToConsole = Config.getBool("Logger", "printToConsole");
@@ -137,7 +137,7 @@ public class LogWriter implements Runnable {
         System.err.println("LogWriter shutdown.");
     }
 
-    public static void attachListener (LogListener listener) {
+    public static void attachListener(LogListener listener) {
         LogWriter.logListener = listener;
     }
 

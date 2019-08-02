@@ -8,8 +8,8 @@ import java.util.Locale;
 public class PlatformUtils {
 
     /**
-    * private constructor
-    */
+     * private constructor
+     */
     private PlatformUtils() {
         //
     }
@@ -38,27 +38,27 @@ public class PlatformUtils {
         }
     }
 
-    public static  OS_TYPE getType () {
+    public static OS_TYPE getType() {
         return type;
     }
 
-    public static boolean isWindows () {
+    public static boolean isWindows() {
         return type == OS_TYPE.WINDOWS;
     }
 
-    public static boolean isLinux () {
+    public static boolean isLinux() {
         return type == OS_TYPE.LINUX;
     }
 
-    public static boolean isMacOS () {
+    public static boolean isMacOS() {
         return type == OS_TYPE.MAC_OS;
     }
 
-    public static boolean isUnknown () {
+    public static boolean isUnknown() {
         return type == OS_TYPE.UNKNOWN;
     }
 
-    public static String getAppDataDir () {
+    public static String getAppDataDir() {
         return PlatformUtils.isWindows() ? System.getenv("APPDATA") + "/" : "./";
     }
 

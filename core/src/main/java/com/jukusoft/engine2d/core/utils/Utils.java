@@ -8,7 +8,7 @@ public class Utils {
         //
     }
 
-    public static String getSection (final String section) {
+    public static String getSection(final String section) {
         if (section == null) {
             throw new NullPointerException("section cannot be null.");
         }
@@ -28,7 +28,7 @@ public class Utils {
         return sb.toString();
     }
 
-    public static void printSection (final String section) {
+    public static void printSection(final String section) {
         String s = getSection(section);
         Log.i("-", "");
         Log.i("-", s);

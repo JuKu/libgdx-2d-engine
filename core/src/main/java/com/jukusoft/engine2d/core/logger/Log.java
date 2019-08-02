@@ -15,14 +15,14 @@ import java.util.concurrent.TimeUnit;
 public class Log {
 
     /**
-    * logging levels:
-     *
+     * logging levels:
+     * <p>
      * - VERBOSE
      * - DEBUG
      * - INFO
      * - WARN (exception was caught, but application can still continue)
      * - ERROR (application crashed)
-    */
+     */
     public enum LEVEL {
         VERBOSE(1, 'V'),
         DEBUG(2, 'D'),
@@ -33,7 +33,7 @@ public class Log {
         private final int value;
         private final char shortcut;
 
-        LEVEL (final int value, final char shortcut) {
+        LEVEL(final int value, final char shortcut) {
             this.value = value;
             this.shortcut = shortcut;
         }
@@ -42,7 +42,7 @@ public class Log {
             return value;
         }
 
-        public final char getShortcut () {
+        public final char getShortcut() {
             return this.shortcut;
         }
     }
@@ -63,7 +63,7 @@ public class Log {
 
     protected static final CountDownLatch shutdownLatch = new CountDownLatch(1);
 
-    public static void init () {
+    public static void init() {
         Log.enabled = Config.getBool(LOGGER_TAG, "enabled");
         Log.printToConsole = Config.getBool(LOGGER_TAG, "printToConsole");
         Log.level = LEVEL.valueOf(Config.get(LOGGER_TAG, "level"));
@@ -91,111 +91,111 @@ public class Log {
     }
 
     /**
-    * Send a VERBOSE log message
+     * Send a VERBOSE log message
      *
-     * @param tag log tag
+     * @param tag     log tag
      * @param message log message
-    */
-    public static final void v (String tag, String message) {
+     */
+    public static final void v(String tag, String message) {
         v(tag, message, null);
     }
 
     /**
      * Send a VERBOSE log message with exception
      *
-     * @param tag log tag
+     * @param tag     log tag
      * @param message log message
-     * @param e throwable
+     * @param e       throwable
      */
-    public static final void v (String tag, String message, Throwable e) {
+    public static final void v(String tag, String message, Throwable e) {
         log(LEVEL.VERBOSE, tag, message, e);
     }
 
     /**
      * Send a DEBUG log message
      *
-     * @param tag log tag
+     * @param tag     log tag
      * @param message log message
      */
-    public static final void d (String tag, String message) {
+    public static final void d(String tag, String message) {
         d(tag, message, null);
     }
 
     /**
      * Send a DEBUG log message with exception
      *
-     * @param tag log tag
+     * @param tag     log tag
      * @param message log message
-     * @param e throwable
+     * @param e       throwable
      */
-    public static final void d (String tag, String message, Throwable e) {
+    public static final void d(String tag, String message, Throwable e) {
         log(LEVEL.DEBUG, tag, message, e);
     }
 
     /**
      * Send a INFO log message
      *
-     * @param tag log tag
+     * @param tag     log tag
      * @param message log message
      */
-    public static final void i (String tag, String message) {
+    public static final void i(String tag, String message) {
         i(tag, message, null);
     }
 
     /**
      * Send a INFO log message with exception
      *
-     * @param tag log tag
+     * @param tag     log tag
      * @param message log message
-     * @param e throwable
+     * @param e       throwable
      */
-    public static final void i (String tag, String message, Throwable e) {
+    public static final void i(String tag, String message, Throwable e) {
         log(LEVEL.INFO, tag, message, e);
     }
 
     /**
      * Send a WARN log message
      *
-     * @param tag log tag
+     * @param tag     log tag
      * @param message log message
      */
-    public static final void w (String tag, String message) {
+    public static final void w(String tag, String message) {
         w(tag, message, null);
     }
 
     /**
      * Send a WARN log message with exception
      *
-     * @param tag log tag
+     * @param tag     log tag
      * @param message log message
-     * @param e throwable
+     * @param e       throwable
      */
-    public static final void w (String tag, String message, Throwable e) {
+    public static final void w(String tag, String message, Throwable e) {
         log(LEVEL.WARN, tag, message, e);
     }
 
     /**
      * Send a ERROR log message
      *
-     * @param tag log tag
+     * @param tag     log tag
      * @param message log message
      */
-    public static final void e (String tag, String message) {
+    public static final void e(String tag, String message) {
         e(tag, message, null);
     }
 
     /**
      * Send a ERROR log message with exception
      *
-     * @param tag log tag
+     * @param tag     log tag
      * @param message log message
-     * @param e throwable
+     * @param e       throwable
      */
-    public static final void e (String tag, String message, Throwable e) {
+    public static final void e(String tag, String message, Throwable e) {
         log(LEVEL.ERROR, tag, message, e);
     }
 
-    protected static final void log (LEVEL level, String tag, String message, Throwable e) {
+    protected static final void log(LEVEL level, String tag, String message, Throwable e) {
         if (!enabled) {
             //logging isn't enabled
             return;
@@ -224,7 +224,7 @@ public class Log {
         }
     }
 
-    public static void shutdown () {
+    public static void shutdown() {
         logWriterThread.interrupt();
 
         try {

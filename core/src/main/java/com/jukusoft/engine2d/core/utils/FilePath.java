@@ -6,7 +6,7 @@ public class FilePath {
     protected static String configDirs = "";
     protected static String tempDir = "";
 
-    protected FilePath () {
+    protected FilePath() {
         //
     }
 
@@ -14,7 +14,7 @@ public class FilePath {
         return dataDir;
     }
 
-    public static void setDataDir (String dataDir) {
+    public static void setDataDir(String dataDir) {
         FilePath.dataDir = dataDir;
     }
 
@@ -34,7 +34,7 @@ public class FilePath {
         FilePath.tempDir = tempDir;
     }
 
-    public static String parse (String path) {
+    public static String parse(String path) {
         path = path.replace("{user.home}", System.getProperty("user.home") + "/");
         path = path.replace("{user.dir}", System.getProperty("user.dir") + "/");
         path = path.replace("{user.name}", System.getProperty("user.name") + "/");

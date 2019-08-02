@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 /**
  * Utils for file operations
- *
+ * <p>
  * Created by Justin on 24.08.2016.
  */
 public class FileUtils {
@@ -24,8 +24,8 @@ public class FileUtils {
     private static final String PATH_CANNOT_EMPTY = "path cannot be empty.";
 
     /**
-    * private constructor, so other classes cannot create an instance of FileUtils
-    */
+     * private constructor, so other classes cannot create an instance of FileUtils
+     */
     protected FileUtils() {
         //
     }
@@ -33,14 +33,10 @@ public class FileUtils {
     /**
      * read content from file
      *
-     * @param path
-     *            path to file
-     * @param encoding
-     *            file encoding
-     *
-     * @throws IOException if there are problems with file I/O
-     *
+     * @param path     path to file
+     * @param encoding file encoding
      * @return content of file as string
+     * @throws IOException if there are problems with file I/O
      */
     public static String readFile(String path, Charset encoding) throws IOException {
         if (path == null) {
@@ -65,14 +61,10 @@ public class FileUtils {
     /**
      * read lines from file
      *
-     * @param path
-     *            path to file
-     * @param charset
-     *            encoding of file
-     *
-     * @throws IOException if there are problems with file I/O
-     *
+     * @param path    path to file
+     * @param charset encoding of file
      * @return list of lines from file
+     * @throws IOException if there are problems with file I/O
      */
     public static List<String> readLines(String path, Charset charset) throws IOException {
         if (path == null) {
@@ -93,13 +85,9 @@ public class FileUtils {
     /**
      * write text to file
      *
-     * @param path
-     *            path to file
-     * @param content
-     *            content of file
-     * @param encoding
-     *            file encoding
-     *
+     * @param path     path to file
+     * @param content  content of file
+     * @param encoding file encoding
      * @throws IOException if file couldn't written
      */
     public static void writeFile(String path, String content, Charset encoding) throws IOException {
@@ -126,11 +114,11 @@ public class FileUtils {
         Files.write(Paths.get(path), content.getBytes(encoding), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
     }
 
-    public static void recursiveDeleteDirectory (File f) throws IOException {
+    public static void recursiveDeleteDirectory(File f) throws IOException {
         FileUtils.recursiveDeleteDirectory(f, true);
     }
 
-    public static void recursiveDeleteDirectory (File f, boolean deleteDir) throws IOException {
+    public static void recursiveDeleteDirectory(File f, boolean deleteDir) throws IOException {
         Objects.requireNonNull(f, "file cannot be null.");
 
         if (!f.exists()) {
@@ -155,7 +143,7 @@ public class FileUtils {
         }
     }
 
-    public static List<String> listFiles (File dir) throws IOException {
+    public static List<String> listFiles(File dir) throws IOException {
         List<String> relPaths = new ArrayList<>();
 
         FileUtils.listFiles(dir, (file, relFilePath) -> {
@@ -165,11 +153,11 @@ public class FileUtils {
         return relPaths;
     }
 
-    public static void listFiles (File dir, FileListIterator iterator) throws IOException {
+    public static void listFiles(File dir, FileListIterator iterator) throws IOException {
         listFiles(dir, dir, iterator);
     }
 
-    protected static void listFiles (File dir, File baseDir, FileListIterator iterator) throws IOException {
+    protected static void listFiles(File dir, File baseDir, FileListIterator iterator) throws IOException {
         Objects.requireNonNull(dir, "file cannot be null.");
 
         if (!dir.exists()) {
@@ -190,25 +178,24 @@ public class FileUtils {
     }
 
     /**
-    * get path to user.home directory
+     * get path to user.home directory
      *
      * @return path to user.home directory
-    */
-    public static String getUserHomeDir () {
+     */
+    public static String getUserHomeDir() {
         return System.getProperty("user.home");
     }
 
-    public static String getAppHomeDir (String appName) {
+    public static String getAppHomeDir(String appName) {
         return getUserHomeDir() + "/." + appName + "/";
     }
 
     /**
-    * removes ../ from path
+     * removes ../ from path
      *
      * @param path path where ../ should be replaced
-     *
      * @return string without ../ (resolved)
-    */
+     */
     public static String removeDoubleDotInDir(String path) {
         if (path == null) {
             throw new NullPointerException(PATH_CANNOT_NULL);
@@ -237,7 +224,7 @@ public class FileUtils {
         for (int i = 1; i < array.length; i++) {
             if (array[i].equals("..")) {
                 array[i] = null;
-                array[i-1] = null;
+                array[i - 1] = null;
             }
         }
 
@@ -261,13 +248,10 @@ public class FileUtils {
      * Returns the path of one File relative to another.
      *
      * @param target the target directory
-     * @param base the base directory
-     *
-     * @see <a href="https://stackoverflow.com/questions/204784/how-to-construct-a-relative-path-in-java-from-two-absolute-paths-or-urls">Stackoverflow</a>
-     *
-     * @throws IOException if an error occurs while resolving the files' canonical names
-     *
+     * @param base   the base directory
      * @return target's path relative to the base directory
+     * @throws IOException if an error occurs while resolving the files' canonical names
+     * @see <a href="https://stackoverflow.com/questions/204784/how-to-construct-a-relative-path-in-java-from-two-absolute-paths-or-urls">Stackoverflow</a>
      */
     public static File getRelativeFile(File target, File base) throws IOException {
         if (target == null) {
@@ -313,7 +297,7 @@ public class FileUtils {
         return new File(result.toString() + File.separator);
     }
 
-    public static String getDirectoryOfFilePath (String filePath) {
+    public static String getDirectoryOfFilePath(String filePath) {
         filePath = filePath.replace("\\", "/");
 
         if (filePath.endsWith("/")) {
@@ -333,7 +317,7 @@ public class FileUtils {
         return dirPath;
     }
 
-    public static void createWritableDirIfAbsent (String dirPath) {
+    public static void createWritableDirIfAbsent(String dirPath) {
         File f = new File(dirPath);
 
         if (!f.exists()) {

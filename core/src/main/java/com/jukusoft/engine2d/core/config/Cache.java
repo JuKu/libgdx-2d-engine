@@ -36,7 +36,7 @@ public class Cache {
         this.createRequiredDirs();
     }
 
-    protected void createRequiredDirs () {
+    protected void createRequiredDirs() {
         FileUtils.createWritableDirIfAbsent(CACHE_PATH);
         FileUtils.createWritableDirIfAbsent(CACHE_PATH + "assets/");
         FileUtils.createWritableDirIfAbsent(CACHE_PATH + "security/");
@@ -44,15 +44,15 @@ public class Cache {
     }
 
     /**
-    * initialize cache
+     * initialize cache
      *
      * @param path cache directory path
-    */
-    public static void init (String path) {
+     */
+    public static void init(String path) {
         instance = new Cache(path);
     }
 
-    public static Cache getInstance () {
+    public static Cache getInstance() {
         if (instance == null) {
             throw new IllegalStateException("You havent initialized cache with Cache::init() before.");
         }
@@ -60,23 +60,23 @@ public class Cache {
         return instance;
     }
 
-    public String getPath () {
+    public String getPath() {
         return CACHE_PATH;
     }
 
-    public void createDirIfAbsent (String dirName) {
+    public void createDirIfAbsent(String dirName) {
         FileUtils.createWritableDirIfAbsent(CACHE_PATH + dirName + "/");
     }
 
-    public String getCachePath (String dirName) {
+    public String getCachePath(String dirName) {
         return CACHE_PATH + dirName + "/";
     }
 
-    public String getCacheFilePath (String filePath) {
+    public String getCacheFilePath(String filePath) {
         return CACHE_PATH + filePath;
     }
 
-    public void clear () throws IOException {
+    public void clear() throws IOException {
         FileUtils.recursiveDeleteDirectory(new File(CACHE_PATH), false);
         createRequiredDirs();
     }

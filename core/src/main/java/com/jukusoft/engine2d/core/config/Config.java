@@ -23,15 +23,15 @@ public class Config {
     public static boolean forceExit = true;
     protected static List<String> loadedConfigFiles = new ArrayList<>();
 
-    protected Config () {
+    protected Config() {
         //
     }
 
-    public static void load (File file) throws IOException {
+    public static void load(File file) throws IOException {
         load(file, true);
     }
 
-    public static void load (File file, boolean skipExampleConfig) throws IOException {
+    public static void load(File file, boolean skipExampleConfig) throws IOException {
         Objects.requireNonNull(file, "config file cannot be null.");
 
         Log.i(LOG_TAG, "Load Config: " + file.getAbsolutePath().replace("\\", "/"));
@@ -53,12 +53,12 @@ public class Config {
         Ini ini = new Ini(file);
 
         //import all sections
-        for (Map.Entry<String, Profile.Section> entry: ini.entrySet()) {
+        for (Map.Entry<String, Profile.Section> entry : ini.entrySet()) {
             String key = entry.getKey();
             Profile.Section section = entry.getValue();
 
             for (Map.Entry<String, String> option : section.entrySet()) {
-                values.put(key + "." + option.getKey(),option.getValue());
+                values.put(key + "." + option.getKey(), option.getValue());
             }
         }
 
@@ -67,7 +67,7 @@ public class Config {
         }
     }
 
-    public static void loadDir (File dir) throws IOException {
+    public static void loadDir(File dir) throws IOException {
         if (!dir.exists()) {
             throw new IllegalStateException("config directory doesn't exists: " + dir.getAbsolutePath());
         }
@@ -96,7 +96,7 @@ public class Config {
         }
     }
 
-    public static String get (String section, String key) {
+    public static String get(String section, String key) {
         String option = section + "." + key;
 
         //first check, if key exists
@@ -107,7 +107,7 @@ public class Config {
         return values.get(option);
     }
 
-    public static String getOrDefault (String section, String key, String defaultValue) {
+    public static String getOrDefault(String section, String key, String defaultValue) {
         String option = section + "." + key;
 
         //first check, if key exists
@@ -118,37 +118,37 @@ public class Config {
         return values.get(option);
     }
 
-    public static boolean getBool (String section, String key) {
+    public static boolean getBool(String section, String key) {
         return Boolean.parseBoolean(get(section, key));
     }
 
-    public static int getInt (String section, String key) {
+    public static int getInt(String section, String key) {
         return Integer.parseInt(get(section, key));
     }
 
-    public static float getFloat (String section, String key) {
+    public static float getFloat(String section, String key) {
         return Float.parseFloat(get(section, key));
     }
 
-    public static void set (String section, String key, String value) {
+    public static void set(String section, String key, String value) {
         values.put(section + "." + key, value);
     }
 
     /**
-    * reload all loaded config files
+     * reload all loaded config files
      *
      * @throws IOException if a file could not be loaded
-    */
-    public static void reload () throws IOException {
+     */
+    public static void reload() throws IOException {
         for (String filePath : loadedConfigFiles) {
             load(new File(filePath));
         }
     }
 
     /**
-    * clear all values in in-memory config cache
-    */
-    public static void clear () {
+     * clear all values in in-memory config cache
+     */
+    public static void clear() {
         values.clear();
     }
 

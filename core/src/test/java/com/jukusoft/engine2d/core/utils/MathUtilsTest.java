@@ -7,12 +7,12 @@ import static org.junit.Assert.assertEquals;
 public class MathUtilsTest {
 
     @Test
-    public void testConstructor () {
+    public void testConstructor() {
         new MathUtils();
     }
 
     @Test
-    public void testRound () {
+    public void testRound() {
         assertEquals(0f, MathUtils.round3Digits(1.5259022E-5f), 0.00000001f);
         assertEquals(0f, MathUtils.round3Digits(0.0001f), 0.00000001f);
         assertEquals(0f, MathUtils.round3Digits(0.000001f), 0.00000001f);
@@ -22,7 +22,7 @@ public class MathUtilsTest {
     }
 
     @Test
-    public void testOverlapping () {
+    public void testOverlapping() {
         assertEquals(false, MathUtils.overlapping(1, 2, 3, 4));
         assertEquals(true, MathUtils.overlapping(1, 2, 2, 4));
         assertEquals(true, MathUtils.overlapping(1, 2, 1, 2));

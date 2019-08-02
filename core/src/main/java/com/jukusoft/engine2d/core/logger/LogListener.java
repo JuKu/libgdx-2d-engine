@@ -4,10 +4,10 @@ package com.jukusoft.engine2d.core.logger;
 public interface LogListener {
 
     /**
-    * log message
+     * log message
      *
      * @param str log message string
-    */
-    public void log (String str);
+     */
+    public void log(String str);
 
 }

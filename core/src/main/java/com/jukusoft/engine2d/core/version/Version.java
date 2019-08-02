@@ -20,10 +20,10 @@ public class Version {
     protected static Version instance = null;
 
     /**
-    * default constructor
+     * default constructor
      *
      * @param cls class of which version is searched
-    */
+     */
     public Version(Class<?> cls) {
         this.loadInfo(cls);
     }
@@ -32,7 +32,7 @@ public class Version {
         //
     }
 
-    protected void loadInfo (Class<?> cls) {
+    protected void loadInfo(Class<?> cls) {
         //get jar file
         File file = JarUtils.getJarFileOfClass(cls);
 
@@ -76,7 +76,7 @@ public class Version {
         }
     }
 
-    protected String getOrDefault (final Attributes attrs, String key, String defaultStr) {
+    protected String getOrDefault(final Attributes attrs, String key, String defaultStr) {
         String value = attrs.getValue(key);
 
         if (value == null) {
@@ -114,15 +114,15 @@ public class Version {
         return vendor;
     }
 
-    public String getFullVersion () {
+    public String getFullVersion() {
         return this.getVersion() + "-" + this.getRevision();
     }
 
-    public static Version getInstance () {
+    public static Version getInstance() {
         return instance;
     }
 
-    public static void setInstance (Version version) {
+    public static void setInstance(Version version) {
         instance = version;
     }
 
