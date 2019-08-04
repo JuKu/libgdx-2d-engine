@@ -3,6 +3,7 @@ package com.jukusoft.engine2d.core.config;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
@@ -79,6 +80,20 @@ public class ConfigTest {
         new File("../data/junit/config/test/").mkdirs();
 
         Config.loadDir(new File("../data/junit/config/"));
+    }
+
+    @Test (expected = FileNotFoundException.class)
+    public void testLoadNotExistingConfigFromResource () throws IOException {
+        Config.clear();
+        Config.loadFromResource("not-existing-config.cfg", Config.class);
+    }
+
+    @Test
+    public void testLoadFromResource () throws IOException {
+        Config.clear();
+        Config.loadFromResource("defaultConfig.cfg", Config.class);
+
+        assertEquals("test2", Config.get("Default", "test"));
     }
 
     @Test

@@ -7,7 +7,9 @@ import org.ini4j.Ini;
 import org.ini4j.Profile;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -65,6 +67,22 @@ public class Config {
         if (!loadedConfigFiles.contains(file.getAbsolutePath())) {
             loadedConfigFiles.add(file.getAbsolutePath());
         }
+    }
+
+    public static void loadFromResource(String filePath, Class<?> cls) throws IOException {
+        URL url = cls.getClassLoader().getResource(filePath);
+
+        if (url == null) {
+            throw new FileNotFoundException("resource config file does not exists: " + filePath);
+        }
+
+        File file = new File(url.getFile());
+
+        if (!file.exists()) {
+            throw new FileNotFoundException("resource config file does not exists: " + filePath + ", absolute path: " + file.getAbsolutePath());
+        }
+
+        load(file, true);
     }
 
     public static void loadDir(File dir) throws IOException {
