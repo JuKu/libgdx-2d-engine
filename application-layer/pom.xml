@@ -9,7 +9,7 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>engine2d-core</artifactId>
+	<artifactId>engine2d-application-layer</artifactId>
 
 	<properties>
 		<!-- don't skip this module, instead deploy this module to maven central -->
@@ -44,6 +44,20 @@
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
 			<version>${org.json.version}</version>
+		</dependency>
+
+		<!-- dom4j xml parser to parse .tmx tiled format -->
+		<dependency>
+			<groupId>org.dom4j</groupId>
+			<artifactId>dom4j</artifactId>
+			<version>${dom4j.version}</version>
+		</dependency>
+
+		<!-- jaxen, to avoid exception on dom4j -->
+		<dependency>
+			<groupId>jaxen</groupId>
+			<artifactId>jaxen</artifactId>
+			<version>${jaxen.version}</version>
 		</dependency>
 	</dependencies>
 
