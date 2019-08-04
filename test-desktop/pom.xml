@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>engine2d-parent</artifactId>
+		<groupId>com.jukusoft</groupId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>engine2d-test-desktop</artifactId>
+
+	<properties>
+		<mainClass>com.jukusoft.mmo.engine.desktop.DesktopLauncher</mainClass>
+
+		<!-- don't deploy all modules to maven central -->
+		<maven.deploy.skip>true</maven.deploy.skip>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.jukusoft</groupId>
+			<artifactId>engine2d-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jukusoft</groupId>
+			<artifactId>engine2d-application-layer</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- libGDX LWJGL Backend -->
+		<dependency>
+			<groupId>com.badlogicgames.gdx</groupId>
+			<artifactId>gdx-backend-lwjgl3</artifactId>
+			<version>${libgdx.version}</version>
+		</dependency>
+
+		<!-- libGDX platform natives -->
+		<dependency>
+			<groupId>com.badlogicgames.gdx</groupId>
+			<artifactId>gdx-platform</artifactId>
+			<version>${libgdx.version}</version>
+			<classifier>natives-desktop</classifier>
+		</dependency>
+
+		<!-- libGDX tools -->
+		<dependency>
+			<groupId>com.badlogicgames.gdx</groupId>
+			<artifactId>gdx-tools</artifactId>
+			<version>${libgdx.version}</version>
+		</dependency>
+
+		<!-- libGDX controller support -->
+		<dependency>
+			<groupId>com.badlogicgames.gdx</groupId>
+			<artifactId>gdx-controllers-desktop</artifactId>
+			<version>${libgdx.version}</version>
+		</dependency>
+
+		<!-- libGDX controller support -->
+		<dependency>
+			<groupId>com.badlogicgames.gdx</groupId>
+			<artifactId>gdx-controllers-platform</artifactId>
+			<version>${libgdx.version}</version>
+			<classifier>natives-desktop</classifier>
+		</dependency>
+
+		<!-- libGDX controller support -->
+		<dependency>
+			<groupId>com.badlogicgames.gdx</groupId>
+			<artifactId>gdx-controllers-lwjgl3</artifactId>
+			<version>${libgdx.version}</version>
+		</dependency>
+
+		<!-- libGDX fonts -->
+		<dependency>
+			<groupId>com.badlogicgames.gdx</groupId>
+			<artifactId>gdx-freetype-platform</artifactId>
+			<version>${libgdx.version}</version>
+			<classifier>natives-desktop</classifier>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- set Java version -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+				</configuration>
+			</plugin>
+
+			<!-- Write the current git revision into ${buildnumber} and populate ${scmBranch} -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>1.4</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>create</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<!-- Get the scm revision once for all modules -->
+					<getRevisionOnlyOnce>true</getRevisionOnlyOnce>
+					<!-- Don't fail on modified local resources -->
+					<doCheck>false</doCheck>
+					<!-- Don't update SCM -->
+					<doUpdate>false</doUpdate>
+					<!-- Use short version of git revision -->
+					<shortRevisionLength>7</shortRevisionLength>
+				</configuration>
+			</plugin>
+
+			<!-- create jar artifact, add classpath and set main class -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.0.2</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>${mainClass}</mainClass>
+
+							<!-- update dependencie versions in MANIFEST.MF -->
+							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+						</manifest>
+						<manifestEntries>
+							<!-- https://www.youtube.com/watch?v=Rnmq_Jv-pe4 -->
+							<!-- http://www.javacreed.com/how-to-add-splash-screen-using-maven/ -->
+							<SplashScreen-Image>splash_screen.png</SplashScreen-Image>
+
+							<!-- http://maven.apache.org/shared/maven-archiver/index.html -->
+
+							<!-- <key>value</key> -->
+							<Implementation-Time>${maven.build.timestamp}</Implementation-Time>
+
+							<Implementation-Build>${buildNumber}-${scmBranch}</Implementation-Build>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>
