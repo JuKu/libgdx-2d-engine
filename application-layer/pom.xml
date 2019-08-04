@@ -18,6 +18,12 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.jukusoft</groupId>
+			<artifactId>engine2d-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
 		<!-- High Performance Primitive Collections for Java, https://github.com/carrotsearch/hppc -->
 		<dependency>
 			<groupId>com.carrotsearch</groupId>
