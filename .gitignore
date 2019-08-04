@@ -428,4 +428,3 @@ gradle-app.setting
 # End of https://www.gitignore.io/api/git,java,linux,macos,maven,gradle,windows,eclipse,gitbook,netbeans,intellij,tortoisegit,intellij+all,intellij+iml
 
 temp
-*.log
