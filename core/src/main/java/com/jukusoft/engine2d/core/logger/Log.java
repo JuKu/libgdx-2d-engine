@@ -209,7 +209,7 @@ public class Log {
 
         StringBuilder sb = new StringBuilder(tag);
 
-        while (sb.length() < 10) {
+        while (sb.length() < 20) {
             sb.append(" ");
         }
 
