@@ -1,7 +1,10 @@
 package com.jukusoft.engine2d.applayer;
 
 import com.badlogic.gdx.ApplicationListener;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.jukusoft.engine2d.applayer.init.InitializerProcessor;
+import com.jukusoft.engine2d.applayer.init.SplashScreenDrawer;
 import com.jukusoft.engine2d.applayer.init.factory.InitializerProcessorFactory;
 import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.core.utils.Platform;
@@ -13,6 +16,7 @@ public abstract class BaseApp implements ApplicationListener {
 
     private final Class<?> gameClass;
     private InitializerProcessor initProcessor;
+    private SplashScreenDrawer splashScreenDrawer;
     private boolean initialized = false;
 
     public BaseApp(Class<?> gameClass) {
@@ -42,6 +46,8 @@ public abstract class BaseApp implements ApplicationListener {
 
             System.exit(0);
         }
+
+        this.splashScreenDrawer = new SplashScreenDrawer();
     }
 
     @Override
@@ -67,7 +73,15 @@ public abstract class BaseApp implements ApplicationListener {
             }
 
             initialized = initProcessor.hasFinished();
+
+            splashScreenDrawer.render();
         } else {
+            //cleanup splash screen
+            if (splashScreenDrawer != null) {
+                splashScreenDrawer.dispose();
+                splashScreenDrawer = null;
+            }
+
             //TODO: enter game loop
         }
     }
