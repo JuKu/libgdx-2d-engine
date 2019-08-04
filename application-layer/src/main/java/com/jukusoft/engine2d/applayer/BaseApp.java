@@ -5,7 +5,6 @@ import com.jukusoft.engine2d.applayer.init.InitializerProcessor;
 import com.jukusoft.engine2d.applayer.init.factory.InitializerProcessorFactory;
 import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.core.utils.Platform;
-import com.jukusoft.engine2d.core.version.Version;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

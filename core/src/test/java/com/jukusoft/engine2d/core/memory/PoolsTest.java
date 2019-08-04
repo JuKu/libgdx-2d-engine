@@ -8,12 +8,12 @@ import static org.junit.Assert.assertNotNull;
 public class PoolsTest {
 
     @Test
-    public void testConstructor () {
+    public void testConstructor() {
         new Pools();
     }
 
     @Test
-    public void testGetObject () {
+    public void testGetObject() {
         for (int i = 0; i < 10; i++) {
             Object obj = Pools.get(DummyPoolObject.class);
             assertNotNull(obj);
@@ -24,7 +24,7 @@ public class PoolsTest {
     }
 
     @Test
-    public void testGetNonPoolableObject () {
+    public void testGetNonPoolableObject() {
         for (int i = 0; i < 10; i++) {
             Object obj = Pools.get(String.class);
             assertNotNull(obj);
@@ -35,7 +35,7 @@ public class PoolsTest {
     }
 
     @Test
-    public void testGetPoolableObject () {
+    public void testGetPoolableObject() {
         for (int i = 0; i < 10; i++) {
             Object obj = Pools.get(DummyPoolableObject.class);
             assertNotNull(obj);
@@ -46,7 +46,7 @@ public class PoolsTest {
     }
 
     @Test
-    public void testGetEventDataObject () {
+    public void testGetEventDataObject() {
         for (int i = 0; i < 10; i++) {
             Object obj = Pools.get(DummyEventDataObject.class);
             assertNotNull(obj);
@@ -57,7 +57,7 @@ public class PoolsTest {
     }
 
     @Test
-    public void testFreePoolableObject () {
+    public void testFreePoolableObject() {
         DummyPoolableObject obj = Pools.get(DummyPoolableObject.class);
         assertNotNull(obj);
         assertEquals(false, obj.resetCalled);

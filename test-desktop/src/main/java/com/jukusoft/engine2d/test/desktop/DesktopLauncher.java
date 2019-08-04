@@ -12,7 +12,7 @@ import java.util.Set;
 
 public class DesktopLauncher {
 
-    public static void main (String[] args) {
+    public static void main(String[] args) {
         for (String param : args) {
             if (param.startsWith("-DclearCache") || param.startsWith("-clearCache")) {
                 System.setProperty("clearCache", "true");
@@ -41,7 +41,7 @@ public class DesktopLauncher {
         }
     }
 
-    protected static void start () throws Exception {
+    protected static void start() throws Exception {
         //check working directory
         if (!(new File("./config/").exists())) {
             throw new IllegalStateException("Working directory isn't correct, couldn't found config directory! Current working dir: " + (new File(".").getAbsolutePath()));

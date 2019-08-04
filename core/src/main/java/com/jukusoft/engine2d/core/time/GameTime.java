@@ -14,13 +14,13 @@ public class GameTime {
     protected volatile float delta = 0;
 
     /**
-    * protected constructor, because only one instance is allowed (singleton design pattern)
-    */
+     * protected constructor, because only one instance is allowed (singleton design pattern)
+     */
     protected GameTime() {
         //
     }
 
-    public static GameTime getInstance () {
+    public static GameTime getInstance() {
         return instance;
     }
 
@@ -32,7 +32,7 @@ public class GameTime {
         return time;
     }
 
-    public void setTime (long time) {
+    public void setTime(long time) {
         this.time = time;
     }
 
@@ -40,7 +40,7 @@ public class GameTime {
         return delta;
     }
 
-    public void setDelta (float delta) {
+    public void setDelta(float delta) {
         this.delta = delta;
     }
 

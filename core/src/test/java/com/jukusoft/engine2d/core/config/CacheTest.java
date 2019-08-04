@@ -11,7 +11,7 @@ import static org.junit.Assert.assertNotNull;
 public class CacheTest {
 
     @Test
-    public void testConstructor () throws IOException {
+    public void testConstructor() throws IOException {
         Cache cache = new Cache("../temp/");
         assertEquals("../temp/", cache.getPath());
 
@@ -20,7 +20,7 @@ public class CacheTest {
     }
 
     @Test
-    public void testConstructor1 () throws IOException {
+    public void testConstructor1() throws IOException {
         Cache cache = new Cache("../temp/");
 
         assertEquals("../temp/", cache.getPath());
@@ -29,33 +29,33 @@ public class CacheTest {
         assertEquals(true, new File("../temp/").exists());
     }
 
-    @Test (expected = NullPointerException.class)
-    public void testNullConstructor () {
+    @Test(expected = NullPointerException.class)
+    public void testNullConstructor() {
         new Cache(null);
     }
 
-    @Test (expected = IllegalStateException.class)
-    public void testConstructorWithNotExistentFile () {
+    @Test(expected = IllegalStateException.class)
+    public void testConstructorWithNotExistentFile() {
         new Cache("not-existent-dir");
     }
 
-    @Test (expected = IllegalStateException.class)
-    public void testConstructorWithFile () {
+    @Test(expected = IllegalStateException.class)
+    public void testConstructorWithFile() {
         new Cache("../config/junit-logger.cfg");
     }
 
     @Test
-    public void testConstructorWithSlash () {
+    public void testConstructorWithSlash() {
         new Cache("../temp/");
     }
 
     @Test
-    public void testConstructorWithoutSlash () {
+    public void testConstructorWithoutSlash() {
         new Cache("../temp");
     }
 
     @Test
-    public void testCreateDirIfAbsent () {
+    public void testCreateDirIfAbsent() {
         //delete directory first
         if (new File("../temp/junit-test1").exists()) {
             new File("../temp/junit-test1").delete();
@@ -67,7 +67,7 @@ public class CacheTest {
         cache.createDirIfAbsent("junit-test1");
 
         //check, if directory was created
-        assertEquals(true,new File("../temp/junit-test1").exists());
+        assertEquals(true, new File("../temp/junit-test1").exists());
 
         //check, if directory is a directory
         assertEquals(true, new File("../temp/junit-test1").isDirectory());
@@ -77,7 +77,7 @@ public class CacheTest {
     }
 
     @Test
-    public void testGetCachePath () {
+    public void testGetCachePath() {
         Cache cache = new Cache("../temp/");
         assertEquals("../temp/test2/", cache.getCachePath("test2"));
 
@@ -86,13 +86,13 @@ public class CacheTest {
     }
 
     @Test
-    public void testGetCacheFilePath () {
+    public void testGetCacheFilePath() {
         Cache cache = new Cache("../temp/");
         assertEquals("../temp/test3/test.txt", cache.getCacheFilePath("test3/test.txt"));
     }
 
     @Test
-    public void testClear () throws IOException {
+    public void testClear() throws IOException {
         //create test directory first
         if (!new File("../temp/junit-test/").exists()) {
             new File("../temp/junit-test/").mkdirs();
@@ -121,15 +121,15 @@ public class CacheTest {
         assertEquals(true, new File("../temp/junit-test/").isDirectory());
     }
 
-    @Test (expected = IllegalStateException.class)
-    public void testGetInstance () {
+    @Test(expected = IllegalStateException.class)
+    public void testGetInstance() {
         Cache.instance = null;
 
         Cache.getInstance();
     }
 
     @Test
-    public void testGetInstance1 () throws IOException {
+    public void testGetInstance1() throws IOException {
         Cache.instance = null;
 
         Cache.init("../temp/");

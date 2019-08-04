@@ -7,27 +7,26 @@ import java.util.Enumeration;
 import java.util.List;
 
 /**
-* Utility class to check if remote port is open
-*/
+ * Utility class to check if remote port is open
+ */
 public class SocketUtils {
 
     /**
-    * protected constructor
-    */
+     * protected constructor
+     */
     protected SocketUtils() {
         //
     }
 
     /**
-    * check, if remote tcp port is open
+     * check, if remote tcp port is open
      *
-     * @param ip remote server ip
-     * @param port remote server port
+     * @param ip      remote server ip
+     * @param port    remote server port
      * @param timeout timeout in milliseconds
-     *
      * @return true, if port is open
-    */
-    public static boolean checkRemoteTCPPort (String ip, int port, int timeout) throws IOException {
+     */
+    public static boolean checkRemoteTCPPort(String ip, int port, int timeout) throws IOException {
         try (Socket s = new Socket()) {
             s.setReuseAddress(true);
             SocketAddress sa = new InetSocketAddress(ip, port);
@@ -47,7 +46,7 @@ public class SocketUtils {
      *
      * @return list with own ip addresses
      */
-    public static List<String> listOwnIPs () throws SocketException {
+    public static List<String> listOwnIPs() throws SocketException {
         //create new empty list with ip addresses
         List<String> ownIPList = new ArrayList<>();
 

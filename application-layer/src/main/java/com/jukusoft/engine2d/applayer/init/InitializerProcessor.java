@@ -1,13 +1,14 @@
 package com.jukusoft.engine2d.applayer.init;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.List;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class InitializerProcessor {
 
     private final Queue<Initializer> queue;
 
-    public InitializerProcessor (List<Initializer> list) {
+    public InitializerProcessor(List<Initializer> list) {
         queue = new PriorityQueue<>((o1, o2) -> {
             int priority1 = 100;
             int priority2 = 100;
@@ -25,11 +26,11 @@ public class InitializerProcessor {
         queue.addAll(list);
     }
 
-    public void addTask (Initializer initializer) {
+    public void addTask(Initializer initializer) {
         this.queue.add(initializer);
     }
 
-    public void processBeforeSplashScreen () throws Exception {
+    public void processBeforeSplashScreen() throws Exception {
         for (Initializer initializer : this.queue) {
             if (initializer.getClass().isAnnotationPresent(InitBeforeSplashScreen.class)) {
                 initializer.init();
@@ -38,9 +39,9 @@ public class InitializerProcessor {
     }
 
     /**
-    * process one entry
-    */
-    public void process () throws Exception {
+     * process one entry
+     */
+    public void process() throws Exception {
         //sortInitializers();
 
         if (!queue.isEmpty()) {
@@ -53,7 +54,7 @@ public class InitializerProcessor {
         }
     }
 
-    public boolean hasFinished () {
+    public boolean hasFinished() {
         return queue.isEmpty();
     }
 

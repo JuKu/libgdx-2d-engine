@@ -1,6 +1,5 @@
 package com.jukusoft.engine2d.applayer.init.impl;
 
-import com.badlogic.gdx.Gdx;
 import com.jukusoft.engine2d.applayer.init.InitBeforeSplashScreen;
 import com.jukusoft.engine2d.applayer.init.InitPriority;
 import com.jukusoft.engine2d.applayer.init.Initializer;
@@ -11,8 +10,6 @@ import com.jukusoft.engine2d.core.utils.Utils;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 @InitPriority(3)
 @InitBeforeSplashScreen

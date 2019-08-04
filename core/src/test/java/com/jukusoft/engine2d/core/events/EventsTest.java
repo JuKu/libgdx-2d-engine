@@ -13,46 +13,47 @@ import static org.junit.Assert.assertEquals;
 public class EventsTest {
 
     @BeforeClass
-    public static void beforeClass () {
+    public static void beforeClass() {
         Events.init();
     }
 
     @AfterClass
-    public static void afterClass () {
+    public static void afterClass() {
         Events.managers = null;
     }
 
     @Test
-    public void testConstructor () {
+    public void testConstructor() {
         new Events();
     }
 
     @Test
-    public void testInit () {
+    public void testInit() {
         Events.managers = null;
         Events.init();
     }
 
-    @Test (expected = NullPointerException.class)
-    public void addNullListener () {
+    @Test(expected = NullPointerException.class)
+    public void addNullListener() {
         Events.addListener(1, 1, null);
     }
 
-    @Test (expected = IllegalArgumentException.class)
-    public void testAddListenerWithIllegalThreadID () {
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddListenerWithIllegalThreadID() {
         Events.addListener(10, 1, eventData -> {
             //don't do anything here
         });
     }
-    @Test (expected = IllegalArgumentException.class)
-    public void testRemoveListenerWithIllegalThreadID () {
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testRemoveListenerWithIllegalThreadID() {
         Events.removeListener(10, 1, eventData -> {
             //don't do anything here
         });
     }
 
     @Test
-    public void testTriggerEvent () {
+    public void testTriggerEvent() {
         AtomicInteger count = new AtomicInteger(0);
         AtomicInteger count1 = new AtomicInteger(0);
 
@@ -79,13 +80,13 @@ public class EventsTest {
         Events.removeListener(Events.LOGIC_THREAD, 1, listener1);
     }
 
-    @Test (expected = IllegalArgumentException.class)
-    public void testUpdateIllegalThreadId () {
+    @Test(expected = IllegalArgumentException.class)
+    public void testUpdateIllegalThreadId() {
         Events.update(10, 10);
     }
 
     @Test
-    public void testUpdate () {
+    public void testUpdate() {
         AtomicInteger count = new AtomicInteger(0);
         AtomicInteger count1 = new AtomicInteger(0);
 

@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 public class EventManagerTest {
 
     @Test
-    public void testConstructor () {
+    public void testConstructor() {
         EventManager.instance = null;
 
         new EventManager("test", false);
@@ -21,7 +21,7 @@ public class EventManagerTest {
     }
 
     @Test
-    public void testSetGlobalConstructor () {
+    public void testSetGlobalConstructor() {
         EventManager.instance = null;
 
         new EventManager("test", true);
@@ -33,7 +33,7 @@ public class EventManagerTest {
     }
 
     @Test
-    public void testGetInstance () {
+    public void testGetInstance() {
         EventManager manager = new EventManager("test", true);
 
         EventManager manager1 = EventManager.getInstance();
@@ -45,14 +45,14 @@ public class EventManagerTest {
         EventManager.instance = null;
     }
 
-    @Test (expected = NullPointerException.class)
-    public void testAddNullListener () {
+    @Test(expected = NullPointerException.class)
+    public void testAddNullListener() {
         EventManager manager = new EventManager("test", false);
         manager.addListener(1, null);
     }
 
     @Test
-    public void testAddListener () {
+    public void testAddListener() {
         EventManager manager = new EventManager("test", false);
         manager.addListener(1, eventData -> {
             //don't do anything here
@@ -60,21 +60,21 @@ public class EventManagerTest {
     }
 
     @Test
-    public void testAddSameListener () {
+    public void testAddSameListener() {
         EventManager manager = new EventManager("test", false);
         manager.addListener(1, eventData -> {
             //don't do anything here
         });
     }
 
-    @Test (expected = NullPointerException.class)
-    public void testRemoveNullListener () {
+    @Test(expected = NullPointerException.class)
+    public void testRemoveNullListener() {
         EventManager manager = new EventManager("test", false);
         manager.removeListener(1, null);
     }
 
-    @Test (expected = IllegalStateException.class)
-    public void testRemoveNotExistentListener () {
+    @Test(expected = IllegalStateException.class)
+    public void testRemoveNotExistentListener() {
         EventManager manager = new EventManager("test", false);
 
         EventListener listener = (eventData -> {
@@ -86,7 +86,7 @@ public class EventManagerTest {
     }
 
     @Test
-    public void testAddAndRemoveListener () {
+    public void testAddAndRemoveListener() {
         EventManager manager = new EventManager("test", false);
 
         //there should not listener array exists yet
@@ -120,19 +120,19 @@ public class EventManagerTest {
     }
 
     @Test
-    public void testUpdateEmptyQueue () {
+    public void testUpdateEmptyQueue() {
         EventManager manager = new EventManager("test", false);
         manager.update();
     }
 
     @Test
-    public void testUpdateEmptyQueue1 () {
+    public void testUpdateEmptyQueue1() {
         EventManager manager = new EventManager("test", false);
         manager.update(10);
     }
 
     @Test
-    public void testQueueEvent () {
+    public void testQueueEvent() {
         EventManager manager = new EventManager("test", false);
         assertEquals(0, manager.activeQueue);
 
@@ -160,7 +160,7 @@ public class EventManagerTest {
     }
 
     @Test
-    public void testQueueMultipleEvent () {
+    public void testQueueMultipleEvent() {
         EventManager manager = new EventManager("test", false);
 
         //add events to queue
@@ -177,14 +177,14 @@ public class EventManagerTest {
         assertNull(manager.eventQueue[1].poll());
     }
 
-    @Test (expected = IllegalStateException.class)
-    public void testTriggerUnsupportedEvent () {
+    @Test(expected = IllegalStateException.class)
+    public void testTriggerUnsupportedEvent() {
         EventManager manager = new EventManager("test", false);
         manager.triggerEvent(new DummyEventDataObject());
     }
 
     @Test
-    public void testTriggerEvent () {
+    public void testTriggerEvent() {
         EventManager manager = new EventManager("test", false);
 
         AtomicInteger count = new AtomicInteger(0);
@@ -206,7 +206,7 @@ public class EventManagerTest {
     }
 
     @Test
-    public void testTriggerEvent1 () {
+    public void testTriggerEvent1() {
         EventManager manager = new EventManager("test", false);
 
         AtomicInteger count = new AtomicInteger(0);
@@ -232,7 +232,7 @@ public class EventManagerTest {
     }
 
     @Test
-    public void testUpdate () {
+    public void testUpdate() {
         EventManager manager = new EventManager("test", false);
 
         AtomicBoolean b = new AtomicBoolean(false);
@@ -280,7 +280,7 @@ public class EventManagerTest {
     }
 
     @Test
-    public void testUpdateWithMillis () {
+    public void testUpdateWithMillis() {
         EventManager manager = new EventManager("test", false);
 
         AtomicBoolean b = new AtomicBoolean(false);

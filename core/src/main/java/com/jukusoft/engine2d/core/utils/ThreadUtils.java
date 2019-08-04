@@ -10,7 +10,7 @@ public class ThreadUtils {
         //
     }
 
-    public static void executeOnUIThreadAndWait (Runnable runnable) {
+    public static void executeOnUIThreadAndWait(Runnable runnable) {
         AtomicBoolean b = new AtomicBoolean(false);
 
         com.jukusoft.engine2d.core.utils.Platform.runOnUIThread(() -> {

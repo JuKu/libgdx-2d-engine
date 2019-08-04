@@ -28,12 +28,12 @@ public class EventManager {
     protected IntMap<Array<EventListener>> listenerMap = new IntMap<>(50);
 
     /**
-    * default constructor
+     * default constructor
      *
-     * @param name name of event manager (for debugging purposes)
+     * @param name        name of event manager (for debugging purposes)
      * @param setAsGlobal set as global, if true, instance is set as global singleton instance
-    */
-    public EventManager (String name, boolean setAsGlobal) {
+     */
+    public EventManager(String name, boolean setAsGlobal) {
         Objects.requireNonNull(name);
         this.name = name;
 
@@ -49,9 +49,9 @@ public class EventManager {
     }
 
     /**
-    * process events and call listeners (without time limit)
-    */
-    public void update () {
+     * process events and call listeners (without time limit)
+     */
+    public void update() {
         this.update(Integer.MAX_VALUE);
     }
 
@@ -60,7 +60,7 @@ public class EventManager {
      *
      * @param maxMillis max milliseconds, how long update() process can take
      */
-    public void update (int maxMillis) {
+    public void update(int maxMillis) {
         long startTime = System.currentTimeMillis();
 
         //first, copy queue
@@ -96,11 +96,11 @@ public class EventManager {
     }
 
     /**
-    * add event to queue and process it on next gameloop tick
+     * add event to queue and process it on next gameloop tick
      *
      * @param event game event
-    */
-    public void queueEvent (EventData event) {
+     */
+    public void queueEvent(EventData event) {
         //add event to queue
         this.eventQueue[this.activeQueue].put(event);
     }
@@ -111,7 +111,7 @@ public class EventManager {
      *
      * @param event game event
      */
-    public void triggerEvent (EventData event) {
+    public void triggerEvent(EventData event) {
         if (!event.allowTrigger()) {
             throw new IllegalStateException("It isn't allowed to trigger this event type!");
         }
@@ -121,11 +121,11 @@ public class EventManager {
     }
 
     /**
-    * handle event and call all listeners
+     * handle event and call all listeners
      *
      * @param event event to handle
-    */
-    protected void handleEvent (EventData event) {
+     */
+    protected void handleEvent(EventData event) {
         //find listener
         Array<EventListener> listeners = this.listenerMap.get(event.getEventType());
 
@@ -144,7 +144,7 @@ public class EventManager {
         }
     }
 
-    public <T extends EventData> void addListener (int typeID, EventListener<T> listener) {
+    public <T extends EventData> void addListener(int typeID, EventListener<T> listener) {
         Objects.requireNonNull(listener);
 
         Array<EventListener> list = this.listenerMap.get(typeID);
@@ -162,7 +162,7 @@ public class EventManager {
         list.add(listener);
     }
 
-    public <T extends EventData> void removeListener (int typeID, EventListener<T> listener) {
+    public <T extends EventData> void removeListener(int typeID, EventListener<T> listener) {
         Objects.requireNonNull(listener);
         Array<EventListener> list = this.listenerMap.get(typeID);
 
@@ -172,10 +172,10 @@ public class EventManager {
     }
 
     /**
-    * get global singleton instance of event manager
+     * get global singleton instance of event manager
      *
      * @return singleton instance of event manager
-    */
+     */
     public static final EventManager getInstance() {
         return EventManager.instance;
     }

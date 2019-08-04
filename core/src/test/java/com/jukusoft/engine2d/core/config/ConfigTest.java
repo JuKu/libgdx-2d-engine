@@ -11,17 +11,17 @@ import static org.junit.Assert.assertEquals;
 public class ConfigTest {
 
     @Test
-    public void testConstructor () {
+    public void testConstructor() {
         new Config();
     }
 
-    @Test (expected = IllegalStateException.class)
-    public void testLoadNotExistentFile () throws IOException {
+    @Test(expected = IllegalStateException.class)
+    public void testLoadNotExistentFile() throws IOException {
         Config.load(new File("not-existent-file"));
     }
 
     @Test
-    public void testLoad () throws IOException {
+    public void testLoad() throws IOException {
         Config.load(new File("../config/junit-logger.cfg"));
 
         assertEquals(true, Config.getBool("Logger", "enabled"));
@@ -34,13 +34,13 @@ public class ConfigTest {
         Config.reload();
     }
 
-    @Test (expected = IllegalStateException.class)
-    public void testLoadDirAsFile () throws IOException {
+    @Test(expected = IllegalStateException.class)
+    public void testLoadDirAsFile() throws IOException {
         Config.load(new File("../config/"));
     }
 
     @Test
-    public void testLoadExampleConfig () throws IOException {
+    public void testLoadExampleConfig() throws IOException {
         Config.load(new File("../data/junit/exampleconfig/test.example.cfg"), true);
         Config.load(new File("../data/junit/exampleconfig/test.travis.cfg"), true);
     }
@@ -55,41 +55,41 @@ public class ConfigTest {
         Config.load(new FileHandle("../"));
     }*/
 
-    @Test (expected = IllegalStateException.class)
-    public void testGetNotExistentOption () {
+    @Test(expected = IllegalStateException.class)
+    public void testGetNotExistentOption() {
         Config.get("test", "not-existent-key");
     }
 
-    @Test (expected = IllegalStateException.class)
-    public void testLoadNotExistentDir () throws IOException {
+    @Test(expected = IllegalStateException.class)
+    public void testLoadNotExistentDir() throws IOException {
         Config.loadDir(new File("../not-existent-dir/"));
     }
 
-    @Test (expected = IllegalArgumentException.class)
-    public void testLoadDirWithFile () throws IOException {
+    @Test(expected = IllegalArgumentException.class)
+    public void testLoadDirWithFile() throws IOException {
         Config.loadDir(new File("../config/game.cfg"));
     }
 
     @Test
-    public void testLoadDir () throws IOException {
+    public void testLoadDir() throws IOException {
         Config.loadDir(new File("../config/"));
     }
 
     @Test
-    public void testLoadDir1 () throws IOException {
+    public void testLoadDir1() throws IOException {
         new File("../data/junit/config/test/").mkdirs();
 
         Config.loadDir(new File("../data/junit/config/"));
     }
 
-    @Test (expected = FileNotFoundException.class)
-    public void testLoadNotExistingConfigFromResource () throws IOException {
+    @Test(expected = FileNotFoundException.class)
+    public void testLoadNotExistingConfigFromResource() throws IOException {
         Config.clear();
         Config.loadFromResource("not-existing-config.cfg", Config.class);
     }
 
     @Test
-    public void testLoadFromResource () throws IOException {
+    public void testLoadFromResource() throws IOException {
         Config.clear();
         Config.loadFromResource("defaultConfig.cfg", Config.class);
 
@@ -97,7 +97,7 @@ public class ConfigTest {
     }
 
     @Test
-    public void testGetOrDefault () {
+    public void testGetOrDefault() {
         assertEquals("defaultValue", Config.getOrDefault("section", "not-existent-key", "defaultValue"));
 
         //set value

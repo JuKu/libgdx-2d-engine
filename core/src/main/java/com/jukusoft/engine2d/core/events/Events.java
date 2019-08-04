@@ -1,10 +1,10 @@
 package com.jukusoft.engine2d.core.events;
 
 /**
-* class to queue and trigger events like EventManager, but in thread safe
+ * class to queue and trigger events like EventManager, but in thread safe
  *
  * @see EventManager
-*/
+ */
 public class Events {
 
     protected static final int NUM_THREADS = 3;
@@ -15,11 +15,11 @@ public class Events {
     public static final int LOGIC_THREAD = 1;
     public static final int NETWORK_THREAD = 2;
 
-    protected Events () {
+    protected Events() {
         //
     }
 
-    public static void init () {
+    public static void init() {
         managers = new EventManager[NUM_THREADS];
 
         for (int i = 0; i < NUM_THREADS; i++) {
@@ -27,7 +27,7 @@ public class Events {
         }
     }
 
-    public static void queueEvent (EventData event) {
+    public static void queueEvent(EventData event) {
         //increment reference counter
         event.retain(NUM_THREADS - 1);
 
@@ -37,7 +37,7 @@ public class Events {
         }
     }
 
-    public static void triggerEvent (EventData event) {
+    public static void triggerEvent(EventData event) {
         //increment reference counter
         event.retain(NUM_THREADS - 1);
 
@@ -47,7 +47,7 @@ public class Events {
         }
     }
 
-    public static void update (int threadID, int maxMillis) {
+    public static void update(int threadID, int maxMillis) {
         if (threadID >= NUM_THREADS) {
             throw new IllegalArgumentException("threadID cannot >= number of threads, but threadID: " + threadID + " >= " + NUM_THREADS);
         }
@@ -56,7 +56,7 @@ public class Events {
         managers[threadID].update(maxMillis);
     }
 
-    public static void addListener (int threadID, int typeID, EventListener listener) {
+    public static void addListener(int threadID, int typeID, EventListener listener) {
         if (threadID >= NUM_THREADS) {
             throw new IllegalArgumentException("threadID cannot >= number of threads, but threadID: " + threadID + " >= " + NUM_THREADS);
         }
@@ -64,7 +64,7 @@ public class Events {
         managers[threadID].addListener(typeID, listener);
     }
 
-    public static void removeListener (int threadID, int typeID, EventListener listener) {
+    public static void removeListener(int threadID, int typeID, EventListener listener) {
         if (threadID >= NUM_THREADS) {
             throw new IllegalArgumentException("threadID cannot >= number of threads, but threadID: " + threadID + " >= " + NUM_THREADS);
         }

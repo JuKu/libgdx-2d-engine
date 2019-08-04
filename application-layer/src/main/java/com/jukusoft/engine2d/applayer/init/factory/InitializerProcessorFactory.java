@@ -16,16 +16,16 @@ public class InitializerProcessorFactory {
 
     private static List<Initializer> globalInitializers = new ArrayList<>();
 
-    private InitializerProcessorFactory () {
+    private InitializerProcessorFactory() {
         //
     }
 
     /**
-    * create initializer processor and add default initializers
+     * create initializer processor and add default initializers
      *
      * @param gameClass game class (to get version information)
-    */
-    public static InitializerProcessor create (Class<?> gameClass) {
+     */
+    public static InitializerProcessor create(Class<?> gameClass) {
         List<Initializer> initializerList = new ArrayList<>();
 
         //add initializers before game engine init
@@ -40,7 +40,7 @@ public class InitializerProcessorFactory {
         return new InitializerProcessor(initializerList);
     }
 
-    public static void addGlobalInitializer (Initializer initializer) {
+    public static void addGlobalInitializer(Initializer initializer) {
         globalInitializers.add(initializer);
     }
 

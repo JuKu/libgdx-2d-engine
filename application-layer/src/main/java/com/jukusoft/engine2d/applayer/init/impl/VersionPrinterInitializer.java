@@ -16,7 +16,7 @@ public class VersionPrinterInitializer implements Initializer {
 
     private final Version version;
 
-    public VersionPrinterInitializer (Version version) {
+    public VersionPrinterInitializer(Version version) {
         this.version = version;
     }
 

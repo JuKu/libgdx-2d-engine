@@ -8,12 +8,12 @@ import static org.junit.Assert.assertNotNull;
 public class GameTimeTest {
 
     @Test
-    public void testConstructor () {
+    public void testConstructor() {
         new GameTime();
     }
 
     @Test
-    public void testGetInstance () {
+    public void testGetInstance() {
         GameTime instance = GameTime.getInstance();
         assertNotNull(instance);
 
@@ -23,12 +23,12 @@ public class GameTimeTest {
     }
 
     @Test
-    public void testGetStartupTime () {
+    public void testGetStartupTime() {
         assertEquals(true, GameTime.getStartTime() > 0);
     }
 
     @Test
-    public void testGetterAndSetter () {
+    public void testGetterAndSetter() {
         GameTime time = new GameTime();
 
         long currentTime = System.currentTimeMillis();

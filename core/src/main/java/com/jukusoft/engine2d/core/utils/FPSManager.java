@@ -21,19 +21,19 @@ public class FPSManager {
         //
     }
 
-    public void setFPS (int fps) {
+    public void setFPS(int fps) {
         this.fps.set(fps);
     }
 
-    public int getFPS () {
+    public int getFPS() {
         return this.fps.get();
     }
 
-    public boolean isCriticalFPSValue () {
+    public boolean isCriticalFPSValue() {
         return this.getFPS() <= this.criticalFPSValue && this.getFPS() != 0;//on init, fps is 0
     }
 
-    public void showWarningIfNeccessary () {
+    public void showWarningIfNeccessary() {
         if (this.isCriticalFPSValue()) {
             //check if warning was already logged this second
             long now = this.time.getTime();
@@ -48,7 +48,7 @@ public class FPSManager {
         }
     }
 
-    public static FPSManager getInstance () {
+    public static FPSManager getInstance() {
         return instance;
     }
 

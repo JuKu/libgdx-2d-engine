@@ -8,12 +8,12 @@ import static org.junit.Assert.assertEquals;
 public class EventDataTest {
 
     @Test
-    public void testAllowTriggerDefaultValue () {
+    public void testAllowTriggerDefaultValue() {
         assertEquals(false, new DummyEventDataObject().allowTrigger());
     }
 
     @Test
-    public void testGetTimestamp () {
+    public void testGetTimestamp() {
         long startTime = System.currentTimeMillis();
 
         DummyEventDataObject event = new DummyEventDataObject();
@@ -27,7 +27,7 @@ public class EventDataTest {
     }
 
     @Test
-    public void testGetRefCount () {
+    public void testGetRefCount() {
         DummyEventDataObject event = new DummyEventDataObject();
 
         //after creation, reference count should be 1
