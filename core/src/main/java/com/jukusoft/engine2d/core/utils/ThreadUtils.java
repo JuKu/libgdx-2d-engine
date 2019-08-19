@@ -28,4 +28,17 @@ public class ThreadUtils {
         }
     }
 
+    public static void checkIfMainThread () {
+        Thread thread = Thread.currentThread();
+
+        if (!isMainThread()) {
+            throw new IllegalStateException("init() can only be called from main / ui thread");
+        }
+    }
+
+    public static boolean isMainThread () {
+        Thread thread = Thread.currentThread();
+        return thread.getName().contains("main") || thread.getName().contains("ui");
+    }
+
 }
