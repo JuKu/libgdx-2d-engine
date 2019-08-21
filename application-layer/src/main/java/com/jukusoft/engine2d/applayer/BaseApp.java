@@ -2,6 +2,7 @@ package com.jukusoft.engine2d.applayer;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.jukusoft.engine2d.applayer.events.game.DisposeGameEvent;
 import com.jukusoft.engine2d.applayer.events.game.PauseGameEvent;
 import com.jukusoft.engine2d.applayer.events.game.ResizeWindowEvent;
 import com.jukusoft.engine2d.applayer.events.game.ResumeGameEvent;
@@ -107,7 +108,8 @@ public abstract class BaseApp implements ApplicationListener {
 
     @Override
     public final void dispose() {
-        //TODO: fire event
+        //fire event
+        Events.triggerEvent(Pools.get(DisposeGameEvent.class));
 
         //TODO: interrupt game logic layer thread
 
