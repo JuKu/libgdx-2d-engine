@@ -10,4 +10,8 @@ public class DisposeGameEvent extends EventData {
         return BaseEvents.DISPOSE_GAME;
     }
 
+    @Override
+    public boolean allowTrigger() {
+        return true;
+    }
 }
