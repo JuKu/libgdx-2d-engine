@@ -1,16 +1,12 @@
 package com.jukusoft.engine2d.applayer;
 
 import com.badlogic.gdx.ApplicationListener;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.jukusoft.engine2d.applayer.init.InitializerProcessor;
 import com.jukusoft.engine2d.applayer.init.SplashScreenDrawer;
 import com.jukusoft.engine2d.applayer.init.factory.InitializerProcessorFactory;
-import com.jukusoft.engine2d.core.logger.Log;
+import com.jukusoft.engine2d.core.shutdown.ErrorHandler;
+import com.jukusoft.engine2d.core.task.TaskManager;
 import com.jukusoft.engine2d.core.utils.Platform;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public abstract class BaseApp implements ApplicationListener {
 
@@ -25,26 +21,15 @@ public abstract class BaseApp implements ApplicationListener {
 
     @Override
     public void create() {
+        Thread.currentThread().setName("ui-thread");
+
         //initialize game engine
         this.initProcessor = InitializerProcessorFactory.create(this.gameClass);
 
         try {
             initProcessor.processBeforeSplashScreen();
         } catch (Exception e) {
-            e.printStackTrace();
-
-            Logger.getAnonymousLogger().log(Level.SEVERE, "Exception while initializing game: ", e);
-            Log.e("BaseApp", "Exception while initializing game engine: ", e);
-
-            Log.shutdown();
-
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
-
-            System.exit(0);
+            ErrorHandler.shutdownWithException(e);
         }
 
         this.splashScreenDrawer = new SplashScreenDrawer();
@@ -56,7 +41,7 @@ public abstract class BaseApp implements ApplicationListener {
             return;
         }
 
-        //TODO: add code here
+        //TODO: fire event
     }
 
     @Override
@@ -88,17 +73,21 @@ public abstract class BaseApp implements ApplicationListener {
 
     @Override
     public void pause() {
-
+        //TODO: fire event
     }
 
     @Override
     public void resume() {
-
+        //TODO: fire event
     }
 
     @Override
     public void dispose() {
-        //
+        //TODO: fire event
+
+        //TODO: interrupt game logic layer thread
+
+        //TODO: shutdown subsystems
     }
 
 }

@@ -1,7 +1,7 @@
 package com.jukusoft.engine2d.applayer.init.impl;
 
 import com.jukusoft.engine2d.applayer.init.InitPriority;
-import com.jukusoft.engine2d.applayer.init.Initializer;
+import com.jukusoft.engine2d.core.init.Initializer;
 import com.jukusoft.engine2d.core.config.Config;
 
 @InitPriority(4)

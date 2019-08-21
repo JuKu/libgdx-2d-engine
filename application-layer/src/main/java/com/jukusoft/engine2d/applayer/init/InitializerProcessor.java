@@ -1,5 +1,7 @@
 package com.jukusoft.engine2d.applayer.init;
 
+import com.jukusoft.engine2d.core.init.Initializer;
+
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;

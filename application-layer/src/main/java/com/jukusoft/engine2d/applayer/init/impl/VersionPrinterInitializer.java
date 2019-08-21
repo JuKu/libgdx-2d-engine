@@ -3,7 +3,7 @@ package com.jukusoft.engine2d.applayer.init.impl;
 import com.jukusoft.engine2d.applayer.BaseApp;
 import com.jukusoft.engine2d.applayer.init.InitBeforeSplashScreen;
 import com.jukusoft.engine2d.applayer.init.InitPriority;
-import com.jukusoft.engine2d.applayer.init.Initializer;
+import com.jukusoft.engine2d.core.init.Initializer;
 import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.core.utils.Utils;
 import com.jukusoft.engine2d.core.version.Version;
