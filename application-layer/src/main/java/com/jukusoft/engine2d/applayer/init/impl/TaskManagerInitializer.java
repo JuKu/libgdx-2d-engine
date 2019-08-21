@@ -8,7 +8,7 @@ import com.jukusoft.engine2d.core.task.TaskManager;
 import com.jukusoft.engine2d.core.task.TaskManagers;
 import com.jukusoft.engine2d.core.task.impl.DefaultTaskManager;
 
-@InitPriority(5)
+@InitPriority(6)
 public class TaskManagerInitializer implements Initializer {
 
     @Override

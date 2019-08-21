@@ -29,6 +29,7 @@ public class InitializerProcessorFactory {
         initializerList.add(new LogInitializer());
         initializerList.add(new VersionPrinterInitializer(new Version(gameClass)));
         initializerList.add(new ConfigInitializer());
+        initializerList.add(new EventInitializer());
         initializerList.add(new TaskManagerInitializer());
         initializerList.addAll(globalInitializers);
 
