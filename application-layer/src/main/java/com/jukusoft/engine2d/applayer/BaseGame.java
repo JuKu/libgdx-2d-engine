@@ -1,11 +1,13 @@
 package com.jukusoft.engine2d.applayer;
 
-public class BaseGame extends BaseApp {
+import com.jukusoft.engine2d.core.subsystem.SubSystemManager;
+
+public abstract class BaseGame extends BaseApp {
 
     public BaseGame(Class<?> gameClass) {
         super(gameClass);
     }
 
-    
+    protected abstract void addSubSystems(SubSystemManager manager);
 
 }

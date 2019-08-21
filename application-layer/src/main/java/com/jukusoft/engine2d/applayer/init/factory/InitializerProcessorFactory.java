@@ -1,12 +1,9 @@
 package com.jukusoft.engine2d.applayer.init.factory;
 
 import com.jukusoft.engine2d.applayer.BaseApp;
+import com.jukusoft.engine2d.applayer.init.impl.*;
 import com.jukusoft.engine2d.core.init.Initializer;
 import com.jukusoft.engine2d.applayer.init.InitializerProcessor;
-import com.jukusoft.engine2d.applayer.init.impl.ConfigInitializer;
-import com.jukusoft.engine2d.applayer.init.impl.DefaultConfigInitializer;
-import com.jukusoft.engine2d.applayer.init.impl.LogInitializer;
-import com.jukusoft.engine2d.applayer.init.impl.VersionPrinterInitializer;
 import com.jukusoft.engine2d.core.version.Version;
 
 import java.util.ArrayList;
@@ -32,6 +29,7 @@ public class InitializerProcessorFactory {
         initializerList.add(new LogInitializer());
         initializerList.add(new VersionPrinterInitializer(new Version(gameClass)));
         initializerList.add(new ConfigInitializer());
+        initializerList.add(new TaskManagerInitializer());
         initializerList.addAll(globalInitializers);
 
         //add initializers which should be executed after splashscreen is shown

@@ -53,6 +53,10 @@ public class DefaultTaskManager implements TaskManager {
             e.printStackTrace();
             taskData.getOnExceptionHandler().handle(e);
         }
+
+        //cleanup memory
+        Pools.free(task);
+        Pools.free(taskData);
     }
 
     @Override
