@@ -34,6 +34,6 @@ script:
   - echo 'Java Version $JAVA_VER'
 #  - [ "$JAVA_VER" -e 18 ] && mvn -e clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.login=${SONAR_TOKEN} || echo "Don't execute sonarqube, because it's not openjdk8"
 #  - mvn -e clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.login=${SONAR_TOKEN}
-  - clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=jukusoft -Dsonar.login=${SONAR_TOKEN}
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=jukusoft -Dsonar.login=${SONAR_TOKEN}
 notifications:
   email: false
