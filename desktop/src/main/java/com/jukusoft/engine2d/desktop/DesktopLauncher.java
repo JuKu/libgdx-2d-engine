@@ -8,6 +8,7 @@ import com.jukusoft.engine2d.applayer.BaseGameFactory;
 import com.jukusoft.engine2d.core.config.Config;
 import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.core.utils.Utils;
+import com.jukusoft.engine2d.desktop.config.WindowConfig;
 
 import java.io.File;
 import java.util.List;
@@ -52,11 +53,17 @@ public class DesktopLauncher {
             throw new IllegalStateException("Working directory isn't correct, couldn't found config directory! Current working dir: " + (new File(".").getAbsolutePath()));
         }
 
-        Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+        /*Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
         config.setTitle("Engine2D Test Window");
         config.setWindowedMode(1280, 720);
         config.setResizable(false);
-        config.useVsync(true);
+        config.useVsync(true);*/
+
+        Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+
+        //load window config
+        WindowConfig windowConfig = new WindowConfig("./config/window.cfg");
+        windowConfig.fillConfig(config);
 
         // start game
         new Lwjgl3Application(createBaseGameInstance(), config);
