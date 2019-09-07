@@ -27,7 +27,7 @@ public class DesktopLauncher {
             start();
         } catch (Exception e) {
             e.printStackTrace();
-            
+
             System.out.println("Exception occurred, exit application now.");
             Log.e("DesktopLauncher", "Exception while startup proxy server: ", e);
 
