@@ -12,6 +12,7 @@
 		<module>core</module>
 		<module>application-layer</module>
 		<module>test-desktop</module>
+		<module>desktop</module>
 	</modules>
 
 	<name>Engine2D</name>

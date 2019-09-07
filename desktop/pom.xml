@@ -9,22 +9,16 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>engine2d-test-desktop</artifactId>
+	<artifactId>engine2d-desktop</artifactId>
 
 	<properties>
-		<mainClass>com.jukusoft.mmo.engine.desktop.DesktopLauncher</mainClass>
+		<mainClass>com.jukusoft.engine2d.desktop.DesktopLauncher</mainClass>
 
 		<!-- don't deploy all modules to maven central -->
-		<maven.deploy.skip>true</maven.deploy.skip>
+		<maven.deploy.skip>false</maven.deploy.skip>
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.jukusoft</groupId>
-			<artifactId>engine2d-desktop</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-
 		<dependency>
 			<groupId>com.jukusoft</groupId>
 			<artifactId>engine2d-core</artifactId>

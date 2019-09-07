@@ -1,13 +1,16 @@
-package com.jukusoft.engine2d.test.desktop;
+package com.jukusoft.engine2d.desktop;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import com.jukusoft.engine2d.applayer.BaseApp;
+import com.jukusoft.engine2d.applayer.BaseGame;
+import com.jukusoft.engine2d.applayer.BaseGameFactory;
 import com.jukusoft.engine2d.core.config.Config;
 import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.core.utils.Utils;
 
 import java.io.File;
+import java.util.List;
 import java.util.Set;
 
 public class DesktopLauncher {
@@ -23,6 +26,8 @@ public class DesktopLauncher {
         try {
             start();
         } catch (Exception e) {
+            e.printStackTrace();
+            
             System.out.println("Exception occurred, exit application now.");
             Log.e("DesktopLauncher", "Exception while startup proxy server: ", e);
 
@@ -54,9 +59,7 @@ public class DesktopLauncher {
         config.useVsync(true);
 
         // start game
-        new Lwjgl3Application(new BaseApp(DesktopLauncher.class) {
-            //
-        }, config);
+        new Lwjgl3Application(createBaseGameInstance(), config);
 
         //list currently active threads
         Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
@@ -89,6 +92,20 @@ public class DesktopLauncher {
         if (Config.forceExit) {
             System.exit(0);
         }
+    }
+
+    private static BaseGame createBaseGameInstance () {
+        List<BaseGameFactory> factories = SPIUtils.findImplementations(BaseGameFactory.class);
+
+        if (factories.isEmpty()) {
+            throw new IllegalStateException("no SPI factory is set: " + BaseGameFactory.class.getSimpleName() + ", this means game project is not well configured");
+        }
+
+        if (factories.size() > 1) {
+            throw new IllegalStateException("multiple SPI implementations for " + BaseGameFactory.class.getSimpleName() + " found");
+        }
+
+        return factories.get(0).createGame();
     }
 
 }
