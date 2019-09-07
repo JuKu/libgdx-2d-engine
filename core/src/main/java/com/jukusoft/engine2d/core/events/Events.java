@@ -33,7 +33,9 @@ public class Events {
 
         //add event to queues
         for (int i = 0; i < NUM_THREADS; i++) {
-            managers[i].queueEvent(event);
+            if (managers[i] != null) {
+                managers[i].queueEvent(event);
+            }
         }
     }
 

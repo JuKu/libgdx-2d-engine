@@ -10,8 +10,8 @@ public class EventInitializer implements Initializer {
 
     @Override
     public void init() throws Exception {
-        Events.init();
         Log.i("Events", "initialize event managers");
+        Events.init();
     }
 
 }
