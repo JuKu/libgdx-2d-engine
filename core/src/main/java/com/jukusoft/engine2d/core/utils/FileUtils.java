@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
@@ -327,6 +328,15 @@ public class FileUtils {
         //check, if directory is writable or try to set directory writable
         if (!f.canWrite() && !f.setWritable(true)) {
             throw new IllegalStateException("directory '" + dirPath + "' is not writable and user dont have permissions to change file permissions.");
+        }
+    }
+
+    public static void createFileIfAbsent (String filePath, String defaultContent) throws IOException {
+        File file = new File(filePath);
+
+        if (!file.exists()) {
+            file.createNewFile();
+            FileUtils.writeFile(filePath, defaultContent, StandardCharsets.UTF_8);
         }
     }
 

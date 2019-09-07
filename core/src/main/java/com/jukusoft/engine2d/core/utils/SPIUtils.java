@@ -1,4 +1,4 @@
-package com.jukusoft.engine2d.desktop;
+package com.jukusoft.engine2d.core.utils;
 
 import java.util.ArrayList;
 import java.util.Iterator;

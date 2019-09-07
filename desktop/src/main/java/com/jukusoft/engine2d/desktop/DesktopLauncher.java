@@ -2,11 +2,13 @@ package com.jukusoft.engine2d.desktop;
 
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.jukusoft.engine2d.applayer.BaseApp;
 import com.jukusoft.engine2d.applayer.BaseGame;
 import com.jukusoft.engine2d.applayer.BaseGameFactory;
 import com.jukusoft.engine2d.core.config.Config;
 import com.jukusoft.engine2d.core.logger.Log;
+import com.jukusoft.engine2d.core.utils.FileUtils;
+import com.jukusoft.engine2d.core.utils.ResourceUtils;
+import com.jukusoft.engine2d.core.utils.SPIUtils;
 import com.jukusoft.engine2d.core.utils.Utils;
 import com.jukusoft.engine2d.desktop.config.WindowConfig;
 
@@ -60,6 +62,14 @@ public class DesktopLauncher {
         config.useVsync(true);*/
 
         Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
+
+        if (!new File("config").exists()) {
+            new File("config").mkdirs();
+        }
+
+        //create default content, if config/window.cfg doesn't exists
+        FileUtils.createFileIfAbsent("./config/window.cfg", ResourceUtils.getResourceFileAsString("template/window.cfg"));
+        FileUtils.createFileIfAbsent("./config/logger.cfg", ResourceUtils.getResourceFileAsString("template/logger.cfg"));
 
         //load window config
         WindowConfig windowConfig = new WindowConfig("./config/window.cfg");
