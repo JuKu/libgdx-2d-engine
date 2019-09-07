@@ -91,7 +91,15 @@ public class ConfigTest {
     @Test
     public void testLoadFromResource() throws IOException {
         Config.clear();
-        Config.loadFromResource("defaultConfig.cfg", Config.class);
+        Config.loadFromResource("config/defaultConfig.cfg", Config.class);
+
+        assertEquals("test2", Config.get("Default", "test"));
+    }
+
+    @Test
+    public void testLoadFromResourceDir() throws IOException {
+        Config.clear();
+        Config.loadFromResourceDir("config", Config.class);
 
         assertEquals("test2", Config.get("Default", "test"));
     }

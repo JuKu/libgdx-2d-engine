@@ -3,12 +3,11 @@ package com.jukusoft.engine2d.core.config;
 import com.carrotsearch.hppc.ObjectObjectHashMap;
 import com.carrotsearch.hppc.ObjectObjectMap;
 import com.jukusoft.engine2d.core.logger.Log;
+import com.jukusoft.engine2d.core.utils.ResourceUtils;
 import org.ini4j.Ini;
 import org.ini4j.Profile;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,6 +68,15 @@ public class Config {
         }
     }
 
+    public static void loadFromResourceDir (String resourceDir, Class<?> cls) throws IOException {
+        Log.d(LOG_TAG, "loadFromResourceDir: " + resourceDir);
+
+        for (String fileName : ResourceUtils.listResourceFiles(resourceDir, cls)) {
+            Log.d(LOG_TAG, "load resource config: " + resourceDir + "/" + fileName);
+            loadFromResource("config/" + fileName, cls);
+        }
+    }
+
     public static void loadFromResource(String filePath, Class<?> cls) throws IOException {
         URL url = cls.getClassLoader().getResource(filePath);
 
@@ -84,6 +92,7 @@ public class Config {
 
         load(file, true);
     }
+
 
     public static void loadDir(File dir) throws IOException {
         if (!dir.exists()) {

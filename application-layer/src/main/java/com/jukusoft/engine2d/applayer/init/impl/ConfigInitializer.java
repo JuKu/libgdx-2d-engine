@@ -27,6 +27,10 @@ public class ConfigInitializer implements Initializer {
         Log.i(CONFIG_TAG, "load ./config/game.cfg");
 
         try {
+            //load first default configs
+            Log.d(CONFIG_TAG, "load default configs");
+            Config.loadFromResourceDir("config", Config.class);
+
             Config.load(new File("./config/game.cfg"));
         } catch (IOException e) {
             Log.e(CONFIG_TAG, "IOException while loading config file ./config/game.cfg!", e);

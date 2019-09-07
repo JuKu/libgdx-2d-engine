@@ -15,7 +15,7 @@ public class DefaultConfigInitializer implements Initializer {
 
     @Override
     public void init() throws Exception {
-        Config.loadFromResource("defaultConfig.cfg", cls);
+        Config.loadFromResource("config/defaultConfig.cfg", cls);
     }
 
 }
