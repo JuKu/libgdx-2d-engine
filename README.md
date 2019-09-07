@@ -90,3 +90,27 @@ Set property for DesktopLauncher in pom.xml:
 		</plugins>
 	</build>
 ```
+
+Next you have to create an `BaseGameFactory` implementation, e.q.:
+```java
+public class TestBaseGameFactory implements BaseGameFactory {
+
+    @Override
+    public BaseGame createGame() {
+        return new BaseGame(TestBaseGameFactory.class) {
+            @Override
+            protected void addSubSystems(SubSystemManager manager) {
+                //
+            }
+        };
+    }
+
+}
+```
+
+Then you have to register this factory implementation via SPI.\
+Create an directory "META-INF/services" in resources directory (e.q. src/main/resources/META-INF/service) and create a new file with the exact file name "com.jukusoft.engine2d.applayer.BaseGameFactory" (without extra extension) there.\
+File content should be your package and class name of your factory implementation, e.q.:
+```java
+com.jukusoft.engine2d.test.desktop.TestBaseGameFactory
+```
