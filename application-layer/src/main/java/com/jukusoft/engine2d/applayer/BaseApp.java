@@ -2,6 +2,8 @@ package com.jukusoft.engine2d.applayer;
 
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.jukusoft.engine2d.applayer.events.game.DisposeGameEvent;
 import com.jukusoft.engine2d.applayer.events.game.PauseGameEvent;
 import com.jukusoft.engine2d.applayer.events.game.ResizeWindowEvent;
@@ -37,6 +39,10 @@ public abstract class BaseApp implements ApplicationListener {
     private int cachedMemoryLeakCheckerInterval;
     private long lastMemoryLeakCheck = 0;
 
+    private Color clearColor = Color.BLACK;
+    private long splashScreenStartTime;
+    private long splashScreenMinTime;
+
     public BaseApp(Class<?> gameClass) {
         this.gameClass = gameClass;
     }
@@ -61,6 +67,9 @@ public abstract class BaseApp implements ApplicationListener {
         this.windowDimension = new WindowDimension();
         this.windowDimension.update();
 
+        this.splashScreenStartTime = System.currentTimeMillis();
+        this.splashScreenMinTime = Config.getInt("SplashScreen", "minTime");
+
         this.cachedMemoryLeakCheckerInterval = Config.getInt("Pools", "memoryLeakCheckerInterval");
     }
 
@@ -83,6 +92,8 @@ public abstract class BaseApp implements ApplicationListener {
         //run tasks which have to be executed in ui thread
         Platform.executeQueue();
 
+        long startTime = System.currentTimeMillis();
+
         if (!initialized) {
             //call initializers
             try {
@@ -91,7 +102,7 @@ public abstract class BaseApp implements ApplicationListener {
                 e.printStackTrace();
             }
 
-            initialized = initProcessor.hasFinished();
+            initialized = initProcessor.hasFinished() && (splashScreenStartTime + splashScreenMinTime < startTime);
 
             splashScreenDrawer.render();
         } else {
@@ -101,7 +112,9 @@ public abstract class BaseApp implements ApplicationListener {
                 splashScreenDrawer = null;
             }
 
-            long startTime = System.currentTimeMillis();
+            //clear OpenGL buffer
+            Gdx.gl.glClearColor(clearColor.r, clearColor.g, clearColor.b, clearColor.a);
+            Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
             //TODO: execute tasks
             TaskManager taskManager = TaskManagers.get(BaseThreads.UI_THREAD);
