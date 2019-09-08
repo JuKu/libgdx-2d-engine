@@ -6,6 +6,7 @@ import com.jukusoft.engine2d.applayer.events.game.DisposeGameEvent;
 import com.jukusoft.engine2d.applayer.events.game.PauseGameEvent;
 import com.jukusoft.engine2d.applayer.events.game.ResizeWindowEvent;
 import com.jukusoft.engine2d.applayer.events.game.ResumeGameEvent;
+import com.jukusoft.engine2d.applayer.game.BasicGame;
 import com.jukusoft.engine2d.applayer.init.InitializerProcessor;
 import com.jukusoft.engine2d.applayer.init.SplashScreenDrawer;
 import com.jukusoft.engine2d.applayer.init.factory.InitializerProcessorFactory;
@@ -13,6 +14,7 @@ import com.jukusoft.engine2d.applayer.plugin.PluginManager;
 import com.jukusoft.engine2d.applayer.plugin.impl.DefaultPluginManager;
 import com.jukusoft.engine2d.applayer.threads.BaseThreads;
 import com.jukusoft.engine2d.applayer.window.WindowDimension;
+import com.jukusoft.engine2d.core.config.Config;
 import com.jukusoft.engine2d.core.events.Events;
 import com.jukusoft.engine2d.core.memory.Pools;
 import com.jukusoft.engine2d.core.shutdown.ErrorHandler;
@@ -30,6 +32,10 @@ public abstract class BaseApp implements ApplicationListener {
 
     private WindowDimension windowDimension;
     private PluginManager pluginManager;
+
+    //memory leak checker
+    private int cachedMemoryLeakCheckerInterval;
+    private long lastMemoryLeakCheck = 0;
 
     public BaseApp(Class<?> gameClass) {
         this.gameClass = gameClass;
@@ -54,6 +60,8 @@ public abstract class BaseApp implements ApplicationListener {
         this.splashScreenDrawer = new SplashScreenDrawer();
         this.windowDimension = new WindowDimension();
         this.windowDimension.update();
+
+        this.cachedMemoryLeakCheckerInterval = Config.getInt("Pools", "memoryLeakCheckerInterval");
     }
 
     @Override
@@ -93,11 +101,26 @@ public abstract class BaseApp implements ApplicationListener {
                 splashScreenDrawer = null;
             }
 
+            long startTime = System.currentTimeMillis();
+
             //TODO: execute tasks
             TaskManager taskManager = TaskManagers.get(BaseThreads.UI_THREAD);
             taskManager.run(10);
 
             //TODO: enter game loop
+
+            //memory leak checker
+            if (lastMemoryLeakCheck + cachedMemoryLeakCheckerInterval < startTime) {
+                Pools.checkForMemoryLeaks();
+
+                //update cached config value
+                this.cachedMemoryLeakCheckerInterval = Config.getInt("Pools", "memoryLeakCheckerInterval");
+
+                lastMemoryLeakCheck = startTime;
+            }
+
+            long endTime = System.currentTimeMillis();
+            long timeDiff = endTime - startTime;
         }
     }
 
