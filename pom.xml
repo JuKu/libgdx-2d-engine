@@ -13,6 +13,8 @@
 		<module>application-layer</module>
 		<module>test-desktop</module>
 		<module>desktop</module>
+		<module>plugin</module>
+		<module>base-game</module>
 	</modules>
 
 	<name>Engine2D</name>
