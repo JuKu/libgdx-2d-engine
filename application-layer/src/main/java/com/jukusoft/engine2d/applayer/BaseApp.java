@@ -18,6 +18,7 @@ import com.jukusoft.engine2d.applayer.threads.BaseThreads;
 import com.jukusoft.engine2d.applayer.window.WindowDimension;
 import com.jukusoft.engine2d.core.config.Config;
 import com.jukusoft.engine2d.core.events.Events;
+import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.core.memory.Pools;
 import com.jukusoft.engine2d.core.shutdown.ErrorHandler;
 import com.jukusoft.engine2d.core.task.TaskManager;
@@ -110,6 +111,8 @@ public abstract class BaseApp implements ApplicationListener {
             if (splashScreenDrawer != null) {
                 splashScreenDrawer.dispose();
                 splashScreenDrawer = null;
+
+                Log.i("BaseApp", "Game Engine initialization finished");
             }
 
             //clear OpenGL buffer
