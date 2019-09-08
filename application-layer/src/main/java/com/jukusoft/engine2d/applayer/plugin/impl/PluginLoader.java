@@ -1,4 +1,4 @@
-package com.jukusoft.engine2d.applayer.plugin;
+package com.jukusoft.engine2d.applayer.plugin.impl;
 
 import com.jukusoft.engine2d.plugin.Pluggable;
 
