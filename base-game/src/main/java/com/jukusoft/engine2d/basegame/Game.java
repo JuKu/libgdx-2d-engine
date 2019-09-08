@@ -10,6 +10,12 @@ public interface Game {
 
     public boolean isPaused();
 
+    public void pause();
+
+    public void resume();
+
+    public void forcePause(boolean value);
+
     public void setProperty(String name, Object obj);
 
     public <T> T getProperty(String name, Class<T> cls);
