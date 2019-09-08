@@ -17,6 +17,12 @@ public class ConfigInitializer implements Initializer {
 
     protected static final String CONFIG_TAG = "Config";
 
+    private final Class<?> cls;
+
+    public ConfigInitializer(Class<?> cls) {
+        this.cls = cls;
+    }
+
     @Override
     public void init() throws IOException {
         //create config directory, if not exists
@@ -24,7 +30,9 @@ public class ConfigInitializer implements Initializer {
 
         //load all config files
         Utils.printSection("Configuration & Init");
-        Log.i(CONFIG_TAG, "load ./config/game.cfg");
+        Config.loadFromResource("config/defaultConfig.cfg", cls);
+
+        //Log.i(CONFIG_TAG, "load ./config/game.cfg");
 
         try {
             //load first default configs

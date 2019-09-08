@@ -33,13 +33,12 @@ public class InitializerProcessorFactory {
         //add initializers before game engine init
         initializerList.add(new LogInitializer());
         initializerList.add(new VersionPrinterInitializer(new Version(gameClass)));
-        initializerList.add(new ConfigInitializer());
+        initializerList.add(new ConfigInitializer(BaseApp.class));
         initializerList.add(new EventInitializer());
         initializerList.add(new TaskManagerInitializer());
         initializerList.addAll(globalInitializers);
 
         //add initializers which should be executed after splashscreen is shown
-        initializerList.add(new DefaultConfigInitializer(BaseApp.class));
         initializerList.add(new GameConfigInitializer());
         initializerList.add(new PluginLoaderInitializer(pluginManager));
 
