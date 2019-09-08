@@ -11,7 +11,7 @@ import java.io.File;
 @InitPriority(100)
 public class PluginLoaderInitializer implements Initializer {
 
-    private static final String LOG_TAG = "PluginLoaderInitializer";
+    private static final String LOG_TAG = "PluginLoaderInit";
     private static final String PLUGIN_SECTION = "Plugins";
 
     private final PluginManager pluginManager;
