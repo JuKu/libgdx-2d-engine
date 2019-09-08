@@ -14,7 +14,7 @@ public class GameConfigInitializer implements Initializer {
     @Override
     public void init() throws Exception {
         //load all config files
-        Utils.printSection("Game Configuration");
+        //Utils.printSection("Game Configuration");
         Log.i(CONFIG_TAG, "load config dir: ./config/");
 
         Config.loadDir(new File("./config/"));

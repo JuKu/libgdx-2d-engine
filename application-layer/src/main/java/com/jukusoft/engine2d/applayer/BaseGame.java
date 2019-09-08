@@ -1,5 +1,6 @@
 package com.jukusoft.engine2d.applayer;
 
+import com.jukusoft.engine2d.basegame.Game;
 import com.jukusoft.engine2d.core.subsystem.SubSystemManager;
 
 public abstract class BaseGame extends BaseApp {
@@ -9,5 +10,7 @@ public abstract class BaseGame extends BaseApp {
     }
 
     protected abstract void addSubSystems(SubSystemManager manager);
+
+    protected abstract Game createGame();
 
 }

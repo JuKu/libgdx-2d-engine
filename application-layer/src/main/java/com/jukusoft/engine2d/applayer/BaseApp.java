@@ -9,6 +9,8 @@ import com.jukusoft.engine2d.applayer.events.game.ResumeGameEvent;
 import com.jukusoft.engine2d.applayer.init.InitializerProcessor;
 import com.jukusoft.engine2d.applayer.init.SplashScreenDrawer;
 import com.jukusoft.engine2d.applayer.init.factory.InitializerProcessorFactory;
+import com.jukusoft.engine2d.applayer.plugin.PluginManager;
+import com.jukusoft.engine2d.applayer.plugin.impl.DefaultPluginManager;
 import com.jukusoft.engine2d.applayer.threads.BaseThreads;
 import com.jukusoft.engine2d.applayer.window.WindowDimension;
 import com.jukusoft.engine2d.core.events.Events;
@@ -17,6 +19,7 @@ import com.jukusoft.engine2d.core.shutdown.ErrorHandler;
 import com.jukusoft.engine2d.core.task.TaskManager;
 import com.jukusoft.engine2d.core.task.TaskManagers;
 import com.jukusoft.engine2d.core.utils.Platform;
+import com.jukusoft.engine2d.plugin.PluginApi;
 
 public abstract class BaseApp implements ApplicationListener {
 
@@ -26,6 +29,7 @@ public abstract class BaseApp implements ApplicationListener {
     private boolean initialized = false;
 
     private WindowDimension windowDimension;
+    private PluginManager pluginManager;
 
     public BaseApp(Class<?> gameClass) {
         this.gameClass = gameClass;
@@ -35,8 +39,11 @@ public abstract class BaseApp implements ApplicationListener {
     public final void create() {
         Thread.currentThread().setName("ui-thread");
 
+        DefaultPluginManager.createInstance(createPluginApi());
+        this.pluginManager = DefaultPluginManager.getInstance();
+
         //initialize game engine
-        this.initProcessor = InitializerProcessorFactory.create(this.gameClass);
+        this.initProcessor = InitializerProcessorFactory.create(this.gameClass, this.pluginManager);
 
         try {
             initProcessor.processBeforeSplashScreen();
@@ -113,7 +120,11 @@ public abstract class BaseApp implements ApplicationListener {
 
         //TODO: interrupt game logic layer thread
 
+        //TODO: interrupt network thread
+
         //TODO: shutdown subsystems
     }
+
+    protected abstract PluginApi createPluginApi();
 
 }
