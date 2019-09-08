@@ -335,7 +335,8 @@ public class FileUtils {
         File file = new File(filePath);
 
         if (!file.exists()) {
-            file.createNewFile();
+            if (!file.createNewFile()) throw new IOException("Cannot create file: " + filePath);
+
             FileUtils.writeFile(filePath, defaultContent, StandardCharsets.UTF_8);
         }
     }
