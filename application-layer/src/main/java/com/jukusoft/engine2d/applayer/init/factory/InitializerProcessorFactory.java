@@ -35,6 +35,7 @@ public class InitializerProcessorFactory {
 
         //add initializers which should be executed after splashscreen is shown
         initializerList.add(new DefaultConfigInitializer(BaseApp.class));
+        initializerList.add(new GameConfigInitializer());
 
         return new InitializerProcessor(initializerList);
     }
