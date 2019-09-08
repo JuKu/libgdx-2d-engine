@@ -2,6 +2,7 @@ package com.jukusoft.engine2d.applayer.init;
 
 import com.jukusoft.engine2d.core.init.Initializer;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -20,7 +21,7 @@ public class InitializerProcessor {
             }
 
             if (o2.getClass().isAnnotationPresent(InitPriority.class)) {
-                priority1 = o2.getClass().getAnnotation(InitPriority.class).value();
+                priority2 = o2.getClass().getAnnotation(InitPriority.class).value();
             }
 
             return priority2 - priority1;

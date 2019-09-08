@@ -9,6 +9,11 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface InitPriority {
 
+    /**
+    * get priority, if smaller, than the Initializer will be called earlier
+     *
+     * @return priority
+    */
     int value() default 20;
 
 }
