@@ -24,7 +24,7 @@ public class InitializerProcessor {
                 priority2 = o2.getClass().getAnnotation(InitPriority.class).value();
             }
 
-            return priority2 - priority1;
+            return priority1 - priority2;
         });
         queue.addAll(list);
     }

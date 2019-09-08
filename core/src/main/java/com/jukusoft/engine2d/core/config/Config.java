@@ -93,8 +93,11 @@ public class Config {
         load(file, true);
     }
 
-
     public static void loadDir(File dir) throws IOException {
+        loadDir(dir, true);
+    }
+
+    public static void loadDir(File dir, boolean skipExampleConfig) throws IOException {
         if (!dir.exists()) {
             throw new IllegalStateException("config directory doesn't exists: " + dir.getAbsolutePath());
         }
@@ -115,7 +118,12 @@ public class Config {
             //check file ending
             if (!file.getName().endsWith(".cfg") && !file.getName().endsWith(".ini")) {
                 //its not a config file, so skip this file instance
-                Log.v(LOG_TAG, "skip file: " + file.getAbsolutePath());
+                Log.v(LOG_TAG, "skip file: " + file.getAbsolutePath().replace("\\", "/"));
+                continue;
+            }
+
+            if (file.getName().contains("junit") && skipExampleConfig) {
+                Log.v(LOG_TAG, "skip file: " + file.getAbsolutePath().replace("\\", "/"));
                 continue;
             }
 
