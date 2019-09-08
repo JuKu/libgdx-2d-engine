@@ -14,4 +14,8 @@ public interface PluginManager extends Service {
 
     public void shutdownAllPlugins(Game game);
 
+    public int countPlugins();
+
+    public int countActivePlugins();
+
 }

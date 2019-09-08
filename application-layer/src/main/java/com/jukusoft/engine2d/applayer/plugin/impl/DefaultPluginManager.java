@@ -75,6 +75,16 @@ public class DefaultPluginManager implements PluginManager {
         }
     }
 
+    @Override
+    public int countPlugins() {
+        return list.size();
+    }
+
+    @Override
+    public int countActivePlugins() {
+        return startedPlugins.size();
+    }
+
     /**
     * get singleton instance
      *

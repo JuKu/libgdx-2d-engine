@@ -35,6 +35,7 @@ public class PluginLoaderInitializer implements Initializer {
         }
 
         pluginManager.loadPlugins(pluginDir);
+        Log.i(LOG_TAG, pluginManager.countPlugins() + " plugins loaded");
     }
 
 }
