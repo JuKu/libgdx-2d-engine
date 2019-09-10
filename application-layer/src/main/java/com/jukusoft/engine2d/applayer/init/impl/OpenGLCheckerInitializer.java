@@ -35,6 +35,23 @@ public class OpenGLCheckerInitializer implements Initializer {
         if (!Gdx.graphics.getGLVersion().isVersionEqualToOrHigher(requiredMajorVersion, requiredMinorVersion)) {
             ErrorHandler.shutdownWithException(new RuntimeException("required OpenGL version is not available. required version: " + requiredMajorVersion + "." + requiredMinorVersion));
         }
+
+        //check OpenGL extensions
+        String requiredExtensions = Config.get(OPENGL_SECTION, "requiredOpenGLExtensions");
+        final String[] extensions = requiredExtensions.split(";");
+
+        //check, if required extensions are available
+        for (String extension : extensions) {
+            if (extension.equals("none")) {
+                continue;
+            }
+
+            Log.d(LOG_TAG, "check OpenGL extension: " + extension);
+
+            if (!Gdx.graphics.supportsExtension(extension)) {
+                ErrorHandler.shutdownWithException(new RuntimeException("Required OpenGL extension is not available: " + extension));
+            }
+        }
     }
 
 }
