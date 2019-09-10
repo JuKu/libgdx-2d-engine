@@ -4,6 +4,8 @@ import com.jukusoft.engine2d.basegame.service.Service;
 import com.jukusoft.engine2d.core.time.GameSpeed;
 import com.jukusoft.engine2d.core.time.GameTime;
 
+import java.util.concurrent.ScheduledExecutorService;
+
 public interface Game {
 
     public boolean isRunning();
@@ -35,6 +37,8 @@ public interface Game {
     public <T extends Service> void putService(T service, Class<T> cls);
 
     public GameTime getTime();
+
+    public ScheduledExecutorService getExecutorService();
 
     //TODO: add code here
 

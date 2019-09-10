@@ -11,6 +11,7 @@ public interface SubSystemManager {
      *
      * @param initializers list with initializers so subsystems can add initializers on startup, e.q. to load assets
     */
+    @Deprecated
     public void init(List<Initializer> initializers);
 
     public void addSubSystem(SubSystem system, boolean useExtraThread);

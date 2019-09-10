@@ -3,8 +3,12 @@ package com.jukusoft.engine2d.applayer.game;
 import com.badlogic.gdx.maps.Map;
 import com.jukusoft.engine2d.basegame.Game;
 import com.jukusoft.engine2d.basegame.service.Service;
+import com.jukusoft.engine2d.core.config.Config;
 import com.jukusoft.engine2d.core.time.GameTime;
 import org.mini2Dx.gdx.utils.ObjectMap;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class BasicGame implements Game {
 
@@ -16,6 +20,14 @@ public class BasicGame implements Game {
 
     ObjectMap<String,Object> properties = new ObjectMap<>();
     ObjectMap<Class<? extends Service>,Service> services = new ObjectMap<>();
+
+    private ScheduledExecutorService executorService;
+
+    public BasicGame() {
+        if (Config.getBool("ExecutorService", "enabled")) {
+            this.executorService = Executors.newScheduledThreadPool(Config.getInt("ExecutorService", "threadCount"));
+        }
+    }
 
     @Override
     public boolean isRunning() {
@@ -102,6 +114,15 @@ public class BasicGame implements Game {
     @Override
     public GameTime getTime() {
         return null;
+    }
+
+    @Override
+    public ScheduledExecutorService getExecutorService() {
+        if (this.executorService == null) {
+            throw new UnsupportedOperationException("executor service is disabled in configuration, see ExecutorService.enabled");
+        }
+
+        return this.executorService;
     }
 
 }
