@@ -3,7 +3,6 @@ package com.jukusoft.engine2d.applayer.init.factory;
 import com.jukusoft.engine2d.applayer.BaseApp;
 import com.jukusoft.engine2d.applayer.init.impl.*;
 import com.jukusoft.engine2d.applayer.plugin.PluginManager;
-import com.jukusoft.engine2d.basegame.Game;
 import com.jukusoft.engine2d.core.init.Initializer;
 import com.jukusoft.engine2d.applayer.init.InitializerProcessor;
 import com.jukusoft.engine2d.core.version.Version;
@@ -33,6 +32,8 @@ public class InitializerProcessorFactory {
         //add initializers before game engine init
         initializerList.add(new LogInitializer());
         initializerList.add(new VersionPrinterInitializer(new Version(gameClass)));
+        initializerList.add(new OpenGLCheckerInitializer());
+        initializerList.add(new LogOSInitializer());
         initializerList.add(new ConfigInitializer(BaseApp.class));
         initializerList.add(new EventInitializer());
         initializerList.add(new TaskManagerInitializer());

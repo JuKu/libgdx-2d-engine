@@ -11,7 +11,7 @@ import com.jukusoft.engine2d.core.utils.Utils;
 import java.io.File;
 import java.io.IOException;
 
-@InitPriority(4)
+@InitPriority(3)
 @InitBeforeSplashScreen
 public class ConfigInitializer implements Initializer {
 
