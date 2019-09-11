@@ -38,6 +38,10 @@ public class Timer {
         this.started = false;
     }
 
+    public boolean isStarted() {
+        return started;
+    }
+
     public void setListener(Runnable listener) {
         this.listener = listener;
     }
