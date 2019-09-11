@@ -3,6 +3,7 @@ package com.jukusoft.engine2d.core.config;
 import com.carrotsearch.hppc.ObjectObjectHashMap;
 import com.carrotsearch.hppc.ObjectObjectMap;
 import com.jukusoft.engine2d.core.logger.Log;
+import com.jukusoft.engine2d.core.utils.FileUtils;
 import com.jukusoft.engine2d.core.utils.ResourceUtils;
 import org.ini4j.Ini;
 import org.ini4j.Profile;
@@ -79,22 +80,24 @@ public class Config {
     }
 
     public static void loadFromResource(String filePath, Class<?> cls) throws IOException {
-        URL url = ClassLoader.getSystemResource(filePath);
+        /*URL url = ClassLoader.getSystemResource(filePath);
 
         if (url == null) {
             throw new FileNotFoundException("resource config file does not exists: " + filePath);
         }
 
-        //System.err.println("getFile(): " + url.getFile());
+        //System.err.println("getFile(): " + url.getFile());*/
 
         File file = null;
 
-        try {
-            file = new File(url.toURI());
-        } catch (URISyntaxException e) {
-            Log.e(LOG_TAG, "URISyntaxException", e);
-            throw new IOException("URISyntaxException", e);
-        }
+        /*try {
+            file = FileUtils.getResourceAsFile(filePath);//new File(FileUtils.getResourcePath(filePath).toUri());//url.toURI()
+        } catch (Exception e) {
+            Log.e(LOG_TAG, "Exception while loading config from resource: " + filePath, e);
+            throw new IOException("Exception", e);
+        }*/
+
+        file = FileUtils.getResourceAsFile(filePath);
 
         if (!file.exists()) {
             throw new FileNotFoundException("resource config file does not exists: " + filePath + ", absolute path: " + file.getAbsolutePath());

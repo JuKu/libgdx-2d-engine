@@ -1,16 +1,14 @@
 package com.jukusoft.engine2d.core.utils;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.nio.file.*;
+import java.nio.file.spi.FileSystemProvider;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -339,6 +337,72 @@ public class FileUtils {
 
             FileUtils.writeFile(filePath, defaultContent, StandardCharsets.UTF_8);
         }
+    }
+
+    /**
+    * extracts the resource file into temp directory and returns the file instance
+     *
+     * See also: https://stackoverflow.com/questions/676097/java-resource-as-file
+     *
+     * @param resourcePath resource path
+     *
+     * @return file instance to resource
+    */
+    public static File getResourceAsFile(String resourcePath) throws IOException {
+        URL url = ClassLoader.getSystemResource(resourcePath);
+
+        if (url == null) {
+            throw new FileNotFoundException("resource config file does not exists: " + resourcePath);
+        }
+
+        InputStream in = ClassLoader.getSystemClassLoader().getResourceAsStream(resourcePath);
+        if (in == null) {
+            return null;
+        }
+
+        File tempFile = File.createTempFile(String.valueOf(in.hashCode()), ".tmp");
+        tempFile.deleteOnExit();
+
+        try (FileOutputStream out = new FileOutputStream(tempFile)) {
+            //copy stream
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = in.read(buffer)) != -1) {
+                out.write(buffer, 0, bytesRead);
+            }
+        }
+
+        return tempFile;
+    }
+
+    public static Path getResourcePath (String resourcePath) throws IOException, URISyntaxException {
+        URL url = ClassLoader.getSystemResource(resourcePath);
+
+        if (url == null) {
+            throw new FileNotFoundException("resource config file does not exists: " + resourcePath);
+        }
+
+        URI uri = url.toURI();
+
+        /*final Map<String, String> env = new HashMap<>();
+        final String[] array = uri.toString().split("!");
+        final FileSystem fs = FileSystems.newFileSystem(URI.create(array[0]), env);
+        final Path path = fs.getPath(array[1]);*/
+
+       if("jar".equals(uri.getScheme())){
+            for (FileSystemProvider provider: FileSystemProvider.installedProviders()) {
+                if (provider.getScheme().equalsIgnoreCase("jar")) {
+                    try {
+                        provider.getFileSystem(uri);
+                    } catch (FileSystemNotFoundException e) {
+                        // in this case we need to initialize it first:
+                        provider.newFileSystem(uri, Collections.emptyMap());
+                    }
+                }
+            }
+        }
+
+        return Paths.get(uri);
     }
 
 }
