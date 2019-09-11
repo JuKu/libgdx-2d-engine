@@ -16,6 +16,8 @@ import java.util.jar.JarInputStream;
 
 public class PluginLoader {
 
+    private static final String LOG_TAG = "PluginLoader";
+
     //see also: https://www.java-blog-buch.de/d-plugin-entwicklung-in-java/2/
 
     public static List<Pluggable> loadPlugins(File pluginDir) throws IOException {
@@ -85,11 +87,9 @@ public class PluginLoader {
             try {
                 plugs.add(plug.newInstance());
             } catch (InstantiationException e) {
-                System.err.println("Can't instantiate plugin: " + plug.getName());
-                e.printStackTrace();
+                Log.w(LOG_TAG, "Can't instantiate plugin: " + plug.getName(), e);
             } catch (IllegalAccessException e) {
-                System.err.println("IllegalAccess for plugin: " + plug.getName());
-                e.printStackTrace();
+                Log.w(LOG_TAG, "IllegalAccess for plugin: " + plug.getName(), e);
             }
         }
 
