@@ -36,7 +36,7 @@ script:
 
 after_success:
   - "echo $TRAVIS_JDK_VERSION"
-  - "[[ $TRAVIS_BRANCH == \"master\" ]] && { mvn deploy --settings .maven.xml -DuniqueVersion=false; };"
+  - "[[ $TRAVIS_BRANCH == \"master\" -a $TRAVIS_JDK_VERSION == \"openjdk8\" ]] && { mvn deploy --settings .maven.xml -DuniqueVersion=false; };"
 
 notifications:
   email: false
