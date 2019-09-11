@@ -7,6 +7,7 @@ public class Timer {
     private boolean started = false;
     private Runnable listener;
     private Runnable internalListener;
+    private boolean finished = false;
 
     public Timer() {
         //
@@ -22,6 +23,7 @@ public class Timer {
         if (this.elapsed >= this.duration) {
             //timer reached
             started = false;
+            finished = true;
 
             if (listener != null) {
                 listener.run();
@@ -41,6 +43,7 @@ public class Timer {
         this.elapsed = 0;
         this.duration = duration;
         this.started = true;
+        this.finished = false;
     }
 
     public void stop() {
@@ -71,6 +74,10 @@ public class Timer {
 
     public boolean isStarted() {
         return started;
+    }
+
+    public boolean hasFinished() {
+        return finished;
     }
 
     public void setListener(Runnable listener) {

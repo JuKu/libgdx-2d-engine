@@ -17,24 +17,30 @@ public class TimerTest {
     public void testStartAndStop() {
         Timer timer = new Timer();
         assertFalse(timer.isStarted());
+        assertFalse(timer.hasFinished());
 
         timer.update(0);
         assertFalse(timer.isStarted());
+        assertFalse(timer.hasFinished());
 
         timer.start(1);
         assertTrue(timer.isStarted());
+        assertFalse(timer.hasFinished());
         assertEquals(0f, timer.getProgress(), 0.0001f);
 
         timer.update(0);
         assertTrue(timer.isStarted());
+        assertFalse(timer.hasFinished());
         assertEquals(0f, timer.getProgress(), 0.0001f);
 
         timer.update(1);
         assertFalse(timer.isStarted());
+        assertTrue(timer.hasFinished());
         assertEquals(1f, timer.getProgress(), 0.0001f);
 
         timer.start(1);
         assertTrue(timer.isStarted());
+        assertFalse(timer.hasFinished());
     }
 
     @Test
