@@ -1,5 +1,6 @@
 package com.jukusoft.engine2d.applayer.plugin.impl;
 
+import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.plugin.Pluggable;
 
 import java.io.File;
@@ -58,7 +59,7 @@ public class PluginLoader {
                         }
                     } catch (ClassNotFoundException e) {
                         System.err.println("Can't load Class " + ent.getName());
-                        e.printStackTrace();
+                        Log.e("PluginLoader", "Can't load class: " + ent.getName(), e);
                     }
                 }
             }
