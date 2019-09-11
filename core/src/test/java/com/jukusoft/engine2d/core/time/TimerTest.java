@@ -23,12 +23,15 @@ public class TimerTest {
 
         timer.start(1);
         assertTrue(timer.isStarted());
+        assertEquals(0f, timer.getProgress(), 0.0001f);
 
         timer.update(0);
         assertTrue(timer.isStarted());
+        assertEquals(0f, timer.getProgress(), 0.0001f);
 
         timer.update(1);
         assertFalse(timer.isStarted());
+        assertEquals(1f, timer.getProgress(), 0.0001f);
 
         timer.start(1);
         assertTrue(timer.isStarted());
