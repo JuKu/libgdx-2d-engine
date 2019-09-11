@@ -47,22 +47,23 @@ public class PluginLoader {
 
         List<Class<Pluggable>> classes = new ArrayList<>();
 
-        JarInputStream jaris = new JarInputStream(new FileInputStream(jar));
-        JarEntry ent = null;
-        while ((ent = jaris.getNextJarEntry()) != null) {
-            if (ent.getName().toLowerCase().endsWith(".class")) {
-                try {
-                    Class<?> cls = cl.loadClass(ent.getName().substring(0, ent.getName().length() - 6).replace('/', '.'));
-                    if (PluginLoader.isPluggableClass(cls)) {
-                        classes.add((Class<Pluggable>) cls);
+        try (JarInputStream jaris = new JarInputStream(new FileInputStream(jar))) {
+            JarEntry ent = null;
+            while ((ent = jaris.getNextJarEntry()) != null) {
+                if (ent.getName().toLowerCase().endsWith(".class")) {
+                    try {
+                        Class<?> cls = cl.loadClass(ent.getName().substring(0, ent.getName().length() - 6).replace('/', '.'));
+                        if (PluginLoader.isPluggableClass(cls)) {
+                            classes.add((Class<Pluggable>) cls);
+                        }
+                    } catch (ClassNotFoundException e) {
+                        System.err.println("Can't load Class " + ent.getName());
+                        e.printStackTrace();
                     }
-                } catch (ClassNotFoundException e) {
-                    System.err.println("Can't load Class " + ent.getName());
-                    e.printStackTrace();
                 }
             }
         }
-        jaris.close();
+
         return classes;
     }
 
