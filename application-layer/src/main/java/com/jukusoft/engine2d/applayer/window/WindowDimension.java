@@ -25,7 +25,7 @@ public class WindowDimension {
         this.windowHeight = height;
     }
 
-    public void update () {
+    public void update() {
         set(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
     }
 

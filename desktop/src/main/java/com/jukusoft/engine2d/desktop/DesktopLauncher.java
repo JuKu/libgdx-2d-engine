@@ -111,7 +111,7 @@ public class DesktopLauncher {
         }
     }
 
-    private static BaseGame createBaseGameInstance () {
+    private static BaseGame createBaseGameInstance() {
         List<BaseGameFactory> factories = SPIUtils.findImplementations(BaseGameFactory.class);
 
         if (factories.isEmpty()) {

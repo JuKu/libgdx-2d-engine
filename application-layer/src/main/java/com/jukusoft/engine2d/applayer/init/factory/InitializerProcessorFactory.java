@@ -1,10 +1,10 @@
 package com.jukusoft.engine2d.applayer.init.factory;
 
 import com.jukusoft.engine2d.applayer.BaseApp;
+import com.jukusoft.engine2d.applayer.init.InitializerProcessor;
 import com.jukusoft.engine2d.applayer.init.impl.*;
 import com.jukusoft.engine2d.applayer.plugin.PluginManager;
 import com.jukusoft.engine2d.core.init.Initializer;
-import com.jukusoft.engine2d.applayer.init.InitializerProcessor;
 import com.jukusoft.engine2d.core.version.Version;
 
 import java.util.ArrayList;

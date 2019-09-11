@@ -11,7 +11,7 @@ public class Timer {
         //
     }
 
-    public void update (float delta) {
+    public void update(float delta) {
         if (!started) {
             return;
         }

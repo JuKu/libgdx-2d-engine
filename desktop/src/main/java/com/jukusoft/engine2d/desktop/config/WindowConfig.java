@@ -17,12 +17,11 @@ public class WindowConfig {
     protected Profile.Section section = null;
 
     /**
-    * default constructor
+     * default constructor
      *
      * @param filePath path to config file
-     *
      * @throws IOException if config couldn't be loaded
-    */
+     */
     public WindowConfig(String filePath) throws IOException {
         if (filePath == null) {
             throw new NullPointerException("filePath cannot be null.");
@@ -44,7 +43,7 @@ public class WindowConfig {
         this.section = this.ini.get("Window");
     }
 
-    public void fillConfig (Lwjgl3ApplicationConfiguration config) {
+    public void fillConfig(Lwjgl3ApplicationConfiguration config) {
         config.setTitle(section.get("title"));
         config.setWindowedMode(getInt("width"), getInt("height"));
 
@@ -61,15 +60,15 @@ public class WindowConfig {
         }
     }
 
-    protected int getInt (String key) {
+    protected int getInt(String key) {
         return Integer.parseInt(this.section.get(key));
     }
 
-    protected int getIntOrDefault (String key, int defaultValue) {
+    protected int getIntOrDefault(String key, int defaultValue) {
         return Integer.parseInt(this.section.getOrDefault(key, "" + defaultValue));
     }
 
-    protected boolean getBoolean (String key) {
+    protected boolean getBoolean(String key) {
         return Boolean.parseBoolean(this.section.get(key));
     }
 

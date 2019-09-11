@@ -1,7 +1,6 @@
 package com.jukusoft.engine2d.basegame;
 
 import com.jukusoft.engine2d.basegame.service.Service;
-import com.jukusoft.engine2d.core.time.GameSpeed;
 import com.jukusoft.engine2d.core.time.GameTime;
 
 import java.util.concurrent.ScheduledExecutorService;

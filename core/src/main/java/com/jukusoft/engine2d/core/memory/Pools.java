@@ -16,7 +16,7 @@ public class Pools {
     private static final String MEMORY_LEAK_LOG_TAG = "MemoryLeak";
 
     private static boolean checkForMemoryLeaks = false;
-    private static ObjectMap<Object,Long> memoryLeakMap = new ObjectMap<>(50);
+    private static ObjectMap<Object, Long> memoryLeakMap = new ObjectMap<>(50);
 
     protected Pools() {
         //
@@ -60,7 +60,7 @@ public class Pools {
         }
     }
 
-    public static void checkForMemoryLeaks () {
+    public static void checkForMemoryLeaks() {
         checkForMemoryLeaks = Config.getBool("Pools", "checkForMemoryLeaks");
 
         //Log.i(MEMORY_LEAK_LOG_TAG, "run memory leak checker");
@@ -75,7 +75,7 @@ public class Pools {
 
         //Log.d(MEMORY_LEAK_LOG_TAG, memoryLeakMap.size + " entries in map");
 
-        for (ObjectMap.Entry<Object,Long> entry : memoryLeakMap.entries()) {
+        for (ObjectMap.Entry<Object, Long> entry : memoryLeakMap.entries()) {
             if (entry.value + timeout < now) {
                 Log.w(MEMORY_LEAK_LOG_TAG, "memory leak detected, class was not be freed: " + entry.key.getClass().getCanonicalName());
 

@@ -15,8 +15,8 @@ import java.util.Locale;
 import java.util.Objects;
 
 /**
-* singleton plugin manager which loads, starts and shutdown plugins
-*/
+ * singleton plugin manager which loads, starts and shutdown plugins
+ */
 public class DefaultPluginManager implements PluginManager {
 
     private static final String LOG_TAG = "PluginManager";
@@ -86,10 +86,10 @@ public class DefaultPluginManager implements PluginManager {
     }
 
     /**
-    * get singleton instance
+     * get singleton instance
      *
      * @return singleton instance
-    */
+     */
     public static PluginManager getInstance() {
         if (instance == null) {
             throw new IllegalStateException("singleton instance wasn't created before");

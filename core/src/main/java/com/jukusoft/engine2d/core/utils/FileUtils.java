@@ -8,7 +8,10 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.nio.file.spi.FileSystemProvider;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 /**
@@ -329,7 +332,7 @@ public class FileUtils {
         }
     }
 
-    public static void createFileIfAbsent (String filePath, String defaultContent) throws IOException {
+    public static void createFileIfAbsent(String filePath, String defaultContent) throws IOException {
         File file = new File(filePath);
 
         if (!file.exists()) {
@@ -340,14 +343,13 @@ public class FileUtils {
     }
 
     /**
-    * extracts the resource file into temp directory and returns the file instance
-     *
+     * extracts the resource file into temp directory and returns the file instance
+     * <p>
      * See also: https://stackoverflow.com/questions/676097/java-resource-as-file
      *
      * @param resourcePath resource path
-     *
      * @return file instance to resource
-    */
+     */
     public static File getResourceAsFile(String resourcePath) throws IOException {
         URL url = ClassLoader.getSystemResource(resourcePath);
 
@@ -375,7 +377,7 @@ public class FileUtils {
         return tempFile;
     }
 
-    public static Path getResourcePath (String resourcePath) throws IOException, URISyntaxException {
+    public static Path getResourcePath(String resourcePath) throws IOException, URISyntaxException {
         URL url = ClassLoader.getSystemResource(resourcePath);
 
         if (url == null) {
@@ -389,8 +391,8 @@ public class FileUtils {
         final FileSystem fs = FileSystems.newFileSystem(URI.create(array[0]), env);
         final Path path = fs.getPath(array[1]);*/
 
-       if("jar".equals(uri.getScheme())){
-            for (FileSystemProvider provider: FileSystemProvider.installedProviders()) {
+        if ("jar".equals(uri.getScheme())) {
+            for (FileSystemProvider provider : FileSystemProvider.installedProviders()) {
                 if (provider.getScheme().equalsIgnoreCase("jar")) {
                     try {
                         provider.getFileSystem(uri);

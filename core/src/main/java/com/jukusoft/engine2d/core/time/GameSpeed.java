@@ -4,7 +4,7 @@ public class GameSpeed {
 
     private static float speed = 1;
 
-    private GameSpeed () {
+    private GameSpeed() {
         //
     }
 

@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class FixedRateTimerTest {
 
     @Test
-    public void testConstructor () {
+    public void testConstructor() {
         new FixedRateTimer();
     }
 

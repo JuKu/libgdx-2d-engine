@@ -8,9 +8,9 @@ import com.jukusoft.engine2d.core.utils.ResourceUtils;
 import org.ini4j.Ini;
 import org.ini4j.Profile;
 
-import java.io.*;
-import java.net.URISyntaxException;
-import java.net.URL;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -70,7 +70,7 @@ public class Config {
         }
     }
 
-    public static void loadFromResourceDir (String resourceDir, Class<?> cls) throws IOException {
+    public static void loadFromResourceDir(String resourceDir, Class<?> cls) throws IOException {
         Log.d(LOG_TAG, "loadFromResourceDir: " + resourceDir);
 
         for (String fileName : ResourceUtils.listResourceFiles(resourceDir, cls)) {

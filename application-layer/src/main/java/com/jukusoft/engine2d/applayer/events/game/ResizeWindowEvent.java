@@ -10,7 +10,7 @@ public class ResizeWindowEvent extends EventData {
     private int newWidth;
     private int newHeight;
 
-    public void set (int oldWidth, int oldHeight, int newWidth, int newHeight) {
+    public void set(int oldWidth, int oldHeight, int newWidth, int newHeight) {
         this.oldWidth = oldWidth;
         this.oldHeight = oldHeight;
         this.newWidth = newWidth;

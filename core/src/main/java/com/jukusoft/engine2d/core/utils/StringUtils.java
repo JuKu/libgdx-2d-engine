@@ -4,15 +4,15 @@ import java.util.Objects;
 
 public class StringUtils {
 
-    private StringUtils () {
+    private StringUtils() {
         //
     }
 
-    public static void checkNotNullAndNotEmpty (String str) {
+    public static void checkNotNullAndNotEmpty(String str) {
         checkNotNullAndNotEmpty(str, "string");
     }
 
-    public static void checkNotNullAndNotEmpty (String str, String messageObj) {
+    public static void checkNotNullAndNotEmpty(String str, String messageObj) {
         Objects.requireNonNull(str);
 
         if (messageObj.isEmpty()) throw new IllegalArgumentException(messageObj + " cannot be null");

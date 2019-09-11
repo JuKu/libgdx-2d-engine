@@ -11,12 +11,12 @@ public class EventProcessor implements SubSystem {
     protected final int maxMillis;
 
     /**
-    * default constructor
+     * default constructor
      *
-     * @param threadID thread ID
+     * @param threadID  thread ID
      * @param maxMillis maximum time in milliseconds, how long event proccessing can take
-    */
-    public EventProcessor (int threadID, int maxMillis) {
+     */
+    public EventProcessor(int threadID, int maxMillis) {
         this.threadID = threadID;
         this.maxMillis = maxMillis;
     }

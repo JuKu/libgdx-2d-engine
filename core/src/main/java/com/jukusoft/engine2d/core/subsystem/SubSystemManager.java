@@ -7,10 +7,10 @@ import java.util.List;
 public interface SubSystemManager {
 
     /**
-    * initialize subsystems
+     * initialize subsystems
      *
      * @param initializers list with initializers so subsystems can add initializers on startup, e.q. to load assets
-    */
+     */
     @Deprecated
     public void init(List<Initializer> initializers);
 

@@ -12,16 +12,16 @@ import java.util.List;
 import java.util.Objects;
 
 /**
-* default subsystem manager. Every thread has it's own subsystem manager
-*/
+ * default subsystem manager. Every thread has it's own subsystem manager
+ */
 public class DefaultSubSystemManager implements SubSystemManager {
 
     //list with subsystems
     protected ObjectArrayList<SubSystem> subSystems = new ObjectArrayList<>();
 
     /**
-    * name of subsystem manager
-    */
+     * name of subsystem manager
+     */
     private final String name;
 
     public DefaultSubSystemManager(String name) {

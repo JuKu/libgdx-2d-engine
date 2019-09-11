@@ -50,7 +50,7 @@ public class TimerTest {
     }
 
     @Test
-    public void testCallListener () {
+    public void testCallListener() {
         AtomicBoolean b = new AtomicBoolean(false);
 
         Timer timer = new Timer();

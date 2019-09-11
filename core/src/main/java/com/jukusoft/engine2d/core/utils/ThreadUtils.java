@@ -28,7 +28,7 @@ public class ThreadUtils {
         }
     }
 
-    public static void checkIfMainThread () {
+    public static void checkIfMainThread() {
         Thread thread = Thread.currentThread();
 
         if (!isMainThread()) {
@@ -36,7 +36,7 @@ public class ThreadUtils {
         }
     }
 
-    public static boolean isMainThread () {
+    public static boolean isMainThread() {
         Thread thread = Thread.currentThread();
         return thread.getName().contains("main") || thread.getName().contains("ui");
     }

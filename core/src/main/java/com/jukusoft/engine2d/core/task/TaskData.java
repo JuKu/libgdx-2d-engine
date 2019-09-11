@@ -14,7 +14,7 @@ public class TaskData {
         //
     }
 
-    public void init (Task task, Handler<Void> onSuccessHandler, Handler<Throwable> onExceptionHandler) {
+    public void init(Task task, Handler<Void> onSuccessHandler, Handler<Throwable> onExceptionHandler) {
         Objects.requireNonNull(task);
         this.task = task;
         this.onSuccessHandler = onSuccessHandler;

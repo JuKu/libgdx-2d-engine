@@ -1,10 +1,9 @@
 package com.jukusoft.engine2d.core.utils;
 
-import java.io.*;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,7 +12,7 @@ public class ResourceUtils {
 
     //see also: https://stackoverflow.com/questions/3923129/get-a-list-of-resources-from-classpath-directory
 
-    private ResourceUtils () {
+    private ResourceUtils() {
         //
     }
 
@@ -54,7 +53,7 @@ public class ResourceUtils {
 
     /**
      * Reads given resource file as a string.
-     *
+     * <p>
      * see also: https://stackoverflow.com/questions/6068197/utils-to-read-resource-text-file-to-string-java
      *
      * @param fileName path to the resource file

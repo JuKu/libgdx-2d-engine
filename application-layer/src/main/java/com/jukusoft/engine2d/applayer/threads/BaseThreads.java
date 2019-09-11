@@ -2,7 +2,7 @@ package com.jukusoft.engine2d.applayer.threads;
 
 public class BaseThreads {
 
-    private BaseThreads () {
+    private BaseThreads() {
         //
     }
 

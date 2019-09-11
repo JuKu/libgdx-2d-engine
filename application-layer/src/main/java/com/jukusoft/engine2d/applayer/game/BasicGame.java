@@ -1,6 +1,5 @@
 package com.jukusoft.engine2d.applayer.game;
 
-import com.badlogic.gdx.maps.Map;
 import com.jukusoft.engine2d.basegame.Game;
 import com.jukusoft.engine2d.basegame.service.Service;
 import com.jukusoft.engine2d.core.config.Config;
@@ -13,13 +12,13 @@ import java.util.concurrent.ScheduledExecutorService;
 public class BasicGame implements Game {
 
     /**
-    * is the game running or paused?
-    */
+     * is the game running or paused?
+     */
     private boolean running = true;
     private boolean forcePause = false;
 
-    ObjectMap<String,Object> properties = new ObjectMap<>();
-    ObjectMap<Class<? extends Service>,Service> services = new ObjectMap<>();
+    ObjectMap<String, Object> properties = new ObjectMap<>();
+    ObjectMap<Class<? extends Service>, Service> services = new ObjectMap<>();
 
     private ScheduledExecutorService executorService;
 

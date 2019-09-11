@@ -7,7 +7,6 @@ import com.jukusoft.engine2d.core.task.TaskData;
 import com.jukusoft.engine2d.core.task.TaskManager;
 import com.jukusoft.engine2d.core.utils.Handler;
 import org.mini2Dx.gdx.utils.AtomicQueue;
-import org.mini2Dx.gdx.utils.Queue;
 
 public class DefaultTaskManager implements TaskManager {
 
@@ -42,7 +41,7 @@ public class DefaultTaskManager implements TaskManager {
         }
     }
 
-    private void executeTask (TaskData taskData) {
+    private void executeTask(TaskData taskData) {
         Task task = taskData.getTask();
 
         try {
