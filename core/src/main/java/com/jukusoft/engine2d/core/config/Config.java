@@ -8,6 +8,7 @@ import org.ini4j.Ini;
 import org.ini4j.Profile;
 
 import java.io.*;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,13 +79,22 @@ public class Config {
     }
 
     public static void loadFromResource(String filePath, Class<?> cls) throws IOException {
-        URL url = cls.getClassLoader().getResource(filePath);
+        URL url = ClassLoader.getSystemResource(filePath);
 
         if (url == null) {
             throw new FileNotFoundException("resource config file does not exists: " + filePath);
         }
 
-        File file = new File(url.getFile());
+        //System.err.println("getFile(): " + url.getFile());
+
+        File file = null;
+
+        try {
+            file = new File(url.toURI());
+        } catch (URISyntaxException e) {
+            Log.e(LOG_TAG, "URISyntaxException", e);
+            throw new IOException("URISyntaxException", e);
+        }
 
         if (!file.exists()) {
             throw new FileNotFoundException("resource config file does not exists: " + filePath + ", absolute path: " + file.getAbsolutePath());
