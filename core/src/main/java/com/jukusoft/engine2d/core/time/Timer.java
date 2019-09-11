@@ -6,6 +6,7 @@ public class Timer {
     private float duration;
     private boolean started = false;
     private Runnable listener;
+    private Runnable internalListener;
 
     public Timer() {
         //
@@ -24,6 +25,10 @@ public class Timer {
 
             if (listener != null) {
                 listener.run();
+            }
+
+            if (internalListener != null) {
+                internalListener.run();
             }
 
             onTimerReached();
@@ -74,6 +79,10 @@ public class Timer {
 
     protected void onTimerReached() {
         //
+    }
+
+    public void setInternalListener(Runnable internalListener) {
+        this.internalListener = internalListener;
     }
 
 }
