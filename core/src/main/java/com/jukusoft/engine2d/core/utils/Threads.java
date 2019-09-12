@@ -4,6 +4,11 @@ public class Threads {
 
     private static int threadCount = 0;
 
+    //thread IDs
+    public static final int UI_THREAD = 0;
+    public static final int LOGIC_THREAD = 1;
+    public static final int NETWORK_THREAD = 2;
+
     private Threads() {
         //
     }

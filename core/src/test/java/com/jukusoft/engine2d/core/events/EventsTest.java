@@ -2,6 +2,7 @@ package com.jukusoft.engine2d.core.events;
 
 import com.jukusoft.engine2d.core.memory.DummyEventDataObject;
 import com.jukusoft.engine2d.core.memory.DummyOtherEventDataObject;
+import com.jukusoft.engine2d.core.utils.Threads;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -65,8 +66,8 @@ public class EventsTest {
             count1.incrementAndGet();
         };
 
-        Events.addListener(Events.UI_THREAD, 2, listener);
-        Events.addListener(Events.LOGIC_THREAD, 2, listener1);
+        Events.addListener(Threads.UI_THREAD, 2, listener);
+        Events.addListener(Threads.LOGIC_THREAD, 2, listener1);
 
         Events.triggerEvent(new DummyOtherEventDataObject());
         Events.triggerEvent(new DummyOtherEventDataObject());
@@ -76,8 +77,8 @@ public class EventsTest {
         assertEquals(2, count1.get());
 
         //remove listeners again (cleanup)
-        Events.removeListener(Events.UI_THREAD, 1, listener);
-        Events.removeListener(Events.LOGIC_THREAD, 1, listener1);
+        Events.removeListener(Threads.UI_THREAD, 1, listener);
+        Events.removeListener(Threads.LOGIC_THREAD, 1, listener1);
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -98,21 +99,21 @@ public class EventsTest {
             count1.incrementAndGet();
         };
 
-        Events.addListener(Events.UI_THREAD, 1, listener);
-        Events.addListener(Events.LOGIC_THREAD, 1, listener1);
+        Events.addListener(Threads.UI_THREAD, 1, listener);
+        Events.addListener(Threads.LOGIC_THREAD, 1, listener1);
 
         Events.queueEvent(new DummyEventDataObject());
         Events.queueEvent(new DummyEventDataObject());
 
-        Events.update(Events.UI_THREAD, 200);
+        Events.update(Threads.UI_THREAD, 200);
 
         assertEquals(2, count.get());
 
         //check, that only UI thread was processed and listeners in other thread wasn't processed with this update() call
         assertEquals(0, count1.get());
 
-        Events.removeListener(Events.UI_THREAD, 1, listener);
-        Events.removeListener(Events.LOGIC_THREAD, 1, listener1);
+        Events.removeListener(Threads.UI_THREAD, 1, listener);
+        Events.removeListener(Threads.LOGIC_THREAD, 1, listener1);
     }
 
 }

@@ -12,11 +12,6 @@ public class Events {
     protected static final int NUM_THREADS = Threads.getThreadCount();
     protected static EventManager[] managers;
 
-    //thread IDs
-    public static final int UI_THREAD = 0;
-    public static final int LOGIC_THREAD = 1;
-    public static final int NETWORK_THREAD = 2;
-
     protected Events() {
         //
     }
