@@ -15,6 +15,7 @@ public class EventsTest {
 
     @BeforeClass
     public static void beforeClass() {
+        Threads.setThreadCount(3);
         Events.init();
     }
 

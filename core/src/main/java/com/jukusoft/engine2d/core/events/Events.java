@@ -47,28 +47,28 @@ public class Events {
     }
 
     public static void update(int threadID, int maxMillis) {
-        if (threadID >= NUM_THREADS) {
+        if (threadID > NUM_THREADS) {
             throw new IllegalArgumentException("threadID cannot >= number of threads, but threadID: " + threadID + " >= " + NUM_THREADS);
         }
 
         //process events
-        managers[threadID].update(maxMillis);
+        managers[threadID-1].update(maxMillis);
     }
 
     public static void addListener(int threadID, int typeID, EventListener listener) {
-        if (threadID >= NUM_THREADS) {
+        if (threadID > NUM_THREADS) {
             throw new IllegalArgumentException("threadID cannot >= number of threads, but threadID: " + threadID + " >= " + NUM_THREADS);
         }
 
-        managers[threadID].addListener(typeID, listener);
+        managers[threadID-1].addListener(typeID, listener);
     }
 
     public static void removeListener(int threadID, int typeID, EventListener listener) {
-        if (threadID >= NUM_THREADS) {
+        if (threadID > NUM_THREADS) {
             throw new IllegalArgumentException("threadID cannot >= number of threads, but threadID: " + threadID + " >= " + NUM_THREADS);
         }
 
-        managers[threadID].removeListener(typeID, listener);
+        managers[threadID-1].removeListener(typeID, listener);
     }
 
 }
