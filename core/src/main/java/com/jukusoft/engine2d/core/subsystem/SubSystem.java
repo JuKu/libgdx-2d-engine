@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface SubSystem {
 
-    public void init(List<Initializer> initializers);
+    //public void init(List<Initializer> initializers);
 
     public void update();
 

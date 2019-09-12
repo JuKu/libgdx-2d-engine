@@ -35,6 +35,7 @@ public class InitializerProcessorFactory {
         initializerList.add(new OpenGLCheckerInitializer());
         initializerList.add(new LogOSInitializer());
         initializerList.add(new ConfigInitializer(BaseApp.class));
+        initializerList.add(new ThreadsInitializer());
         initializerList.add(new EventInitializer());
         initializerList.add(new TaskManagerInitializer());
         initializerList.addAll(globalInitializers);

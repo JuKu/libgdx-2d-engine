@@ -21,10 +21,10 @@ public class EventProcessor implements SubSystem {
         this.maxMillis = maxMillis;
     }
 
-    @Override
+    /*@Override
     public void init(List<Initializer> initializers) {
         //
-    }
+    }*/
 
     @Override
     public void update() {

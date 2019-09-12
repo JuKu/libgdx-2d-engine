@@ -7,6 +7,7 @@ import com.jukusoft.engine2d.core.subsystem.SubSystem;
 import com.jukusoft.engine2d.core.subsystem.SubSystemManager;
 import com.jukusoft.engine2d.core.utils.StringUtils;
 import com.jukusoft.engine2d.core.utils.ThreadUtils;
+import com.jukusoft.engine2d.core.utils.Threads;
 
 import java.util.List;
 import java.util.Objects;
@@ -29,7 +30,7 @@ public class DefaultSubSystemManager implements SubSystemManager {
         this.name = name;
     }
 
-    @Override
+    /*@Override
     public void init(List<Initializer> initializers) {
         Objects.requireNonNull(initializers);
 
@@ -38,10 +39,13 @@ public class DefaultSubSystemManager implements SubSystemManager {
 
         //initialize subsystems in main thread
         this.subSystems.iterator().forEachRemaining(system -> system.value.init(initializers));
-    }
+    }*/
 
     @Override
-    public void addSubSystem(SubSystem system, boolean useExtraThread) {
+    public void addSubSystem(SubSystem system, int threadID) {
+        if (threadID < 0 || threadID > Threads.getThreadCount())
+            throw new IllegalArgumentException("threadID is out of bounds (min: 1, max: " + Threads.getThreadCount() + ")");
+
         this.subSystems.add(system);
         Log.i("SubSystems_" + getName(), "added subsystem " + system.getClass().getCanonicalName());
     }
@@ -54,7 +58,9 @@ public class DefaultSubSystemManager implements SubSystemManager {
 
     @Override
     public void run() {
-        //
+        for (int i = 0; i < subSystems.size(); i++) {
+            subSystems.get(i).update();
+        }
     }
 
     public String getName() {

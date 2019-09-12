@@ -1,5 +1,7 @@
 package com.jukusoft.engine2d.core.events;
 
+import com.jukusoft.engine2d.core.utils.Threads;
+
 /**
  * class to queue and trigger events like EventManager, but in thread safe
  *
@@ -7,7 +9,7 @@ package com.jukusoft.engine2d.core.events;
  */
 public class Events {
 
-    protected static final int NUM_THREADS = 3;
+    protected static final int NUM_THREADS = Threads.getThreadCount();
     protected static EventManager[] managers;
 
     //thread IDs
