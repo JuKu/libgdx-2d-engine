@@ -13,17 +13,21 @@ import com.jukusoft.engine2d.applayer.init.SplashScreenDrawer;
 import com.jukusoft.engine2d.applayer.init.factory.InitializerProcessorFactory;
 import com.jukusoft.engine2d.applayer.plugin.PluginManager;
 import com.jukusoft.engine2d.applayer.plugin.impl.DefaultPluginManager;
-import com.jukusoft.engine2d.applayer.threads.BaseThreads;
 import com.jukusoft.engine2d.applayer.window.WindowDimension;
 import com.jukusoft.engine2d.core.config.Config;
 import com.jukusoft.engine2d.core.events.Events;
+import com.jukusoft.engine2d.core.init.Initializer;
 import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.core.memory.Pools;
 import com.jukusoft.engine2d.core.shutdown.ErrorHandler;
 import com.jukusoft.engine2d.core.task.TaskManager;
 import com.jukusoft.engine2d.core.task.TaskManagers;
 import com.jukusoft.engine2d.core.utils.Platform;
+import com.jukusoft.engine2d.core.utils.Threads;
 import com.jukusoft.engine2d.plugin.PluginApi;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class BaseApp implements ApplicationListener {
 
@@ -53,6 +57,9 @@ public abstract class BaseApp implements ApplicationListener {
 
         DefaultPluginManager.createInstance(createPluginApi());
         this.pluginManager = DefaultPluginManager.getInstance();
+
+        //call abstract method to add initializers
+        registerAdditionalInitializers();
 
         //initialize game engine
         this.initProcessor = InitializerProcessorFactory.create(this.gameClass, this.pluginManager);
@@ -112,6 +119,9 @@ public abstract class BaseApp implements ApplicationListener {
                 splashScreenDrawer = null;
 
                 Log.i("BaseApp", "Game Engine initialization finished");
+
+                //initialize subsystems and so on
+                onInitAfterSplashscreen();
             }
 
             //clear OpenGL buffer
@@ -119,10 +129,11 @@ public abstract class BaseApp implements ApplicationListener {
             Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
             //TODO: execute tasks
-            TaskManager taskManager = TaskManagers.get(BaseThreads.UI_THREAD);
+            TaskManager taskManager = TaskManagers.get(Threads.UI_THREAD);
             taskManager.run(10);
 
-            //TODO: enter game loop
+            //enter game loop
+            onUpdate();
 
             //memory leak checker
             if (lastMemoryLeakCheck + cachedMemoryLeakCheckerInterval < startTime) {
@@ -156,7 +167,10 @@ public abstract class BaseApp implements ApplicationListener {
         //fire event
         Events.triggerEvent(Pools.get(DisposeGameEvent.class));
 
-        //TODO: interrupt game logic layer thread
+        onDispose();
+
+        //interrupt game logic layer thread
+        Threads.interruptAllThreads();
 
         //TODO: interrupt network thread
 
@@ -164,5 +178,27 @@ public abstract class BaseApp implements ApplicationListener {
     }
 
     protected abstract PluginApi createPluginApi();
+
+    /**
+     * method where other game layers can add initializers to game init
+     *
+     * @param initializers
+     */
+    protected abstract void addInitializers(List<Initializer> initializers);
+
+    protected abstract void onInitAfterSplashscreen();
+
+    protected abstract void onUpdate();
+
+    protected abstract void onDispose();
+
+    private void registerAdditionalInitializers() {
+        List<Initializer> initializers = new ArrayList<>();
+        this.addInitializers(initializers);
+
+        for (Initializer initializer : initializers) {
+            InitializerProcessorFactory.addGlobalInitializer(initializer);
+        }
+    }
 
 }

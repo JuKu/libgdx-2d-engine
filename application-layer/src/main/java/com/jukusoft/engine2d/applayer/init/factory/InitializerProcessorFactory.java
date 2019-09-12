@@ -35,9 +35,9 @@ public class InitializerProcessorFactory {
         initializerList.add(new OpenGLCheckerInitializer());
         initializerList.add(new LogOSInitializer());
         initializerList.add(new ConfigInitializer(BaseApp.class));
-        initializerList.add(new ThreadsInitializer());
         initializerList.add(new EventInitializer());
         initializerList.add(new TaskManagerInitializer());
+        initializerList.add(new ThreadsInitializer());
         initializerList.addAll(globalInitializers);
 
         //add initializers which should be executed after splashscreen is shown

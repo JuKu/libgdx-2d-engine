@@ -8,9 +8,11 @@ import com.jukusoft.engine2d.core.subsystem.SubSystemManager;
 import com.jukusoft.engine2d.core.utils.StringUtils;
 import com.jukusoft.engine2d.core.utils.ThreadUtils;
 import com.jukusoft.engine2d.core.utils.Threads;
+import org.mini2Dx.gdx.utils.ObjectMap;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 /**
  * default subsystem manager. Every thread has it's own subsystem manager
@@ -18,7 +20,7 @@ import java.util.Objects;
 public class DefaultSubSystemManager implements SubSystemManager {
 
     //list with subsystems
-    protected ObjectArrayList<SubSystem> subSystems = new ObjectArrayList<>();
+    protected ObjectMap<Integer,ObjectArrayList<SubSystem>> subSystemsThreadsMap = new ObjectMap<>(10);
 
     /**
      * name of subsystem manager
@@ -46,22 +48,42 @@ public class DefaultSubSystemManager implements SubSystemManager {
         if (threadID < 0 || threadID > Threads.getThreadCount())
             throw new IllegalArgumentException("threadID is out of bounds (min: 1, max: " + Threads.getThreadCount() + ")");
 
-        this.subSystems.add(system);
+        checkIfKeyExists(threadID);
+
+        ObjectArrayList<SubSystem> subSystems = subSystemsThreadsMap.get(threadID);
+        subSystems.add(system);
+
         Log.i("SubSystems_" + getName(), "added subsystem " + system.getClass().getCanonicalName());
     }
 
     @Override
     public void removeSubSystem(SubSystem system) {
-        this.subSystems.remove(this.subSystems.lastIndexOf(system));
+        subSystemsThreadsMap.forEach(entry -> {
+            ObjectArrayList<SubSystem> subSystems = entry.value;
+            subSystems.removeAll(system);
+        });
+
         Log.i("SubSystems_" + getName(), "removed subsystem " + system.getClass().getCanonicalName());
     }
 
     @Override
-    public void run() {
+    public ObjectArrayList<SubSystem> listSubSystemsByThread(int threadID) {
+        checkIfKeyExists(threadID);
+        return subSystemsThreadsMap.get(threadID);
+    }
+
+    private void checkIfKeyExists(int threadID) {
+        if (!subSystemsThreadsMap.containsKey(threadID)) {
+            subSystemsThreadsMap.put(threadID, new ObjectArrayList<>());
+        }
+    }
+
+    /*@Override
+    public void run(int threadID) {
         for (int i = 0; i < subSystems.size(); i++) {
             subSystems.get(i).update();
         }
-    }
+    }*/
 
     public String getName() {
         return name;

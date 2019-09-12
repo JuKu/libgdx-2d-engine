@@ -1,6 +1,6 @@
 package com.jukusoft.engine2d.core.subsystem;
 
-import com.jukusoft.engine2d.core.init.Initializer;
+import com.carrotsearch.hppc.ObjectArrayList;
 
 import java.util.List;
 
@@ -32,6 +32,8 @@ public interface SubSystemManager {
     /**
      * update all subsystems
      */
-    public void run();
+    //public void run(int threadID);
+
+    public ObjectArrayList<SubSystem> listSubSystemsByThread(int threadID);
 
 }

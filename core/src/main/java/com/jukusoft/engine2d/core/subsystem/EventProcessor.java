@@ -27,6 +27,11 @@ public class EventProcessor implements SubSystem {
     }*/
 
     @Override
+    public void init() {
+        //
+    }
+
+    @Override
     public void update() {
         Events.update(this.threadID, this.maxMillis);
     }
