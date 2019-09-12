@@ -3,6 +3,7 @@ package com.jukusoft.engine2d.applayer;
 import com.carrotsearch.hppc.ObjectArrayList;
 import com.jukusoft.engine2d.applayer.init.impl.UIThreadSubSystemsInitializer;
 import com.jukusoft.engine2d.applayer.init.impl.CreateThreadsInitializer;
+import com.jukusoft.engine2d.applayer.utils.SubSystemInitializer;
 import com.jukusoft.engine2d.basegame.Game;
 import com.jukusoft.engine2d.core.init.Initializer;
 import com.jukusoft.engine2d.core.logger.Log;
@@ -44,7 +45,8 @@ public abstract class BaseGame extends BaseApp {
     }
 
     protected final void onInitAfterSplashscreen() {
-        //TODO: initialize subsystems
+        //initialize subsystems
+        SubSystemInitializer.init(subSystemsList);
     }
 
     protected final void onUpdate() {
