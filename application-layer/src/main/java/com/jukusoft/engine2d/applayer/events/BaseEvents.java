@@ -11,4 +11,6 @@ public class BaseEvents {
     //window events
     public static final int RESIZE_WINDOW = 4;
 
+    public static final int ALL_SUBSYSTEMS_READY = 5;
+
 }

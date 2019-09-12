@@ -22,7 +22,26 @@ public class Pools {
         //
     }
 
+    /**
+     * get an instance of an object (maybe the instance was recycled)
+     *
+     * @param cls class name of instance to get
+     * @param <T> type of instance
+     * @return instance
+     */
     public static <T> T get(Class<T> cls) {
+        return get(cls, true);
+    }
+
+    /**
+     * get an instance of an object (maybe the instance was recycled)
+     *
+     * @param cls class name of instance to get
+     * @param memoryDetection set to false, if the object isn't freed in 30 seconds, else to true
+     * @param <T> type of instance
+     * @return instance
+     */
+    public static <T> T get(Class<T> cls, boolean memoryDetection) {
         T obj = org.mini2Dx.gdx.utils.Pools.get(cls).obtain();
 
         if (obj == null) {
@@ -38,7 +57,7 @@ public class Pools {
             ((EventData) obj).init();
         }
 
-        if (checkForMemoryLeaks) {
+        if (checkForMemoryLeaks && memoryDetection) {
             //Log.d(MEMORY_LEAK_LOG_TAG, "add object to list");
             memoryLeakMap.put(obj, System.currentTimeMillis());
         }

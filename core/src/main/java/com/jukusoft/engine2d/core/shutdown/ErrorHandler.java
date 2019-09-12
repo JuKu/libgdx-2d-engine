@@ -1,6 +1,7 @@
 package com.jukusoft.engine2d.core.shutdown;
 
 import com.jukusoft.engine2d.core.logger.Log;
+import com.jukusoft.engine2d.core.utils.Threads;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -16,6 +17,8 @@ public class ErrorHandler {
 
     public static void shutdownWithException(Throwable e) {
         e.printStackTrace();
+
+        Threads.interruptAllThreads();
 
         Logger.getAnonymousLogger().log(Level.SEVERE, "Exception while initializing game: ", e);
         Log.e("BaseApp", "Exception while initializing game engine: ", e);
