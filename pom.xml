@@ -13,6 +13,7 @@
 		<module>base-game</module>
 		<module>plugin</module>
 		<module>application-layer</module>
+		<module>input</module>
 		<module>game-view</module>
 		<module>desktop</module>
 		<module>test-desktop</module>

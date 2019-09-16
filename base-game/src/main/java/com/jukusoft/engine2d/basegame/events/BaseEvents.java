@@ -1,4 +1,4 @@
-package com.jukusoft.engine2d.applayer.events;
+package com.jukusoft.engine2d.basegame.events;
 
 public class BaseEvents {
 
@@ -12,5 +12,6 @@ public class BaseEvents {
     public static final int RESIZE_WINDOW = 4;
 
     public static final int ALL_SUBSYSTEMS_READY = 5;
+    public static final int TAKE_SCREENSHOT = 6;
 
 }

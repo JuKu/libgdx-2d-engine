@@ -9,7 +9,7 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 
-	<artifactId>engine2d-game-view</artifactId>
+	<artifactId>engine2d-input</artifactId>
 
 	<properties>
 		<!-- don't skip this module, instead deploy this module to maven central -->
@@ -41,6 +41,13 @@
 		<dependency>
 			<groupId>com.badlogicgames.gdx</groupId>
 			<artifactId>gdx</artifactId>
+			<version>${libgdx.version}</version>
+		</dependency>
+
+		<!-- libGDX controller support -->
+		<dependency>
+			<groupId>com.badlogicgames.gdx</groupId>
+			<artifactId>gdx-controllers</artifactId>
 			<version>${libgdx.version}</version>
 		</dependency>
 	</dependencies>
