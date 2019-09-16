@@ -1,10 +1,14 @@
 package com.jukusoft.engine2d.basegame;
 
 import com.jukusoft.engine2d.basegame.service.Service;
+import com.jukusoft.engine2d.core.time.GameSpeed;
 import com.jukusoft.engine2d.core.time.GameTime;
 
 import java.util.concurrent.ScheduledExecutorService;
 
+/**
+ * service locator for the game
+ */
 public interface Game {
 
     public boolean isRunning();
@@ -30,6 +34,12 @@ public interface Game {
     public double getPropertyDouble(String name);
 
     public String getPropertyString(String name);
+
+    public GameSpeed getSpeedInstance();
+
+    public float getGameSpeed();
+
+    public void setGameSpeed(float gameSpeed);
 
     public <T extends Service> T getService(Class<T> cls);
 

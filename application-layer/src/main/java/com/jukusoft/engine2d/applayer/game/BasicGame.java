@@ -3,24 +3,29 @@ package com.jukusoft.engine2d.applayer.game;
 import com.jukusoft.engine2d.basegame.Game;
 import com.jukusoft.engine2d.basegame.service.Service;
 import com.jukusoft.engine2d.core.config.Config;
+import com.jukusoft.engine2d.core.time.GameSpeed;
 import com.jukusoft.engine2d.core.time.GameTime;
 import org.mini2Dx.gdx.utils.ObjectMap;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 
+/**
+ * service locator for the game
+ */
 public class BasicGame implements Game {
 
     /**
      * is the game running or paused?
      */
-    private boolean running = true;
+    private boolean running = false;
     private boolean forcePause = false;
 
     ObjectMap<String, Object> properties = new ObjectMap<>();
     ObjectMap<Class<? extends Service>, Service> services = new ObjectMap<>();
 
     private ScheduledExecutorService executorService;
+    private GameSpeed gameSpeed = new GameSpeed();
 
     public BasicGame() {
         if (Config.getBool("ExecutorService", "enabled")) {
@@ -92,6 +97,21 @@ public class BasicGame implements Game {
     @Override
     public String getPropertyString(String name) {
         return getProperty(name, String.class);
+    }
+
+    @Override
+    public GameSpeed getSpeedInstance() {
+        return gameSpeed;
+    }
+
+    @Override
+    public float getGameSpeed() {
+        return this.gameSpeed.getSpeed();
+    }
+
+    @Override
+    public void setGameSpeed(float gameSpeed) {
+        this.gameSpeed.setSpeed(gameSpeed);
     }
 
     @Override
