@@ -32,7 +32,7 @@ public class DesktopLauncher {
             e.printStackTrace();
 
             System.out.println("Exception occurred, exit application now.");
-            Log.e("DesktopLauncher", "Exception while startup proxy server: ", e);
+            Log.e("DesktopLauncher", "Exception while startup game client: ", e);
 
             //try to shutdown logs first
             Log.shutdown();
