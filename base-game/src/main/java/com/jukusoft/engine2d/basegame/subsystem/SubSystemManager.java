@@ -1,8 +1,6 @@
-package com.jukusoft.engine2d.core.subsystem;
+package com.jukusoft.engine2d.basegame.subsystem;
 
 import com.carrotsearch.hppc.ObjectArrayList;
-
-import java.util.List;
 
 public interface SubSystemManager {
 
@@ -17,7 +15,7 @@ public interface SubSystemManager {
     /**
      * add subsystem
      *
-     * @param system subsystem to add
+     * @param system   subsystem to add
      * @param threadID threadID of the thread, where the system should be updated
      */
     public void addSubSystem(SubSystem system, int threadID);
@@ -33,7 +31,6 @@ public interface SubSystemManager {
      * update all subsystems
      */
     //public void run(int threadID);
-
     public ObjectArrayList<SubSystem> listSubSystemsByThread(int threadID);
 
 }

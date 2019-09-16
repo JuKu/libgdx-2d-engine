@@ -1,8 +1,4 @@
-package com.jukusoft.engine2d.core.subsystem;
-
-import com.jukusoft.engine2d.core.init.Initializer;
-
-import java.util.List;
+package com.jukusoft.engine2d.basegame.subsystem;
 
 public interface SubSystem {
 

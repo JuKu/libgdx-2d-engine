@@ -1,10 +1,7 @@
 package com.jukusoft.engine2d.core.utils;
 
-import com.carrotsearch.hppc.ObjectArrayList;
 import com.jukusoft.engine2d.core.logger.Log;
 import org.mini2Dx.gdx.utils.ObjectMap;
-
-import java.util.function.Consumer;
 
 public class Threads {
 
@@ -15,14 +12,15 @@ public class Threads {
     public static final int LOGIC_THREAD = 2;
     public static final int NETWORK_THREAD = 3;
 
-    private static ObjectMap<Integer,Thread> threads = new ObjectMap<>(10);
+    private static ObjectMap<Integer, Thread> threads = new ObjectMap<>(10);
 
     private Threads() {
         //
     }
 
     public static int getThreadCount() {
-        if (threadCount == 0) throw new IllegalStateException("Threads was not initialized with setThreadCount() before");
+        if (threadCount == 0)
+            throw new IllegalStateException("Threads was not initialized with setThreadCount() before");
 
         return threadCount;
     }

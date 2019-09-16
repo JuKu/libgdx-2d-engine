@@ -1,18 +1,12 @@
-package com.jukusoft.engine2d.core.subsystem.impl;
+package com.jukusoft.engine2d.basegame.subsystem.impl;
 
 import com.carrotsearch.hppc.ObjectArrayList;
-import com.jukusoft.engine2d.core.init.Initializer;
+import com.jukusoft.engine2d.basegame.subsystem.SubSystem;
+import com.jukusoft.engine2d.basegame.subsystem.SubSystemManager;
 import com.jukusoft.engine2d.core.logger.Log;
-import com.jukusoft.engine2d.core.subsystem.SubSystem;
-import com.jukusoft.engine2d.core.subsystem.SubSystemManager;
 import com.jukusoft.engine2d.core.utils.StringUtils;
-import com.jukusoft.engine2d.core.utils.ThreadUtils;
 import com.jukusoft.engine2d.core.utils.Threads;
 import org.mini2Dx.gdx.utils.ObjectMap;
-
-import java.util.List;
-import java.util.Objects;
-import java.util.function.Consumer;
 
 /**
  * default subsystem manager. Every thread has it's own subsystem manager
@@ -20,7 +14,7 @@ import java.util.function.Consumer;
 public class DefaultSubSystemManager implements SubSystemManager {
 
     //list with subsystems
-    protected ObjectMap<Integer,ObjectArrayList<SubSystem>> subSystemsThreadsMap = new ObjectMap<>(10);
+    protected ObjectMap<Integer, ObjectArrayList<SubSystem>> subSystemsThreadsMap = new ObjectMap<>(10);
 
     /**
      * name of subsystem manager

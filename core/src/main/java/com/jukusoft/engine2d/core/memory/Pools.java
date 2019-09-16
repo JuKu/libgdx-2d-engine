@@ -36,9 +36,9 @@ public class Pools {
     /**
      * get an instance of an object (maybe the instance was recycled)
      *
-     * @param cls class name of instance to get
+     * @param cls             class name of instance to get
      * @param memoryDetection set to false, if the object isn't freed in 30 seconds, else to true
-     * @param <T> type of instance
+     * @param <T>             type of instance
      * @return instance
      */
     public static <T> T get(Class<T> cls, boolean memoryDetection) {

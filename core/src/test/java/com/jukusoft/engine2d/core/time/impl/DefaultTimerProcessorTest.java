@@ -11,17 +11,17 @@ import static org.junit.Assert.*;
 public class DefaultTimerProcessorTest {
 
     @Test
-    public void testConstructor () {
+    public void testConstructor() {
         new DefaultTimerProcessor();
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void testAddNullTimer() {
         TimerProcessor timerProcessor = new DefaultTimerProcessor();
         timerProcessor.addTimer(null);
     }
 
-    @Test (expected = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testAddStopedTimer() {
         TimerProcessor timerProcessor = new DefaultTimerProcessor();
         timerProcessor.addTimer(new Timer());
@@ -35,7 +35,7 @@ public class DefaultTimerProcessorTest {
         timerProcessor.addTimer(timer);
     }
 
-    @Test (expected = NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void testRemoveNullTimer() {
         TimerProcessor timerProcessor = new DefaultTimerProcessor();
         timerProcessor.removeTimer(null);
@@ -55,7 +55,7 @@ public class DefaultTimerProcessorTest {
         assertEquals(0, timerProcessor.countActiveTimers());
     }
 
-    @Test (expected = IllegalArgumentException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testNegativeDeltaUpdate() {
         TimerProcessor timerProcessor = new DefaultTimerProcessor();
 

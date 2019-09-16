@@ -1,21 +1,22 @@
 package com.jukusoft.engine2d.applayer;
 
 import com.carrotsearch.hppc.ObjectArrayList;
-import com.jukusoft.engine2d.applayer.init.impl.UIThreadSubSystemsInitializer;
 import com.jukusoft.engine2d.applayer.init.impl.CreateThreadsInitializer;
+import com.jukusoft.engine2d.applayer.init.impl.UIThreadSubSystemsInitializer;
 import com.jukusoft.engine2d.applayer.utils.SubSystemInitializer;
 import com.jukusoft.engine2d.basegame.Game;
+import com.jukusoft.engine2d.basegame.subsystem.SubSystem;
+import com.jukusoft.engine2d.basegame.subsystem.SubSystemManager;
+import com.jukusoft.engine2d.basegame.subsystem.impl.DefaultSubSystemManager;
 import com.jukusoft.engine2d.core.init.Initializer;
 import com.jukusoft.engine2d.core.logger.Log;
-import com.jukusoft.engine2d.core.subsystem.SubSystem;
-import com.jukusoft.engine2d.core.subsystem.SubSystemManager;
-import com.jukusoft.engine2d.core.subsystem.impl.DefaultSubSystemManager;
 
 import java.util.List;
 
 public abstract class BaseGame extends BaseApp {
 
     private ObjectArrayList<SubSystem> subSystemsList;
+    private Game game;
 
     public BaseGame(Class<?> gameClass) {
         super(gameClass);
@@ -31,6 +32,8 @@ public abstract class BaseGame extends BaseApp {
      * @param initializerList list with initializers to process
      */
     protected final void addInitializers(List<Initializer> initializerList) {
+        this.game = createGame();
+
         SubSystemManager subSystemManager = new DefaultSubSystemManager("SubSystemManager");
 
         Log.i("BaseGame", "add subsystems");
@@ -44,11 +47,13 @@ public abstract class BaseGame extends BaseApp {
         initializerList.add(new CreateThreadsInitializer(subSystemManager));
     }
 
+    @Override
     protected final void onInitAfterSplashscreen() {
         //initialize subsystems
         SubSystemInitializer.init(subSystemsList);
     }
 
+    @Override
     protected final void onUpdate() {
         //update subsystems
         for (int i = 0; i < subSystemsList.size(); i++) {
@@ -57,6 +62,7 @@ public abstract class BaseGame extends BaseApp {
         }
     }
 
+    @Override
     protected final void onDispose() {
         //shutdown all subsystems
         for (int i = 0; i < subSystemsList.size(); i++) {

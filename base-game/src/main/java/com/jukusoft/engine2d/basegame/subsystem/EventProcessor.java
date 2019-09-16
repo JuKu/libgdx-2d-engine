@@ -1,9 +1,6 @@
-package com.jukusoft.engine2d.core.subsystem;
+package com.jukusoft.engine2d.basegame.subsystem;
 
 import com.jukusoft.engine2d.core.events.Events;
-import com.jukusoft.engine2d.core.init.Initializer;
-
-import java.util.List;
 
 public class EventProcessor implements SubSystem {
 
