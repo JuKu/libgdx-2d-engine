@@ -11,5 +11,25 @@
 
 	<artifactId>engine2d-game-view</artifactId>
 
+	<properties>
+		<!-- don't skip this module, instead deploy this module to maven central -->
+		<maven.deploy.skip>false</maven.deploy.skip>
+		<maven.deploy.uniqueVersion>false</maven.deploy.uniqueVersion>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.jukusoft</groupId>
+			<artifactId>engine2d-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.jukusoft</groupId>
+			<artifactId>engine2d-base-game</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+
 
 </project>
