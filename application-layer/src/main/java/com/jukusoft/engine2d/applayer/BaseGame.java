@@ -5,6 +5,7 @@ import com.jukusoft.engine2d.applayer.init.impl.CreateThreadsInitializer;
 import com.jukusoft.engine2d.applayer.init.impl.UIThreadSubSystemsInitializer;
 import com.jukusoft.engine2d.applayer.utils.SubSystemInitializer;
 import com.jukusoft.engine2d.basegame.Game;
+import com.jukusoft.engine2d.core.shutdown.ErrorHandler;
 import com.jukusoft.engine2d.core.subsystem.SubSystem;
 import com.jukusoft.engine2d.core.subsystem.SubSystemManager;
 import com.jukusoft.engine2d.core.init.Initializer;
@@ -32,17 +33,22 @@ public abstract class BaseGame extends BaseApp {
      * @param initializerList list with initializers to process
      */
     protected final void addInitializers(List<Initializer> initializerList) {
-        SubSystemManager subSystemManager = new DefaultSubSystemManager("SubSystemManager");
+        try {
+            SubSystemManager subSystemManager = new DefaultSubSystemManager("SubSystemManager");
 
-        Log.i("BaseGame", "add subsystems");
-        this.addSubSystems(subSystemManager);
+            Log.i("BaseGame", "add subsystems");
+            this.addSubSystems(subSystemManager);
 
-        //get subsystems for UI-thread
-        this.subSystemsList = subSystemManager.listSubSystemsByThread(1);
+            //get subsystems for UI-thread
+            this.subSystemsList = subSystemManager.listSubSystemsByThread(1);
 
-        //initialize subsystems for UI-thread
-        initializerList.add(new UIThreadSubSystemsInitializer(subSystemManager.listSubSystemsByThread(1)));
-        initializerList.add(new CreateThreadsInitializer(subSystemManager));
+            //initialize subsystems for UI-thread
+            initializerList.add(new UIThreadSubSystemsInitializer(subSystemManager.listSubSystemsByThread(1)));
+            initializerList.add(new CreateThreadsInitializer(subSystemManager));
+        } catch (Throwable e) {
+            Log.e("BaseGame", "error occured during initialization: ", e);
+            ErrorHandler.shutdownWithException(e);
+        }
     }
 
     @Override
