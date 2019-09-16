@@ -1,4 +1,4 @@
-package com.jukusoft.engine2d.basegame.subsystem;
+package com.jukusoft.engine2d.core.subsystem;
 
 public interface SubSystem {
 

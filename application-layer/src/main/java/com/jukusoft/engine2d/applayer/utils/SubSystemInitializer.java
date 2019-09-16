@@ -1,7 +1,7 @@
 package com.jukusoft.engine2d.applayer.utils;
 
 import com.carrotsearch.hppc.ObjectArrayList;
-import com.jukusoft.engine2d.basegame.subsystem.SubSystem;
+import com.jukusoft.engine2d.core.subsystem.SubSystem;
 
 import java.util.Objects;
 

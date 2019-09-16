@@ -2,7 +2,7 @@ package com.jukusoft.engine2d.applayer.threads;
 
 import com.carrotsearch.hppc.ObjectArrayList;
 import com.jukusoft.engine2d.applayer.utils.SubSystemInitializer;
-import com.jukusoft.engine2d.basegame.subsystem.SubSystem;
+import com.jukusoft.engine2d.core.subsystem.SubSystem;
 import com.jukusoft.engine2d.core.config.Config;
 import com.jukusoft.engine2d.core.logger.Log;
 

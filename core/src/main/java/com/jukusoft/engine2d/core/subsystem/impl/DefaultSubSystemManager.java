@@ -1,8 +1,8 @@
-package com.jukusoft.engine2d.basegame.subsystem.impl;
+package com.jukusoft.engine2d.core.subsystem.impl;
 
 import com.carrotsearch.hppc.ObjectArrayList;
-import com.jukusoft.engine2d.basegame.subsystem.SubSystem;
-import com.jukusoft.engine2d.basegame.subsystem.SubSystemManager;
+import com.jukusoft.engine2d.core.subsystem.SubSystem;
+import com.jukusoft.engine2d.core.subsystem.SubSystemManager;
 import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.core.utils.StringUtils;
 import com.jukusoft.engine2d.core.utils.Threads;

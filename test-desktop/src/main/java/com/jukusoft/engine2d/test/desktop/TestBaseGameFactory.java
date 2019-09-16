@@ -3,7 +3,7 @@ package com.jukusoft.engine2d.test.desktop;
 import com.jukusoft.engine2d.applayer.BaseGame;
 import com.jukusoft.engine2d.applayer.BaseGameFactory;
 import com.jukusoft.engine2d.basegame.Game;
-import com.jukusoft.engine2d.basegame.subsystem.SubSystemManager;
+import com.jukusoft.engine2d.core.subsystem.SubSystemManager;
 import com.jukusoft.engine2d.plugin.PluginApi;
 
 public class TestBaseGameFactory implements BaseGameFactory {

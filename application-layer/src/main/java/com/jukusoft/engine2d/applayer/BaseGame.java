@@ -5,11 +5,11 @@ import com.jukusoft.engine2d.applayer.init.impl.CreateThreadsInitializer;
 import com.jukusoft.engine2d.applayer.init.impl.UIThreadSubSystemsInitializer;
 import com.jukusoft.engine2d.applayer.utils.SubSystemInitializer;
 import com.jukusoft.engine2d.basegame.Game;
-import com.jukusoft.engine2d.basegame.subsystem.SubSystem;
-import com.jukusoft.engine2d.basegame.subsystem.SubSystemManager;
-import com.jukusoft.engine2d.basegame.subsystem.impl.DefaultSubSystemManager;
+import com.jukusoft.engine2d.core.subsystem.SubSystem;
+import com.jukusoft.engine2d.core.subsystem.SubSystemManager;
 import com.jukusoft.engine2d.core.init.Initializer;
 import com.jukusoft.engine2d.core.logger.Log;
+import com.jukusoft.engine2d.core.subsystem.impl.DefaultSubSystemManager;
 
 import java.util.List;
 

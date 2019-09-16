@@ -10,11 +10,12 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<modules>
 		<module>core</module>
-		<module>application-layer</module>
-		<module>test-desktop</module>
-		<module>desktop</module>
-		<module>plugin</module>
 		<module>base-game</module>
+		<module>plugin</module>
+		<module>application-layer</module>
+		<module>desktop</module>
+		<module>test-desktop</module>
+		<module>game-view</module>
 	</modules>
 
 	<name>Engine2D</name>

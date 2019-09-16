@@ -1,4 +1,4 @@
-package com.jukusoft.engine2d.basegame.subsystem;
+package com.jukusoft.engine2d.core.subsystem;
 
 import com.carrotsearch.hppc.ObjectArrayList;
 
