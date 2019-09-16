@@ -47,7 +47,7 @@ public class DefaultSubSystemManager implements SubSystemManager {
         ObjectArrayList<SubSystem> subSystems = subSystemsThreadsMap.get(threadID);
         subSystems.add(system);
 
-        Log.i("SubSystems_" + getName(), "added subsystem " + system.getClass().getCanonicalName());
+        Log.i(getName(), "added subsystem " + system.getClass().getCanonicalName());
     }
 
     @Override
