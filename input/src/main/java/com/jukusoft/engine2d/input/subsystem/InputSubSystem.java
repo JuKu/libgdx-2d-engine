@@ -12,6 +12,7 @@ import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.core.memory.Pools;
 import com.jukusoft.engine2d.core.subsystem.SubSystem;
 import com.jukusoft.engine2d.core.utils.FilePath;
+import com.jukusoft.engine2d.core.utils.Utils;
 import com.jukusoft.engine2d.input.InputManager;
 import com.jukusoft.engine2d.input.KeyboardInputProcessor;
 import com.jukusoft.engine2d.input.controller.ControllerMapper;
@@ -38,6 +39,7 @@ public class InputSubSystem implements SubSystem {
 
     @Override
     public void init() {
+        Utils.printSection("Input Devices");
         Log.i(LOG_TAG, "initializing input devices");
 
         //initialize controllers

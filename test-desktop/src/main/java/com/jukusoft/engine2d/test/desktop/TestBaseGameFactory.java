@@ -4,8 +4,13 @@ import com.jukusoft.engine2d.applayer.BaseGame;
 import com.jukusoft.engine2d.applayer.BaseGameFactory;
 import com.jukusoft.engine2d.applayer.game.BasicGame;
 import com.jukusoft.engine2d.basegame.Game;
+import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.core.subsystem.SubSystemManager;
+import com.jukusoft.engine2d.core.utils.Threads;
+import com.jukusoft.engine2d.input.subsystem.InputSubSystem;
 import com.jukusoft.engine2d.plugin.PluginApi;
+
+import java.util.function.Consumer;
 
 public class TestBaseGameFactory implements BaseGameFactory {
 
@@ -23,8 +28,11 @@ public class TestBaseGameFactory implements BaseGameFactory {
             }
 
             @Override
-            protected void addSubSystems(SubSystemManager manager) {
-                //
+            protected Consumer<SubSystemManager> addSubSystems() {
+                return manager -> {
+                    Log.i("TestBaseGameFactory", "add subsystems");
+                    manager.addSubSystem(new InputSubSystem(), Threads.UI_THREAD);
+                };
             }
 
             @Override

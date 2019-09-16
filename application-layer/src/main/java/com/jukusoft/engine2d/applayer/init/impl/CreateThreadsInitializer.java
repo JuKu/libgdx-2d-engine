@@ -8,7 +8,7 @@ import com.jukusoft.engine2d.core.utils.Threads;
 
 import java.util.Objects;
 
-@InitPriority(10)
+@InitPriority(11)
 public class CreateThreadsInitializer implements Initializer {
 
     private static final String LOG_TAG = "CreateThreadsInit";

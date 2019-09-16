@@ -2,6 +2,7 @@ package com.jukusoft.engine2d.applayer;
 
 import com.carrotsearch.hppc.ObjectArrayList;
 import com.jukusoft.engine2d.applayer.init.impl.CreateThreadsInitializer;
+import com.jukusoft.engine2d.applayer.init.impl.SubSystemCreatorInitializer;
 import com.jukusoft.engine2d.applayer.init.impl.UIThreadSubSystemsInitializer;
 import com.jukusoft.engine2d.applayer.utils.SubSystemInitializer;
 import com.jukusoft.engine2d.basegame.Game;
@@ -13,6 +14,7 @@ import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.core.subsystem.impl.DefaultSubSystemManager;
 
 import java.util.List;
+import java.util.function.Consumer;
 
 public abstract class BaseGame extends BaseApp {
 
@@ -23,7 +25,7 @@ public abstract class BaseGame extends BaseApp {
         super(gameClass);
     }
 
-    protected abstract void addSubSystems(SubSystemManager manager);
+    protected abstract Consumer<SubSystemManager> addSubSystems(/*SubSystemManager manager*/);
 
     protected abstract Game createGame();
 
@@ -37,12 +39,13 @@ public abstract class BaseGame extends BaseApp {
             SubSystemManager subSystemManager = new DefaultSubSystemManager("SubSystemManager");
 
             Log.i("BaseGame", "add subsystems");
-            this.addSubSystems(subSystemManager);
+            Consumer<SubSystemManager> subSystemCreator = this.addSubSystems(/*subSystemManager*/);
 
             //get subsystems for UI-thread
             this.subSystemsList = subSystemManager.listSubSystemsByThread(1);
 
             //initialize subsystems for UI-thread
+            initializerList.add(new SubSystemCreatorInitializer(subSystemManager, subSystemCreator));
             initializerList.add(new UIThreadSubSystemsInitializer(subSystemManager.listSubSystemsByThread(1)));
             initializerList.add(new CreateThreadsInitializer(subSystemManager));
         } catch (Throwable e) {

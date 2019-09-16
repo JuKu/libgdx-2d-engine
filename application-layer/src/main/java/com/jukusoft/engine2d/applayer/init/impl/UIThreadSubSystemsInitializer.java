@@ -12,7 +12,7 @@ import com.jukusoft.engine2d.core.memory.Pools;
 
 import java.util.Objects;
 
-@InitPriority(9)
+@InitPriority(10)
 public class UIThreadSubSystemsInitializer implements Initializer {
 
     private final ObjectArrayList<SubSystem> subSystemList;
