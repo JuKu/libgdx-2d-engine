@@ -32,8 +32,6 @@ public abstract class BaseGame extends BaseApp {
      * @param initializerList list with initializers to process
      */
     protected final void addInitializers(List<Initializer> initializerList) {
-        this.game = createGame();
-
         SubSystemManager subSystemManager = new DefaultSubSystemManager("SubSystemManager");
 
         Log.i("BaseGame", "add subsystems");
@@ -49,6 +47,8 @@ public abstract class BaseGame extends BaseApp {
 
     @Override
     protected final void onInitAfterSplashscreen() {
+        this.game = createGame();
+
         //initialize subsystems
         SubSystemInitializer.init(subSystemsList);
     }
