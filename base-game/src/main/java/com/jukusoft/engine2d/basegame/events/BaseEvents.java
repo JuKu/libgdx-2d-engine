@@ -14,4 +14,7 @@ public class BaseEvents {
     public static final int ALL_SUBSYSTEMS_READY = 5;
     public static final int TAKE_SCREENSHOT = 6;
 
+    //player / camera movement (e.q. used by controllers)
+    public static final int MOVE_PLAYER = 7;
+
 }

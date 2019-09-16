@@ -146,7 +146,7 @@ public class KeyboardInputProcessor extends InputAdapter {
     }
 
     /**
-     * disable input processor, so input events were handled, e.q. if game isn't paused anymore
+     * enable input processor, so input events were handled, e.q. if game isn't paused anymore
      */
     public void enable () {
         this.enabled = true;
