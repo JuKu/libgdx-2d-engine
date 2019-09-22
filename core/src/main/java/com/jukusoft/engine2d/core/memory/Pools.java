@@ -6,6 +6,9 @@ import com.jukusoft.engine2d.core.logger.Log;
 import org.mini2Dx.gdx.utils.ObjectMap;
 import org.mini2Dx.gdx.utils.Pool;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  * Object pools to reuse memory to avoid memory allocation
  *
@@ -17,6 +20,8 @@ public class Pools {
 
     private static boolean checkForMemoryLeaks = false;
     private static ObjectMap<Object, Long> memoryLeakMap = new ObjectMap<>(50);
+
+    private static Lock lock = new ReentrantLock(true);
 
     protected Pools() {
         //
@@ -42,9 +47,21 @@ public class Pools {
      * @return instance
      */
     public static <T> T get(Class<T> cls, boolean memoryDetection) {
+        //first, lock Pools
+        lock.lock();
+
         Pool<T> pool = org.mini2Dx.gdx.utils.Pools.get(cls);
         //System.err.println("pool size: " + pool.getFree());
-        T obj = pool.obtain();
+        T obj = null;
+
+        try {
+            obj = pool.obtain();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.err.println("freeObjects size: " + pool.getFree());
+            throw e;
+        }
+
+        lock.unlock();
 
         if (obj == null) {
             try {
@@ -72,8 +89,12 @@ public class Pools {
             ((Pool.Poolable) obj).reset();
         }
 
+        lock.lock();
+
         Pool<T> pool = (Pool<T>) org.mini2Dx.gdx.utils.Pools.get(obj.getClass());
         pool.free(obj);
+
+        lock.unlock();
 
         if (checkForMemoryLeaks) {
             //Log.d(MEMORY_LEAK_LOG_TAG, "remove object to list");
