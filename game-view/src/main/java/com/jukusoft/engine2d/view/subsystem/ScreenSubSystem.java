@@ -7,11 +7,11 @@ import com.jukusoft.engine2d.view.screens.impl.DefaultScreenManager;
 
 public class ScreenSubSystem implements SubSystem {
 
-    private ScreenManager<IScreen> screenManager;
+    private ScreenManager<IScreen> screenManager = new DefaultScreenManager();
 
     @Override
     public void init() {
-        this.screenManager = new DefaultScreenManager();
+        //
     }
 
     @Override
