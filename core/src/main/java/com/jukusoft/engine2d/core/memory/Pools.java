@@ -42,7 +42,9 @@ public class Pools {
      * @return instance
      */
     public static <T> T get(Class<T> cls, boolean memoryDetection) {
-        T obj = org.mini2Dx.gdx.utils.Pools.get(cls).obtain();
+        Pool<T> pool = org.mini2Dx.gdx.utils.Pools.get(cls);
+        //System.err.println("pool size: " + pool.getFree());
+        T obj = pool.obtain();
 
         if (obj == null) {
             try {
