@@ -72,9 +72,15 @@ public class Pools {
         }
 
         if (obj instanceof EventData) {
+            if (((EventData) obj).getRefCount() != 1) {
+                throw new IllegalStateException("refCount has to be 1, refCount: " + ((EventData) obj).getRefCount());
+            }
+
             //initialize event
             ((EventData) obj).init();
         }
+
+        //System.err.println("get(): " + obj.hashCode());
 
         if (checkForMemoryLeaks && memoryDetection) {
             //Log.d(MEMORY_LEAK_LOG_TAG, "add object to list");
@@ -85,11 +91,12 @@ public class Pools {
     }
 
     public static <T> void free(T obj) {
+        lock.lock();
+        //System.err.println("free(): " + obj.hashCode());
+
         if (obj instanceof Pool.Poolable) {
             ((Pool.Poolable) obj).reset();
         }
-
-        lock.lock();
 
         Pool<T> pool = (Pool<T>) org.mini2Dx.gdx.utils.Pools.get(obj.getClass());
         pool.free(obj);

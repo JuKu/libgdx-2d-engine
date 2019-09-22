@@ -25,6 +25,12 @@ public class Events {
     }
 
     public static void queueEvent(EventData event) {
+        if (event.getRefCount() > 1) {
+            throw new IllegalStateException("refCount cannot be > 1 (event: " + event.getClass().getSimpleName() + ", refCount: " + event.getRefCount() + ")");
+        }
+
+        //System.err.println("refCount before: " + event.getRefCount());
+
         //increment reference counter
         event.retain(NUM_THREADS - 1);
 
@@ -37,6 +43,10 @@ public class Events {
     }
 
     public static void triggerEvent(EventData event) {
+        if (event.getRefCount() > 1) {
+            throw new IllegalStateException("refCount cannot be > 1");
+        }
+
         //increment reference counter
         event.retain(NUM_THREADS - 1);
 

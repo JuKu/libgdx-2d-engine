@@ -2,6 +2,7 @@ package com.jukusoft.engine2d.core.events;
 
 import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.core.memory.Pools;
+import com.jukusoft.engine2d.core.utils.Threads;
 import org.mini2Dx.gdx.utils.Array;
 import org.mini2Dx.gdx.utils.AtomicQueue;
 import org.mini2Dx.gdx.utils.IntMap;
@@ -101,6 +102,8 @@ public class EventManager {
      * @param event game event
      */
     public void queueEvent(EventData event) {
+        //TODO: increment ref counter
+
         //add event to queue
         this.eventQueue[this.activeQueue].put(event);
     }
@@ -112,6 +115,8 @@ public class EventManager {
      * @param event game event
      */
     public void triggerEvent(EventData event) {
+        //TODO: increment ref counter
+
         if (!event.allowTrigger()) {
             throw new IllegalStateException("It isn't allowed to trigger this event type!");
         }
@@ -130,6 +135,10 @@ public class EventManager {
             throw new IllegalStateException("Cannot process event " + event.getClass().getSimpleName() + " because refCount is 0");
         }
 
+        if (event.getRefCount() > Threads.getThreadCount()) {
+            throw new IllegalStateException("ref count cannot > thread count (" + event.getRefCount() + " > " + Threads.getThreadCount() + ")");
+        }
+
         //find listener
         Array<EventListener> listeners = this.listenerMap.get(event.getEventType());
 
@@ -140,9 +149,7 @@ public class EventManager {
             }
         }
 
-        event.release();
-
-        if (event.getRefCount() <= 0) {
+        if (event.release() <= 0) {
             //add event back to memory pool, so it can be reused
             Pools.free(event);
         }
