@@ -13,6 +13,7 @@ public class GameThreadFactory {
     public static Thread createAndStartThread(int threadID, String threadName, ObjectArrayList<SubSystem> subSystemList) {
         Thread thread = new Thread(new GameThread(subSystemList, threadID));
         thread.setName(threadName);
+        thread.setDaemon(true);
         thread.start();
 
         //register thread, so thread will be interrupted automatically on game shutdown
