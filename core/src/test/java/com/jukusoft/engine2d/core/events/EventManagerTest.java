@@ -2,6 +2,8 @@ package com.jukusoft.engine2d.core.events;
 
 import com.jukusoft.engine2d.core.memory.DummyEventDataObject;
 import com.jukusoft.engine2d.core.memory.DummyOtherEventDataObject;
+import com.jukusoft.engine2d.core.utils.Threads;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -10,6 +12,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static org.junit.Assert.*;
 
 public class EventManagerTest {
+
+    @BeforeClass
+    public static void beforeClass() {
+        Threads.setThreadCount(1);
+    }
 
     @Test
     public void testConstructor() {
@@ -205,7 +212,7 @@ public class EventManagerTest {
         assertEquals(1, count.get());
     }
 
-    @Test
+    @Test(expected = IllegalStateException.class)
     public void testTriggerEvent1() {
         EventManager manager = new EventManager("test", false);
 
@@ -224,6 +231,8 @@ public class EventManagerTest {
         DummyOtherEventDataObject event = new DummyOtherEventDataObject();
         event.retain();
         assertEquals(2, event.getRefCount());
+
+        //refCount > 1 is not allowed, so this will cause an IllegalStateException
         manager.triggerEvent(event);
 
         //check, if event listener was called
