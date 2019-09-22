@@ -126,6 +126,10 @@ public class EventManager {
      * @param event event to handle
      */
     protected void handleEvent(EventData event) {
+        if (event.getRefCount() <= 0) {
+            throw new IllegalStateException("Cannot process event " + event.getClass().getSimpleName() + " because refCount is 0");
+        }
+
         //find listener
         Array<EventListener> listeners = this.listenerMap.get(event.getEventType());
 
