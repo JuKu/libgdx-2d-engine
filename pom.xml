@@ -70,7 +70,7 @@
 		<javolution.version>6.0.0</javolution.version>
 
 		<!-- libGDX version, 1.9.10 -->
-		<libgdx.version>1.9.8</libgdx.version>
+		<libgdx.version>1.9.10</libgdx.version>
 
 		<!-- libGDX collections, TODO: upgrade this version to 1.9.10 to be equals to libGDX version -->
 		<gdx.collections.version>1.9.8</gdx.collections.version>
