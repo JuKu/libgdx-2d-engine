@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.carrotsearch.hppc.ObjectArrayList;
 import com.carrotsearch.hppc.ObjectStack;
+import com.jukusoft.engine2d.core.logger.Log;
+import com.jukusoft.engine2d.core.subsystem.impl.DefaultSubSystemManager;
 import com.jukusoft.engine2d.core.utils.Platform;
 import com.jukusoft.engine2d.view.screens.IScreen;
 import com.jukusoft.engine2d.view.screens.ScreenManager;
@@ -125,6 +127,8 @@ public class DefaultScreenManager implements ScreenManager<IScreen> {
 
     @Override
     public void leaveAllAndEnter(String name) {
+        Log.i(DefaultSubSystemManager.class.getSimpleName(), "leaveAllAndEnter: " + name);
+
         // leave all active game states
         IScreen screen = pop();
 
