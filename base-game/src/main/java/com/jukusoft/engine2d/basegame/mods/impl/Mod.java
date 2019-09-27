@@ -9,7 +9,8 @@ public class Mod {
         MOD,
         DLC,
         PATCH,
-        GAMEPACK
+        GAMEPACK,
+        ASSETPACK
     }
 
     private final String name;
@@ -24,7 +25,7 @@ public class Mod {
         this.name = name;
         this.title = title;
         this.description = description;
-        this.type = Type.valueOf(type.toUpperCase());
+        this.type = Type.valueOf(type.replace("_", "").toUpperCase());
         this.version = version;
     }
 
