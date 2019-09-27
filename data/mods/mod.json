@@ -1,0 +1,8 @@
+{
+	"name": "core",
+	"title": "Core",
+	"description": "the core game content",
+	"version": "0.0.1",
+	"url": "http://jukusoft.com",
+	"dependencies": []
+}
