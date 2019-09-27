@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.jukusoft.engine2d.applayer.events.game.DisposeGameEvent;
 import com.jukusoft.engine2d.applayer.events.game.PauseGameEvent;
-import com.jukusoft.engine2d.applayer.events.game.ResizeWindowEvent;
+import com.jukusoft.engine2d.basegame.events.window.ResizeWindowEvent;
 import com.jukusoft.engine2d.applayer.events.game.ResumeGameEvent;
 import com.jukusoft.engine2d.applayer.init.InitializerProcessor;
 import com.jukusoft.engine2d.applayer.init.SplashScreenDrawer;

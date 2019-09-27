@@ -1,6 +1,12 @@
 package com.jukusoft.engine2d.view.subsystem;
 
+import com.jukusoft.engine2d.basegame.events.BaseEvents;
+import com.jukusoft.engine2d.basegame.events.window.ResizeWindowEvent;
+import com.jukusoft.engine2d.core.events.EventListener;
+import com.jukusoft.engine2d.core.events.Events;
 import com.jukusoft.engine2d.core.subsystem.SubSystem;
+import com.jukusoft.engine2d.core.time.GameTime;
+import com.jukusoft.engine2d.core.utils.Threads;
 import com.jukusoft.engine2d.view.screens.IScreen;
 import com.jukusoft.engine2d.view.screens.ScreenManager;
 import com.jukusoft.engine2d.view.screens.impl.DefaultScreenManager;
@@ -11,13 +17,17 @@ public class ScreenSubSystem implements SubSystem {
 
     @Override
     public void init() {
-        //
+        Events.addListener(Threads.UI_THREAD, BaseEvents.RESIZE_WINDOW, (EventListener<ResizeWindowEvent>) resizeEvent -> {
+            screenManager.resize(resizeEvent.getOldWidth(), resizeEvent.getOldHeight(), resizeEvent.getNewWidth(), resizeEvent.getNewHeight());
+        });
     }
 
     @Override
     public void update() {
-        this.screenManager.update();
-        this.screenManager.draw();
+        float delta = GameTime.getInstance().getDelta();
+
+        this.screenManager.update(delta);
+        this.screenManager.draw(delta);
     }
 
     @Override

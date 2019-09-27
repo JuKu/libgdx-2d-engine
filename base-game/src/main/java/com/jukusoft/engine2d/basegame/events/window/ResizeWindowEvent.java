@@ -1,4 +1,4 @@
-package com.jukusoft.engine2d.applayer.events.game;
+package com.jukusoft.engine2d.basegame.events.window;
 
 import com.jukusoft.engine2d.basegame.events.BaseEvents;
 import com.jukusoft.engine2d.core.events.EventData;
