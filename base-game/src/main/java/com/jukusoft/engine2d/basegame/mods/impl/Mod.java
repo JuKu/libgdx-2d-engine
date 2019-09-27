@@ -5,17 +5,26 @@ import java.util.Map;
 
 public class Mod {
 
+    public enum Type {
+        MOD,
+        DLC,
+        PATCH,
+        GAMEPACK
+    }
+
     private final String name;
     private final String title;
     private final String description;
+    private final Type type;
     private final String version;
     private String url;
     private Map<String,String> dependencies = new HashMap<>();
 
-    protected Mod(String name, String title, String description, String version) {
+    protected Mod(String name, String title, String description, String type, String version) {
         this.name = name;
         this.title = title;
         this.description = description;
+        this.type = Type.valueOf(type.toUpperCase());
         this.version = version;
     }
 
@@ -29,6 +38,10 @@ public class Mod {
 
     public String getDescription() {
         return description;
+    }
+
+    public Type getType() {
+        return type;
     }
 
     public String getVersion() {

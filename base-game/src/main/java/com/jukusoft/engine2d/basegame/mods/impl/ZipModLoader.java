@@ -65,6 +65,7 @@ public class ZipModLoader implements ModLoader {
                     json.getString("name"),
                     json.getString("title"),
                     json.getString("description"),
+                    json.getString("type"),
                     json.getString("version")
             );
 
@@ -93,7 +94,7 @@ public class ZipModLoader implements ModLoader {
     }
 
     private boolean validateJson(JSONObject json) {
-        return json.has("name") && json.has("title") && json.has("description") && json.has("version");
+        return json.has("name") && json.has("title") && json.has("description") && json.has("type") && json.has("version");
     }
 
 }

@@ -2,6 +2,7 @@
 	"name": "core",
 	"title": "Core",
 	"description": "the core game content",
+	"type": "gamepack",
 	"version": "0.0.1",
 	"url": "http://jukusoft.com",
 	"dependencies": []
