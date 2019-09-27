@@ -17,7 +17,6 @@ public class SubSystemInitializer {
         for (int i = 0; i < subSystemList.size(); i++) {
             SubSystem subSystem = subSystemList.get(i);
             subSystem.init();
-
         }
     }
 
