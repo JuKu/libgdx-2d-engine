@@ -23,17 +23,17 @@ public abstract class ScreenAdapter implements IScreen {
     }
 
     @Override
-    public void onResize(int width, int height) {
+    public void onResize(int oldWidth, int oldHeight, int width, int height) {
         //
     }
 
     @Override
-    public void update(ScreenManager<IScreen> screenManager) {
+    public void update(ScreenManager<IScreen> screenManager, float delta) {
         //
     }
 
     @Override
-    public void draw() {
+    public void draw(float delta) {
         //
     }
 

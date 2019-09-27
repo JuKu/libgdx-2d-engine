@@ -118,7 +118,7 @@ public class DefaultScreenManager implements ScreenManager<IScreen> {
         screen.onResume();
 
         //call resize
-        screen.onResize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        screen.onResize(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         this.activeScreens.push(screen);
 
@@ -176,35 +176,35 @@ public class DefaultScreenManager implements ScreenManager<IScreen> {
     }
 
     @Override
-    public void resize(int width, int height) {
+    public void resize(int oldWidth, int oldHeight, int width, int height) {
         for (int i = this.activeScreens.size() - 1; i >= 0; i--) {
             //get screen
             IScreen screen = this.activeScreens.get(i);
 
             //resize screen
-            screen.onResize(width, height);
+            screen.onResize(oldWidth, oldHeight, width, height);
         }
     }
 
     @Override
-    public void update() {
+    public void update(float delta) {
         for (int i = 0; i < this.activeScreens.size(); i++) {
             //get screen
             IScreen screen = this.activeScreens.get(i);
 
             //update screen
-            screen.update(this);
+            screen.update(this, delta);
         }
     }
 
     @Override
-    public void draw() {
+    public void draw(float delta) {
         for (int i = 0; i < this.activeScreens.size(); i++) {
             //get screen
             IScreen screen = this.activeScreens.get(i);
 
             //draw screen
-            screen.draw();
+            screen.draw(delta);
         }
     }
 

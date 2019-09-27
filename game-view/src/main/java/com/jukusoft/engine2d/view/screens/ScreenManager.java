@@ -66,17 +66,17 @@ public interface ScreenManager<T extends IScreen> {
      */
     public ObjectArrayList<T> listActiveScreens();
 
-    public void resize(int width, int height);
+    public void resize(int oldWidth, int oldHeight, int newWidth, int newHeight);
 
     /**
     * update all active screens
     */
-    public void update();
+    public void update(float delta);
 
     /**
     * beforeDraw all active screens
     */
-    public void draw();
+    public void draw(float delta);
 
     /**
     * dispose screen manager with all screens

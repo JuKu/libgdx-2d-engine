@@ -30,19 +30,21 @@ public interface IScreen {
     /**
     * window was resized
      *
-     * @param width new window width
-     * @param height new window height
+     * @param oldWidth old window width
+     * @param oldHeight old window height
+     * @param newWidth new window width
+     * @param newheight new window height
     */
-    public void onResize(int width, int height);
+    public void onResize(int oldWidth, int oldHeight, int newWidth, int newheight);
 
     /**
      * update game screen
      */
-    public void update(ScreenManager<IScreen> screenManager);
+    public void update(ScreenManager<IScreen> screenManager, float delta);
 
     /**
      * beforeDraw game screen
      */
-    public void draw();
+    public void draw(float delta);
 
 }
