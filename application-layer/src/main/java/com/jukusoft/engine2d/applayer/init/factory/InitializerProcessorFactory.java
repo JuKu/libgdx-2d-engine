@@ -43,6 +43,7 @@ public class InitializerProcessorFactory {
 
         //add initializers which should be executed after splashscreen is shown
         initializerList.add(new GameConfigInitializer());
+        initializerList.add(new CreateDataDirsIfAbsentInitializer());
         initializerList.add(new PluginLoaderInitializer(pluginManager));
 
         return new InitializerProcessor(initializerList);

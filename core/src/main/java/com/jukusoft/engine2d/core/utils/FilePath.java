@@ -11,6 +11,10 @@ public class FilePath {
     }
 
     public static String getDataDir() {
+        if (!dataDir.endsWith("/")) {
+            return dataDir + "/";
+        }
+
         return dataDir;
     }
 
