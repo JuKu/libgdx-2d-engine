@@ -2,13 +2,17 @@ package com.jukusoft.engine2d.basegame.mods.impl;
 
 import com.jukusoft.engine2d.basegame.mods.ModLoader;
 import com.jukusoft.engine2d.core.logger.Log;
+import com.jukusoft.engine2d.core.utils.FileUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -19,9 +23,15 @@ public class ZipModLoader implements ModLoader {
 
     @Override
     public List<Mod> findMods(File modDir) throws IOException {
+        Objects.requireNonNull(modDir);
+
+        if (!modDir.exists()) {
+            throw new FileNotFoundException("mod dir does not exists: " + modDir.getAbsolutePath());
+        }
+
         return Files.list(modDir.toPath())
                 .filter(Files::isRegularFile)
-                .filter(path -> path.endsWith(".zip") || path.endsWith(".mod"))
+                .filter(path -> path.getFileName().toString().endsWith(".zip") || path.getFileName().toString().endsWith(".mod"))
                 .map(path -> path.toFile())
                 .map(this::parseMod)
                 .filter(mod -> mod != null)
@@ -43,7 +53,8 @@ public class ZipModLoader implements ModLoader {
                 return null;
             }
 
-            JSONObject json = new JSONObject(zipFile.getInputStream(modJsonEntry));
+            String content = FileUtils.getContentFromInputStream(zipFile.getInputStream(modJsonEntry), StandardCharsets.UTF_8);
+            JSONObject json = new JSONObject(content);
 
             if (!validateJson(json)) {
                 Log.w(LOG_TAG, "invalid mod json, json does not contains all required fields: " + modZip.getAbsolutePath());

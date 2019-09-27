@@ -13,6 +13,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Utils for file operations
@@ -405,6 +406,12 @@ public class FileUtils {
         }
 
         return Paths.get(uri);
+    }
+
+    public static String getContentFromInputStream(InputStream is, Charset charset) throws IOException {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(is, charset))) {
+            return br.lines().collect(Collectors.joining(System.lineSeparator()));
+        }
     }
 
 }

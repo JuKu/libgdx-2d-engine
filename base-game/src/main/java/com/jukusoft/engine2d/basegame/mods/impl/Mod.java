@@ -43,7 +43,7 @@ public class Mod {
         this.url = url;
     }
 
-    public Map<String, String> getDependencies() {
+    public Map<String, String> listDependencies() {
         return dependencies;
     }
 
