@@ -19,11 +19,11 @@ public class ReplayMode {
      *
      * @return true, if the replay mode is enabled in config (this does not means it's also running)
      */
-    public boolean isEnabled() {
+    public static boolean isEnabled() {
         return Config.getBool("Replay", "enabled");
     }
 
-    public boolean isRunning() {
+    public static boolean isRunning() {
         //TODO: add code here
 
         return false;
