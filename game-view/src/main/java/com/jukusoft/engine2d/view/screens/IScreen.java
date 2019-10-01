@@ -15,17 +15,17 @@ public interface IScreen {
     /**
      * method which should be executed if screen has stopped
      */
-    public void onStop();
+    public void onStop(ScreenManager<IScreen> screenManager);
 
     /**
      * method is executed, if screen is set to active state now.
      */
-    public void onResume();
+    public void onResume(ScreenManager<IScreen> screenManager);
 
     /**
     * method is executed, if screen isn't active anymore
     */
-    public void onPause();
+    public void onPause(ScreenManager<IScreen> screenManager);
 
     /**
     * window was resized

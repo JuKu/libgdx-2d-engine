@@ -87,7 +87,7 @@ public class DefaultScreenManager implements ScreenManager<IScreen> {
         IScreen screen = this.screens.get(name);
 
         if (screen != null) {
-            screen.onStop();
+            screen.onStop(this);
 
             this.activeScreens.removeFirst(screen);
             this.cachedScreenList.removeFirst(screen);
@@ -115,7 +115,7 @@ public class DefaultScreenManager implements ScreenManager<IScreen> {
                     "Couldnt found initialized screen '" + name + "', add screen with method addScreen() first.");
         }
 
-        screen.onResume();
+        screen.onResume(this);
 
         //call resize
         screen.onResize(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -151,7 +151,7 @@ public class DefaultScreenManager implements ScreenManager<IScreen> {
 
             Platform.runOnUIThread(() -> {
                 //pause screen
-                screen1.onPause();
+                screen1.onPause(this);
             });
         }
 
