@@ -22,6 +22,7 @@ public abstract class BaseGame extends BaseApp {
 
     private ObjectArrayList<SubSystem> subSystemsList;
     private Game game;
+    private GameTime gameTime = GameTime.getInstance();
 
     public BaseGame(Class<?> gameClass) {
         super(gameClass);
@@ -66,8 +67,9 @@ public abstract class BaseGame extends BaseApp {
 
     @Override
     protected final void onUpdate() {
-        //update game time and delta
-        GameTime.getInstance().setDelta(Gdx.graphics.getDeltaTime());
+        //update timestamp and delta time for movements & animations
+        //gameTime.setTime(System.currentTimeMillis());
+        gameTime.setDelta(Gdx.graphics.getDeltaTime());
 
         //update subsystems
         for (int i = 0; i < subSystemsList.size(); i++) {
