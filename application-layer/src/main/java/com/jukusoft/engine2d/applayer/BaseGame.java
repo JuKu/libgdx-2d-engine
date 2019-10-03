@@ -69,6 +69,7 @@ public abstract class BaseGame extends BaseApp {
     protected final void onUpdate() {
         //update timestamp and delta time for movements & animations
         //gameTime.setTime(System.currentTimeMillis());
+        //System.out.println("delta: " + Gdx.graphics.getDeltaTime() + ", gameTime delta: " + gameTime.getDelta());
         gameTime.setDelta(Gdx.graphics.getDeltaTime());
 
         //update subsystems
