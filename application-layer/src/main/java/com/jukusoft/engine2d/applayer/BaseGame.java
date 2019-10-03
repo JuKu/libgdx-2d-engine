@@ -1,5 +1,6 @@
 package com.jukusoft.engine2d.applayer;
 
+import com.badlogic.gdx.Gdx;
 import com.carrotsearch.hppc.ObjectArrayList;
 import com.jukusoft.engine2d.applayer.init.impl.CreateThreadsInitializer;
 import com.jukusoft.engine2d.applayer.init.impl.SubSystemCreatorInitializer;
@@ -12,6 +13,7 @@ import com.jukusoft.engine2d.core.subsystem.SubSystemManager;
 import com.jukusoft.engine2d.core.init.Initializer;
 import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.core.subsystem.impl.DefaultSubSystemManager;
+import com.jukusoft.engine2d.core.time.GameTime;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -64,6 +66,9 @@ public abstract class BaseGame extends BaseApp {
 
     @Override
     protected final void onUpdate() {
+        //update game time and delta
+        GameTime.getInstance().setDelta(Gdx.graphics.getDeltaTime());
+
         //update subsystems
         for (int i = 0; i < subSystemsList.size(); i++) {
             SubSystem subSystem = subSystemsList.get(i);
