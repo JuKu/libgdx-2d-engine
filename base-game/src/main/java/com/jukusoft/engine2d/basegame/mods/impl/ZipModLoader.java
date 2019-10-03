@@ -1,6 +1,7 @@
 package com.jukusoft.engine2d.basegame.mods.impl;
 
 import com.jukusoft.engine2d.basegame.mods.ModLoader;
+import com.jukusoft.engine2d.core.config.Config;
 import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.core.utils.FileUtils;
 import org.json.JSONArray;
@@ -11,8 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -20,6 +20,16 @@ import java.util.zip.ZipFile;
 public class ZipModLoader implements ModLoader {
 
     private static final String LOG_TAG = "ModLoader";
+    private Set<String> allowedExtensions = new HashSet<>();
+
+    public ZipModLoader() {
+        //get allowed mod extensions from config
+        allowedExtensions = Arrays.stream(Config.get("Mods", "extensions").split(",")).collect(Collectors.toSet());
+
+        if (allowedExtensions.size() == 0) {
+            throw new IllegalStateException("no valid mod extension registered in mods config");
+        }
+    }
 
     @Override
     public List<Mod> findMods(File modDir) throws IOException {
@@ -31,7 +41,15 @@ public class ZipModLoader implements ModLoader {
 
         return Files.list(modDir.toPath())
                 .filter(Files::isRegularFile)
-                .filter(path -> path.getFileName().toString().endsWith(".zip") || path.getFileName().toString().endsWith(".mod"))
+                .filter(path -> {
+                    for (String extension : allowedExtensions) {
+                        if (path.getFileName().toString().endsWith(extension)) {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                })
                 .map(path -> path.toFile())
                 .map(this::parseMod)
                 .filter(mod -> mod != null)

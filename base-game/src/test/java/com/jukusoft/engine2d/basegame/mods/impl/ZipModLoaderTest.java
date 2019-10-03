@@ -1,7 +1,10 @@
 package com.jukusoft.engine2d.basegame.mods.impl;
 
 import com.jukusoft.engine2d.basegame.mods.ModLoader;
+import com.jukusoft.engine2d.core.config.Config;
 import com.jukusoft.engine2d.core.logger.Log;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.File;
@@ -12,6 +15,16 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class ZipModLoaderTest {
+
+    @BeforeClass
+    public static void beforeClass() {
+        Config.set("Mods", "extensions", ".zip,.mod,.gamepack,.package");
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        Config.clear();
+    }
 
     @Test
     public void testConstructor() {
