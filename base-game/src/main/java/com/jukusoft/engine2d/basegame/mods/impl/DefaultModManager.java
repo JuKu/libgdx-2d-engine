@@ -43,6 +43,19 @@ public class DefaultModManager implements ModManager {
         return mods;
     }
 
+    @Override
+    public Array<Mod> listMods(Mod.Type type) {
+        Array<Mod> list = new Array<>(mods.size);
+
+        for (Mod mod : mods) {
+            if (mod.hasType(type)) {
+                list.add(mod);
+            }
+        }
+
+        return list;
+    }
+
     public static ModManager getInstance() {
         if (instance == null) {
             instance = new DefaultModManager();
