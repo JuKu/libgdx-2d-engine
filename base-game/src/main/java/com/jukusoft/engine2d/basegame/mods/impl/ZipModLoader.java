@@ -79,6 +79,10 @@ public class ZipModLoader implements ModLoader {
                 return null;
             }
 
+            if (!json.has("types")) {
+                throw new IllegalStateException("JSONObject[\"types\"] not found in zip: " + modZip.getAbsolutePath());
+            }
+
             JSONArray typesArray = json.getJSONArray("types");
             Set<String> types = typesArray.toList().stream().map(str -> (String) str).collect(Collectors.toSet());
 
@@ -115,7 +119,7 @@ public class ZipModLoader implements ModLoader {
     }
 
     private boolean validateJson(JSONObject json) {
-        return json.has("name") && json.has("title") && json.has("description") && json.has("type") && json.has("version");
+        return json.has("name") && json.has("title") && json.has("description") && json.has("types") && json.has("version");
     }
 
 }
