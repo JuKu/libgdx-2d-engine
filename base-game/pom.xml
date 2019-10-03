@@ -23,6 +23,20 @@
 			<artifactId>engine2d-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+
+		<!-- High Performance Primitive Collections for Java, https://github.com/carrotsearch/hppc -->
+		<dependency>
+			<groupId>com.carrotsearch</groupId>
+			<artifactId>hppc</artifactId>
+			<version>${hppc.version}</version>
+		</dependency>
+
+		<!-- https://github.com/mini2Dx/gdx-collections -->
+		<dependency>
+			<groupId>org.mini2Dx</groupId>
+			<artifactId>gdx-collections</artifactId>
+			<version>${gdx.collections.version}</version>
+		</dependency>
 	</dependencies>
 
 
