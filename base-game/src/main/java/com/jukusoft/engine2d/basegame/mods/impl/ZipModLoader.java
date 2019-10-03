@@ -79,11 +79,14 @@ public class ZipModLoader implements ModLoader {
                 return null;
             }
 
+            JSONArray typesArray = json.getJSONArray("types");
+            Set<String> types = typesArray.toList().stream().map(str -> (String) str).collect(Collectors.toSet());
+
             Mod mod = new Mod(
                     json.getString("name"),
                     json.getString("title"),
                     json.getString("description"),
-                    json.getString("type"),
+                    types,
                     json.getString("version")
             );
 

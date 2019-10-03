@@ -2,6 +2,8 @@ package com.jukusoft.engine2d.basegame.mods.impl;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Mod {
 
@@ -16,16 +18,16 @@ public class Mod {
     private final String name;
     private final String title;
     private final String description;
-    private final Type type;
+    private final Set<Type> types;
     private final String version;
     private String url;
     private Map<String,String> dependencies = new HashMap<>();
 
-    protected Mod(String name, String title, String description, String type, String version) {
+    protected Mod(String name, String title, String description, Set<String> typesString, String version) {
         this.name = name;
         this.title = title;
         this.description = description;
-        this.type = Type.valueOf(type.replace("_", "").toUpperCase());
+        this.types = typesString.stream().map(type -> Type.valueOf(type.replace("_", "").toUpperCase())).collect(Collectors.toSet());
         this.version = version;
     }
 
@@ -41,8 +43,12 @@ public class Mod {
         return description;
     }
 
-    public Type getType() {
-        return type;
+    public Set<Type> getTypes() {
+        return types;
+    }
+
+    public boolean hasType(Type type) {
+        return types.contains(type);
     }
 
     public String getVersion() {
