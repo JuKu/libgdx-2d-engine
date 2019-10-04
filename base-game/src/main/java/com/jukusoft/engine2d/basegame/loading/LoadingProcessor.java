@@ -63,6 +63,12 @@ public class LoadingProcessor {
         return !hasFinished();
     }
 
+    public void processAll(Game game) throws Exception {
+        while (!hasFinished()) {
+            process(game);
+        }
+    }
+
     /**
      * check, if all tasks was executed
      *

@@ -9,11 +9,13 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 public @interface TaskPriority {
 
+    public static final int DEFAULT_VALUE = 50;
+
     /**
      * get priority, if greater, than the task will be executed earlier
      *
      * @return priority
      */
-    int value() default 50;
+    int value() default DEFAULT_VALUE;
 
 }

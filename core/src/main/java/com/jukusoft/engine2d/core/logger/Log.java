@@ -253,6 +253,11 @@ public class Log {
     }
 
     public static void shutdown() {
+        if (headlessMode) {
+            //we don't have to do anything here in headless mode, because there is no extra thread
+            return;
+        }
+
         logWriterThread.interrupt();
 
         try {

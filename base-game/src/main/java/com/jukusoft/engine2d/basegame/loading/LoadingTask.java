@@ -11,6 +11,6 @@ public interface LoadingTask {
      * @param game instance of game
      * @return true, if loading task executed successfully
      */
-    public boolean load(Game game) throws Exception;
+    public void load(Game game) throws Exception;
 
 }
