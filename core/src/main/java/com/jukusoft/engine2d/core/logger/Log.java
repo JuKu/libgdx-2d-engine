@@ -63,6 +63,9 @@ public class Log {
 
     protected static final CountDownLatch shutdownLatch = new CountDownLatch(1);
 
+    //headless mode means the LoggerWriter thread is not started but all messages are printed to console
+    protected static boolean headlessMode = false;
+
     public static void init() {
         Log.enabled = Config.getBool(LOGGER_TAG, "enabled");
         Log.printToConsole = Config.getBool(LOGGER_TAG, "printToConsole");
@@ -88,6 +91,19 @@ public class Log {
             //start thread
             logWriterThread.start();
         }
+
+        headlessMode = false;
+    }
+
+    public static void initJUnitLogger(LEVEL level) {
+        Log.enabled = true;
+        Log.printToConsole = true;
+        Log.level = level;
+
+        //get format
+        format = new SimpleDateFormat("yyyy-MM-dd HH:mm:SS");
+
+        headlessMode = true;
     }
 
     /**
@@ -214,13 +230,25 @@ public class Log {
         }
 
         String timestampStr = format.format(new Date(System.currentTimeMillis()));
-        loggingQueue.add("[" + timestampStr + "] " + level.getShortcut() + "/" + sb.toString() + ": " + message);
 
-        if (e != null) {
-            //print exception in extra line
-            StringWriter sw = new StringWriter();
-            e.printStackTrace(new PrintWriter(sw));
-            loggingQueue.add(sw.toString());
+        if (headlessMode) {
+            System.out.println("[" + timestampStr + "] " + level.getShortcut() + "/" + sb.toString() + ": " + message);
+
+            if (e != null) {
+                //print exception in extra line
+                StringWriter sw = new StringWriter();
+                e.printStackTrace(new PrintWriter(sw));
+                System.err.println(sw.toString());
+            }
+        } else {
+            loggingQueue.add("[" + timestampStr + "] " + level.getShortcut() + "/" + sb.toString() + ": " + message);
+
+            if (e != null) {
+                //print exception in extra line
+                StringWriter sw = new StringWriter();
+                e.printStackTrace(new PrintWriter(sw));
+                loggingQueue.add(sw.toString());
+            }
         }
     }
 
