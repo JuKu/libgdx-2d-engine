@@ -12,8 +12,6 @@ public class TaskPriorityComperator<T> implements Comparator<T> {
         int priority1 = getPriority(o1);
         int priority2 = getPriority(o2);
 
-        System.out.println("priority1: " + priority1 + ", priority2: " + priority2);
-
         return Integer.compare(priority2, priority1);
     }
 
