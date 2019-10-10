@@ -23,7 +23,7 @@ public class ArchiveFileHandle extends FileHandle {
     public ArchiveFileHandle (ZipFile archive, File file) {
         super(file, Files.FileType.Classpath);//Classpath, External
         this.archive = archive;
-        archiveEntry = this.archive.getEntry(file.getPath());
+        archiveEntry = this.archive.getEntry(file.getPath().replace("\\", "/"));
     }
 
     public ArchiveFileHandle (ZipFile archive, String fileName) {
