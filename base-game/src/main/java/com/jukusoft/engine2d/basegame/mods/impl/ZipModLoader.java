@@ -12,8 +12,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -39,21 +41,22 @@ public class ZipModLoader implements ModLoader {
             throw new FileNotFoundException("mod dir does not exists: " + modDir.getAbsolutePath());
         }
 
-        return Files.list(modDir.toPath())
-                .filter(Files::isRegularFile)
-                .filter(path -> {
-                    for (String extension : allowedExtensions) {
-                        if (path.getFileName().toString().endsWith(extension)) {
-                            return true;
+        try (Stream<Path> stream = Files.list(modDir.toPath())) {
+            return stream.filter(Files::isRegularFile)
+                    .filter(path -> {
+                        for (String extension : allowedExtensions) {
+                            if (path.getFileName().toString().endsWith(extension)) {
+                                return true;
+                            }
                         }
-                    }
 
-                    return false;
-                })
-                .map(path -> path.toFile())
-                .map(this::parseMod)
-                .filter(mod -> mod != null)
-                .collect(Collectors.toList());
+                        return false;
+                    })
+                    .map(path -> path.toFile())
+                    .map(this::parseMod)
+                    .filter(mod -> mod != null)
+                    .collect(Collectors.toList());
+        }
     }
 
     private Mod parseMod(File modZip) {
@@ -62,8 +65,7 @@ public class ZipModLoader implements ModLoader {
             return null;
         }
 
-        try {
-            ZipFile zipFile = new ZipFile(modZip);
+        try (ZipFile zipFile = new ZipFile(modZip)) {
             ZipEntry modJsonEntry = zipFile.getEntry("mod.json");
 
             if (modJsonEntry == null) {
