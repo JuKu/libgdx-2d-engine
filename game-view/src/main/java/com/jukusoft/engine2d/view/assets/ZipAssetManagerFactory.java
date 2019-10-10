@@ -1,8 +1,10 @@
 package com.jukusoft.engine2d.view.assets;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.TextureAtlasLoader;
 import com.badlogic.gdx.assets.loaders.TextureLoader;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.jukusoft.engine2d.view.assets.zip.ZipFileHandleResolver;
@@ -34,6 +36,9 @@ public class ZipAssetManagerFactory {
 
         ZipFileHandleResolver resolver = new ZipFileHandleResolver(zipFile);
         AssetManager assetManager = new AssetManager(resolver);
+
+        assetManager.setLoader(TextureAtlas.class, new TextureAtlasLoader(resolver));
+        assetManager.setLoader(TiledMap.class, new TmxMapLoader(resolver));
 
         //see also: https://github.com/libgdx/libgdx/wiki/Managing-your-assets
         //assetManager.setLoader(TiledMap.class, new TmxMapLoader(resolver));
