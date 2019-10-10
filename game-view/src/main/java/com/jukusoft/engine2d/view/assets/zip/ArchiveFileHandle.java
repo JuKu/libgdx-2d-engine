@@ -21,13 +21,13 @@ public class ArchiveFileHandle extends FileHandle {
     final ZipEntry archiveEntry;
 
     public ArchiveFileHandle (ZipFile archive, File file) {
-        super(file, Files.FileType.External);//Classpath
+        super(file, Files.FileType.Classpath);//Classpath, External
         this.archive = archive;
         archiveEntry = this.archive.getEntry(file.getPath());
     }
 
     public ArchiveFileHandle (ZipFile archive, String fileName) {
-        super(fileName.replace('\\', '/'), Files.FileType.External);//Classpath
+        super(fileName.replace('\\', '/'), Files.FileType.Classpath);//Classpath, External
         this.archive = archive;
         this.archiveEntry = archive.getEntry(fileName.replace('\\', '/'));
     }
