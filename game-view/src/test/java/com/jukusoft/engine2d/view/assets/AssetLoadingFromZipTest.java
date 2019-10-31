@@ -82,17 +82,7 @@ public class AssetLoadingFromZipTest extends LibGDXTest {
 
     @Test(timeout = 5000)
     public void testLoadTextureAtlasFromZip() throws IOException {
-        AssetManager assetManager = ZipAssetManagerFactory.create(new ZipFile("../data/junit/test-zip.zip"));
-        assetManager.setErrorListener((asset, throwable) -> {
-            System.err.println("Error while loading asset: " + asset);
-            throwable.printStackTrace();
-        });
-
-        String fileName = "AnimationLoadingScreen.pack";
-
-        assetManager.load(fileName, TextureAtlas.class);
-        assetManager.finishLoadingAsset(fileName);
-        TextureAtlas textureAtlas = assetManager.get(fileName);
+        TextureAtlas textureAtlas = loadTextureAtlas("../data/junit/test-zip.zip", "AnimationLoadingScreen.pack");
         assertNotNull(textureAtlas);
 
         assertEquals(5, textureAtlas.getTextures().size);
@@ -105,17 +95,7 @@ public class AssetLoadingFromZipTest extends LibGDXTest {
 
     @Test(timeout = 5000)
     public void testLoadTextureAtlasFromDirInZip() throws IOException {
-        AssetManager assetManager = ZipAssetManagerFactory.create(new ZipFile("../data/junit/test-zip.zip"));
-        assetManager.setErrorListener((asset, throwable) -> {
-            System.err.println("Error while loading asset: " + asset);
-            throwable.printStackTrace();
-        });
-
-        String fileName = "loadscreen/AnimationLoadingScreen.pack";
-
-        assetManager.load(fileName, TextureAtlas.class);
-        assetManager.finishLoadingAsset(fileName);
-        TextureAtlas textureAtlas = assetManager.get(fileName);
+        TextureAtlas textureAtlas = loadTextureAtlas("../data/junit/test-zip.zip", "loadscreen/AnimationLoadingScreen.pack");
         assertNotNull(textureAtlas);
 
         assertEquals(5, textureAtlas.getTextures().size);
@@ -124,6 +104,31 @@ public class AssetLoadingFromZipTest extends LibGDXTest {
             assertEquals(1024, texture.getWidth());
             assertEquals(1024, texture.getHeight());
         }
+    }
+
+    @Test(timeout = 5000)
+    public void testLoadTextureAtlasFromDirInZip1() throws IOException {
+        TextureAtlas textureAtlas = loadTextureAtlas("../data/junit/test-zip2.zip", "loadscreen/AnimationLoadingScreen.pack");
+        assertNotNull(textureAtlas);
+
+        assertEquals(5, textureAtlas.getTextures().size);
+
+        for (Texture texture : textureAtlas.getTextures()) {
+            assertEquals(1024, texture.getWidth());
+            assertEquals(1024, texture.getHeight());
+        }
+    }
+
+    private TextureAtlas loadTextureAtlas(String zipPath, String fileName) throws IOException {
+        AssetManager assetManager = ZipAssetManagerFactory.create(new ZipFile(zipPath));
+        assetManager.setErrorListener((asset, throwable) -> {
+            System.err.println("Error while loading asset: " + asset);
+            throwable.printStackTrace();
+        });
+
+        assetManager.load(fileName, TextureAtlas.class);
+        assetManager.finishLoadingAsset(fileName);
+        return assetManager.get(fileName);
     }
 
 }
