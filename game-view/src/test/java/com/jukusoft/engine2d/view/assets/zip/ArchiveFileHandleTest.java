@@ -1,5 +1,6 @@
 package com.jukusoft.engine2d.view.assets.zip;
 
+import com.jukusoft.engine2d.view.LibGDXTest;
 import org.junit.Test;
 
 import java.io.File;
@@ -7,7 +8,7 @@ import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 import java.util.zip.ZipFile;
 
-public class ArchiveFileHandleTest {
+public class ArchiveFileHandleTest extends LibGDXTest {
 
     @Test(expected = NullPointerException.class)
     public void testNullArchiveConstructor() {
