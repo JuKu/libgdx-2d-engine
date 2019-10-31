@@ -81,7 +81,7 @@ public class AssetLoadingFromZipTest extends LibGDXTest {
     }
 
     @Test(timeout = 5000)
-    public void testLoadTextureAtlas() throws IOException {
+    public void testLoadTextureAtlasFromZip() throws IOException {
         AssetManager assetManager = ZipAssetManagerFactory.create(new ZipFile("../data/junit/test-zip.zip"));
         assetManager.setErrorListener((asset, throwable) -> {
             System.err.println("Error while loading asset: " + asset);
@@ -89,6 +89,29 @@ public class AssetLoadingFromZipTest extends LibGDXTest {
         });
 
         String fileName = "AnimationLoadingScreen.pack";
+
+        assetManager.load(fileName, TextureAtlas.class);
+        assetManager.finishLoadingAsset(fileName);
+        TextureAtlas textureAtlas = assetManager.get(fileName);
+        assertNotNull(textureAtlas);
+
+        assertEquals(5, textureAtlas.getTextures().size);
+
+        for (Texture texture : textureAtlas.getTextures()) {
+            assertEquals(1024, texture.getWidth());
+            assertEquals(1024, texture.getHeight());
+        }
+    }
+
+    @Test(timeout = 5000)
+    public void testLoadTextureAtlasFromDirInZip() throws IOException {
+        AssetManager assetManager = ZipAssetManagerFactory.create(new ZipFile("../data/junit/test-zip.zip"));
+        assetManager.setErrorListener((asset, throwable) -> {
+            System.err.println("Error while loading asset: " + asset);
+            throwable.printStackTrace();
+        });
+
+        String fileName = "loadscreen/AnimationLoadingScreen.pack";
 
         assetManager.load(fileName, TextureAtlas.class);
         assetManager.finishLoadingAsset(fileName);
