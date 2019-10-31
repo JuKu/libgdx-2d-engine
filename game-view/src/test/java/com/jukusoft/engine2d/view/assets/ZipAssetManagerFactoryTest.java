@@ -7,22 +7,21 @@ import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 import java.util.zip.ZipFile;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class ZipAssetManagerFactoryTest {
 
-    @Test (expected = NullPointerException.class)
+    @Test(expected = NullPointerException.class)
     public void testCreateNull() {
         ZipAssetManagerFactory.create(null);
     }
 
-    @Test (expected = NoSuchFileException.class)
+    @Test(expected = NoSuchFileException.class)
     public void testCreateNotExistingZipFile() throws IOException {
         ZipAssetManagerFactory.create(new ZipFile("not-existing-file.zip"));
     }
 
-    @Test (expected = IllegalStateException.class)
+    @Test(expected = IllegalStateException.class)
     public void testCreateEmptyZip() throws IOException {
         assertTrue(new File("../data/junit/empty-zip.zip").exists());
         ZipAssetManagerFactory.create(new ZipFile("../data/junit/empty-zip.zip"));

@@ -3,10 +3,12 @@ package com.jukusoft.engine2d.view.assets.zip;
 import com.badlogic.gdx.Files;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.jukusoft.engine2d.core.utils.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
@@ -22,12 +24,20 @@ public class ArchiveFileHandle extends FileHandle {
 
     public ArchiveFileHandle (ZipFile archive, File file) {
         super(new File(file.getAbsolutePath().replace("\\", "/")), Files.FileType.Classpath);//Classpath, External
+
+        Objects.requireNonNull(archive);
+        Objects.requireNonNull(file);
+
         this.archive = archive;
         archiveEntry = this.archive.getEntry(file.getPath().replace("\\", "/"));
     }
 
     public ArchiveFileHandle (ZipFile archive, String fileName) {
         super(fileName.replace('\\', '/'), Files.FileType.Classpath);//Classpath, External
+
+        Objects.requireNonNull(archive);
+        StringUtils.checkNotNullAndNotEmpty(fileName, "fileName");
+
         this.archive = archive;
         this.archiveEntry = archive.getEntry(fileName.replace('\\', '/'));
 
