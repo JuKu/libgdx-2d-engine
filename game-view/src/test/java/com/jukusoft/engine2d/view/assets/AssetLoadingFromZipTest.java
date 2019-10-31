@@ -80,7 +80,7 @@ public class AssetLoadingFromZipTest extends LibGDXTest {
         }
     }
 
-    /*@Test(timeout = 5000)
+    @Test(timeout = 5000)
     public void testLoadTextureAtlas() throws IOException {
         AssetManager assetManager = ZipAssetManagerFactory.create(new ZipFile("../data/junit/test-zip.zip"));
         assetManager.setErrorListener((asset, throwable) -> {
@@ -88,12 +88,19 @@ public class AssetLoadingFromZipTest extends LibGDXTest {
             throwable.printStackTrace();
         });
 
-        String fileName = "";
+        String fileName = "AnimationLoadingScreen.pack";
 
         assetManager.load(fileName, TextureAtlas.class);
         assetManager.finishLoadingAsset(fileName);
         TextureAtlas textureAtlas = assetManager.get(fileName);
         assertNotNull(textureAtlas);
-    }*/
+
+        assertEquals(5, textureAtlas.getTextures().size);
+
+        for (Texture texture : textureAtlas.getTextures()) {
+            assertEquals(1024, texture.getWidth());
+            assertEquals(1024, texture.getHeight());
+        }
+    }
 
 }

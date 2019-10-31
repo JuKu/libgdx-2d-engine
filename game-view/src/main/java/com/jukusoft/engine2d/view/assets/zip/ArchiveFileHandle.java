@@ -23,7 +23,7 @@ public class ArchiveFileHandle extends FileHandle {
     final ZipEntry archiveEntry;
 
     public ArchiveFileHandle (ZipFile archive, File file) {
-        super(new File(file.getAbsolutePath().replace("\\", "/")), Files.FileType.Classpath);//Classpath, External
+        super(/*new File(file.getAbsolutePath().replace("\\", "/"))*/file, Files.FileType.Classpath);//Classpath, External
 
         Objects.requireNonNull(archive);
         Objects.requireNonNull(file);
@@ -63,12 +63,15 @@ public class ArchiveFileHandle extends FileHandle {
     @Override
     public FileHandle parent () {
         File parent = file.getParentFile();
+        //System.err.println("parent: " + parent);
+
         if (parent == null) {
             if (type == Files.FileType.Absolute)
                 parent = new File("/");
             else
                 parent = new File("");
         }
+
         return new ArchiveFileHandle(archive, parent);
     }
 
