@@ -30,6 +30,10 @@ public class ArchiveFileHandle extends FileHandle {
         super(fileName.replace('\\', '/'), Files.FileType.Classpath);//Classpath, External
         this.archive = archive;
         this.archiveEntry = archive.getEntry(fileName.replace('\\', '/'));
+
+        if (this.archiveEntry == null) {
+            throw new IllegalStateException("file does not exists in zip archive: " + fileName);
+        }
     }
 
     @Override
