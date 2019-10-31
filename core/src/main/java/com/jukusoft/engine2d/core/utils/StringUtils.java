@@ -15,7 +15,7 @@ public class StringUtils {
     public static void checkNotNullAndNotEmpty(String str, String messageObj) {
         Objects.requireNonNull(str);
 
-        if (messageObj.isEmpty()) throw new IllegalArgumentException(messageObj + " cannot be null");
+        if (str.isEmpty()) throw new IllegalArgumentException(messageObj + " cannot be null");
     }
 
 }
