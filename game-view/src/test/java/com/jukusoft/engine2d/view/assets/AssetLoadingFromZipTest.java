@@ -4,15 +4,16 @@ import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.jukusoft.engine2d.view.LibGDXTest;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.zip.ZipFile;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class AssetLoadingFromZipTest extends LibGDXTest {
 
@@ -51,5 +52,48 @@ public class AssetLoadingFromZipTest extends LibGDXTest {
 
         return assetManager.get(fileName);
     }
+
+    /**
+    * this test verifys, that the atlas is correct
+    */
+    @Test(timeout = 5000)
+    public void testLoadTextureAtlasDirectly() throws IOException {
+        AssetManager assetManager = new AssetManager();
+        assetManager.setErrorListener((asset, throwable) -> {
+            System.err.println("Error while loading asset: " + asset);
+            throwable.printStackTrace();
+        });
+
+        String fileName = "../data/junit/loadscreen/AnimationLoadingScreen.pack";
+        assertTrue(new File(fileName).exists());
+
+        assetManager.load(fileName, TextureAtlas.class);
+        assetManager.finishLoadingAsset(fileName);
+        TextureAtlas textureAtlas = assetManager.get(fileName);
+        assertNotNull(textureAtlas);
+
+        assertEquals(5, textureAtlas.getTextures().size);
+
+        for (Texture texture : textureAtlas.getTextures()) {
+            assertEquals(1024, texture.getWidth());
+            assertEquals(1024, texture.getHeight());
+        }
+    }
+
+    /*@Test(timeout = 5000)
+    public void testLoadTextureAtlas() throws IOException {
+        AssetManager assetManager = ZipAssetManagerFactory.create(new ZipFile("../data/junit/test-zip.zip"));
+        assetManager.setErrorListener((asset, throwable) -> {
+            System.err.println("Error while loading asset: " + asset);
+            throwable.printStackTrace();
+        });
+
+        String fileName = "";
+
+        assetManager.load(fileName, TextureAtlas.class);
+        assetManager.finishLoadingAsset(fileName);
+        TextureAtlas textureAtlas = assetManager.get(fileName);
+        assertNotNull(textureAtlas);
+    }*/
 
 }
