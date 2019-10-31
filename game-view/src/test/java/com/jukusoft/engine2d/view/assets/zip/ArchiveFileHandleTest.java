@@ -5,6 +5,7 @@ import com.jukusoft.engine2d.view.LibGDXTest;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 import java.util.zip.ZipFile;
@@ -43,7 +44,11 @@ public class ArchiveFileHandleTest extends LibGDXTest {
 
     @Test(expected = NoSuchFileException.class)
     public void testNotExistingZipFileConstructor() throws IOException {
-        new ArchiveFileHandle(new ZipFile("not-existing-file.zip"), "mod.json");
+        try {
+            new ArchiveFileHandle(new ZipFile("not-existing-file.zip"), "mod.json");
+        } catch (FileNotFoundException e) {
+            throw new NoSuchFileException(e.getLocalizedMessage());
+        }
     }
 
     @Test

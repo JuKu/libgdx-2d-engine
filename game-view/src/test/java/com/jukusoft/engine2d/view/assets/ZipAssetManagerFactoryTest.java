@@ -1,8 +1,10 @@
 package com.jukusoft.engine2d.view.assets;
 
+import com.jukusoft.engine2d.view.assets.zip.ArchiveFileHandle;
 import org.junit.Test;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 import java.util.zip.ZipFile;
@@ -18,7 +20,11 @@ public class ZipAssetManagerFactoryTest {
 
     @Test(expected = NoSuchFileException.class)
     public void testCreateNotExistingZipFile() throws IOException {
-        ZipAssetManagerFactory.create(new ZipFile("not-existing-file.zip"));
+        try {
+            ZipAssetManagerFactory.create(new ZipFile("not-existing-file.zip"));
+        } catch (FileNotFoundException e) {
+            throw new NoSuchFileException(e.getLocalizedMessage());
+        }
     }
 
     @Test(expected = IllegalStateException.class)
