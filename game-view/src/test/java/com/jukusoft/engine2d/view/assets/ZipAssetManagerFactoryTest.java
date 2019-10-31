@@ -22,6 +22,12 @@ public class ZipAssetManagerFactoryTest {
         ZipAssetManagerFactory.create(new ZipFile("not-existing-file.zip"));
     }
 
+    @Test (expected = IllegalStateException.class)
+    public void testCreateEmptyZip() throws IOException {
+        assertTrue(new File("../data/junit/empty-zip.zip").exists());
+        ZipAssetManagerFactory.create(new ZipFile("../data/junit/empty-zip.zip"));
+    }
+
     @Test
     public void testCreateValidZip() throws IOException {
         assertTrue(new File("../data/mods/mod1.zip").exists());
