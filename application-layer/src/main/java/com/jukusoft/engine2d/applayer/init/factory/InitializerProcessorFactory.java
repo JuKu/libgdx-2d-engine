@@ -51,6 +51,7 @@ public class InitializerProcessorFactory {
     }
 
     public static void addGlobalInitializer(Initializer initializer) {
+        Objects.requireNonNull(initializer);
         globalInitializers.add(initializer);
     }
 
