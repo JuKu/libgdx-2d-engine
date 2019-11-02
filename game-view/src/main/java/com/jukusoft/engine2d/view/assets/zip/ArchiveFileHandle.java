@@ -99,4 +99,19 @@ public class ArchiveFileHandle extends FileHandle {
         return archiveEntry.getTime();
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ArchiveFileHandle)) return false;
+        if (!super.equals(o)) return false;
+
+        ArchiveFileHandle that = (ArchiveFileHandle) o;
+        return archive.equals(that.archive) &&
+                archiveEntry.equals(that.archiveEntry);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), archive, archiveEntry);
+    }
 }
