@@ -26,7 +26,7 @@ public class KeyboardInputProcessor extends InputAdapter {
 
     protected final KeyBinding[] bindings;
 
-    public KeyboardInputProcessor (Vector3 direction) {
+    public KeyboardInputProcessor(Vector3 direction) {
         //find configuration file for keyboard bindings
         File keyboardBindingsFile = new File(FilePath.parse(Config.get("Input", "keyboardMappings")));
 
@@ -46,7 +46,7 @@ public class KeyboardInputProcessor extends InputAdapter {
         this.direction = direction;
     }
 
-    protected void registerTemplates (InputMapper inputMapper) {
+    protected void registerTemplates(InputMapper inputMapper) {
         //fire event to
         inputMapper.registerTemplate("TAKE_SCREENSHOT", new KeyBindingAdapter() {
             @Override
@@ -140,21 +140,21 @@ public class KeyboardInputProcessor extends InputAdapter {
     }
 
     /**
-    * disable input processor, so no input events were handled, e.q. if game is paused
-    */
-    public void disable () {
+     * disable input processor, so no input events were handled, e.q. if game is paused
+     */
+    public void disable() {
         this.enabled = false;
     }
 
     /**
      * enable input processor, so input events were handled, e.q. if game isn't paused anymore
      */
-    public void enable () {
+    public void enable() {
         this.enabled = true;
     }
 
     @Override
-    public boolean keyDown (int keycode) {
+    public boolean keyDown(int keycode) {
         if (!this.enabled) {
             //game is paused
             return false;
@@ -177,7 +177,7 @@ public class KeyboardInputProcessor extends InputAdapter {
     }
 
     @Override
-    public boolean keyUp (int keycode) {
+    public boolean keyUp(int keycode) {
         if (!this.enabled) {
             //game is paused
             return false;
@@ -200,7 +200,7 @@ public class KeyboardInputProcessor extends InputAdapter {
     }
 
     @Override
-    public boolean keyTyped (char character) {
+    public boolean keyTyped(char character) {
         if (!this.enabled) {
             //game is paused
             return false;

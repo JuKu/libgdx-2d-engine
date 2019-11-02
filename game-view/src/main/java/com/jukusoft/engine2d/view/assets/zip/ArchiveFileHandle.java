@@ -14,7 +14,7 @@ import java.util.zip.ZipFile;
 
 /**
  * file handle for files inside a (zip) archive
- *
+ * <p>
  * see also: https://gist.github.com/MobiDevelop/5514357
  */
 public class ArchiveFileHandle extends FileHandle {
@@ -22,7 +22,7 @@ public class ArchiveFileHandle extends FileHandle {
     final ZipFile archive;
     final ZipEntry archiveEntry;
 
-    public ArchiveFileHandle (ZipFile archive, File file) {
+    public ArchiveFileHandle(ZipFile archive, File file) {
         super(/*new File(file.getAbsolutePath().replace("\\", "/"))*/file, Files.FileType.Classpath);//Classpath, External
 
         Objects.requireNonNull(archive);
@@ -32,7 +32,7 @@ public class ArchiveFileHandle extends FileHandle {
         archiveEntry = this.archive.getEntry(file.getPath().replace("\\", "/"));
     }
 
-    public ArchiveFileHandle (ZipFile archive, String fileName) {
+    public ArchiveFileHandle(ZipFile archive, String fileName) {
         super(fileName.replace('\\', '/'), Files.FileType.Classpath);//Classpath, External
 
         Objects.requireNonNull(archive);
@@ -47,21 +47,21 @@ public class ArchiveFileHandle extends FileHandle {
     }
 
     @Override
-    public FileHandle child (String name) {
+    public FileHandle child(String name) {
         name = name.replace('\\', '/');
         if (file.getPath().length() == 0) return new ArchiveFileHandle(archive, new File(name));
         return new ArchiveFileHandle(archive, new File(file, name));
     }
 
     @Override
-    public FileHandle sibling (String name) {
+    public FileHandle sibling(String name) {
         name = name.replace('\\', '/');
         if (file.getPath().length() == 0) throw new GdxRuntimeException("Cannot get the sibling of the root.");
         return new ArchiveFileHandle(archive, new File(file.getParent(), name));
     }
 
     @Override
-    public FileHandle parent () {
+    public FileHandle parent() {
         File parent = file.getParentFile();
         //System.err.println("parent: " + parent);
 
@@ -76,7 +76,7 @@ public class ArchiveFileHandle extends FileHandle {
     }
 
     @Override
-    public InputStream read () {
+    public InputStream read() {
         try {
             return archive.getInputStream(archiveEntry);
         } catch (IOException e) {
@@ -90,12 +90,12 @@ public class ArchiveFileHandle extends FileHandle {
     }
 
     @Override
-    public long length () {
+    public long length() {
         return archiveEntry.getSize();
     }
 
     @Override
-    public long lastModified () {
+    public long lastModified() {
         return archiveEntry.getTime();
     }
 

@@ -1,6 +1,5 @@
 package com.jukusoft.engine2d.view.assets;
 
-import com.jukusoft.engine2d.view.assets.zip.ArchiveFileHandle;
 import org.junit.Test;
 
 import java.io.File;

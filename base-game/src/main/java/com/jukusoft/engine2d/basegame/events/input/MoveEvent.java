@@ -4,8 +4,8 @@ import com.jukusoft.engine2d.basegame.events.BaseEvents;
 import com.jukusoft.engine2d.core.events.EventData;
 
 /**
-* event which is fired from input system or network system to move player's position
-*/
+ * event which is fired from input system or network system to move player's position
+ */
 public class MoveEvent extends EventData {
 
     //move direction (vector 2D)

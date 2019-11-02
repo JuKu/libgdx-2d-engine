@@ -21,7 +21,7 @@ public class Mod {
     private final Set<Type> types;
     private final String version;
     private String url;
-    private Map<String,String> dependencies = new HashMap<>();
+    private Map<String, String> dependencies = new HashMap<>();
 
     protected Mod(String name, String title, String description, Set<String> typesString, String version) {
         this.name = name;

@@ -20,8 +20,8 @@ public class ControllerMapper extends ControllerAdapter {
     protected static final String CONTROLLER_SECTION = "Controller";
 
     /**
-    * mappings
-    */
+     * mappings
+     */
     protected final int BUTTON_A;
     protected final int BUTTON_B;
     protected final int BUTTON_X;
@@ -45,8 +45,8 @@ public class ControllerMapper extends ControllerAdapter {
     protected final int R_STICK_HORIZONTAL_AXIS;
 
     /**
-    * options
-    */
+     * options
+     */
     protected final float invertLStickVerticalAxis;
     protected final float invertLStickHorizontalAxis;
     protected final float invertRStickVerticalAxis;
@@ -55,9 +55,9 @@ public class ControllerMapper extends ControllerAdapter {
     protected final Vector3 playerMoveDirection;
 
     /**
-    * default constructor
-    */
-    public ControllerMapper (Vector3 playerMoveDirection, File file) throws IOException {
+     * default constructor
+     */
+    public ControllerMapper(Vector3 playerMoveDirection, File file) throws IOException {
         this.playerMoveDirection = playerMoveDirection;
         Profile.Section section = this.getSection(file);
 
@@ -97,9 +97,9 @@ public class ControllerMapper extends ControllerAdapter {
     }
 
     /**
-    * load mappings
-    */
-    protected Profile.Section getSection (File file) throws IOException {
+     * load mappings
+     */
+    protected Profile.Section getSection(File file) throws IOException {
         if (!file.exists()) {
             throw new FileNotFoundException("controller mapping file doesn't exists: " + file.getAbsolutePath());
         }
@@ -119,12 +119,12 @@ public class ControllerMapper extends ControllerAdapter {
         return ini.get(sectionName);
     }
 
-    private int getInt (String key, Profile.Section section) {
+    private int getInt(String key, Profile.Section section) {
         return Integer.parseInt(section.get(key));
     }
 
     @Override
-    public boolean axisMoved (Controller controller, int axisIndex, float value) {
+    public boolean axisMoved(Controller controller, int axisIndex, float value) {
         //correct value, because controller doesn't return 0
         value = MathUtils.round3Digits(value);
 
@@ -138,9 +138,9 @@ public class ControllerMapper extends ControllerAdapter {
     }
 
     /**
-    * cleanUp memory
-    */
-    public void dispose () {
+     * cleanUp memory
+     */
+    public void dispose() {
         //
     }
 

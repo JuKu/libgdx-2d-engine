@@ -19,18 +19,18 @@ public class InputMapper {
     protected KeyBinding[] bindings = null;
 
     //map with key bindings
-    protected ObjectObjectMap<String,KeyBinding> templates = new ObjectObjectHashMap<>();
+    protected ObjectObjectMap<String, KeyBinding> templates = new ObjectObjectHashMap<>();
 
-    public InputMapper () {
+    public InputMapper() {
         //
     }
 
     /**
-    * load keyboard bindings
+     * load keyboard bindings
      *
      * @param configFile keyboard bindings file, e.q. keyboard.cfg
-    */
-    public void load (File configFile) {
+     */
+    public void load(File configFile) {
         Log.i(LOG_TAG, "load keyboard bindings...");
 
         if (!configFile.exists()) {
@@ -79,7 +79,7 @@ public class InputMapper {
         this.bindings = new KeyBinding[highestValue];
 
         //iterate through keys
-        for (Map.Entry<String,String> entry : section.entrySet()) {
+        for (Map.Entry<String, String> entry : section.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
 
@@ -111,11 +111,11 @@ public class InputMapper {
         }
     }
 
-    public void registerTemplate (String actionType, KeyBinding binding) {
+    public void registerTemplate(String actionType, KeyBinding binding) {
         this.templates.put(actionType, binding);
     }
 
-    public KeyBinding[] getBindings () {
+    public KeyBinding[] getBindings() {
         return bindings;
     }
 

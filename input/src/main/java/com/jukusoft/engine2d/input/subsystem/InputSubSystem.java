@@ -96,7 +96,7 @@ public class InputSubSystem implements SubSystem {
         this.manager.clear();
     }
 
-    private void initControllers () {
+    private void initControllers() {
         if (Config.getBool(CONTROLLER_TAG, "enabled")) {
             //check for connected controllers
             int connectedControllers = 0;
@@ -123,7 +123,7 @@ public class InputSubSystem implements SubSystem {
         }
     }
 
-    private void initController (Controller controller) {
+    private void initController(Controller controller) {
         //search for keyDownMapping
         String name = controller.getName().replace(" ", "_");
         String mappingFile = FilePath.parse("{data.dir}input/mappings/" + name.toLowerCase() + ".ini");

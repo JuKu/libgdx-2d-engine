@@ -1,7 +1,6 @@
 package com.jukusoft.engine2d.basegame.loading;
 
 import com.jukusoft.engine2d.basegame.Game;
-import com.jukusoft.engine2d.core.init.Initializer;
 import com.jukusoft.engine2d.core.task.TaskPriorityComperator;
 
 import java.util.PriorityQueue;

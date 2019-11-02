@@ -10,7 +10,7 @@ public interface ScreenManager<T extends IScreen> {
     /**
      * add screen
      *
-     * @param name name of screen
+     * @param name   name of screen
      * @param screen instance of screen
      */
     public void addScreen(final String name, T screen);
@@ -44,12 +44,11 @@ public interface ScreenManager<T extends IScreen> {
     public T pop();
 
     /**
-    * get screen by name
+     * get screen by name
      *
      * @param name unique name of screen
-     *
      * @return instance of screen
-    */
+     */
     public T getScreenByName(final String name);
 
     /**
@@ -69,18 +68,18 @@ public interface ScreenManager<T extends IScreen> {
     public void resize(int oldWidth, int oldHeight, int newWidth, int newHeight);
 
     /**
-    * update all active screens
-    */
+     * update all active screens
+     */
     public void update(float delta);
 
     /**
-    * beforeDraw all active screens
-    */
+     * beforeDraw all active screens
+     */
     public void draw(float delta);
 
     /**
-    * dispose screen manager with all screens
-    */
+     * dispose screen manager with all screens
+     */
     public void dispose();
 
 }

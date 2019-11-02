@@ -1,110 +1,110 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<parent>
-		<artifactId>engine2d-parent</artifactId>
-		<groupId>com.jukusoft</groupId>
-		<version>1.0.1-SNAPSHOT</version>
-	</parent>
-	<modelVersion>4.0.0</modelVersion>
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>engine2d-parent</artifactId>
+        <groupId>com.jukusoft</groupId>
+        <version>1.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
 
-	<artifactId>engine2d-core</artifactId>
+    <artifactId>engine2d-core</artifactId>
 
-	<properties>
-		<!-- don't skip this module, instead deploy this module to maven central -->
-		<maven.deploy.skip>false</maven.deploy.skip>
-		<maven.deploy.uniqueVersion>false</maven.deploy.uniqueVersion>
-	</properties>
+    <properties>
+        <!-- don't skip this module, instead deploy this module to maven central -->
+        <maven.deploy.skip>false</maven.deploy.skip>
+        <maven.deploy.uniqueVersion>false</maven.deploy.uniqueVersion>
+    </properties>
 
-	<dependencies>
-		<!-- High Performance Primitive Collections for Java, https://github.com/carrotsearch/hppc -->
-		<dependency>
-			<groupId>com.carrotsearch</groupId>
-			<artifactId>hppc</artifactId>
-			<version>${hppc.version}</version>
-		</dependency>
+    <dependencies>
+        <!-- High Performance Primitive Collections for Java, https://github.com/carrotsearch/hppc -->
+        <dependency>
+            <groupId>com.carrotsearch</groupId>
+            <artifactId>hppc</artifactId>
+            <version>${hppc.version}</version>
+        </dependency>
 
-		<!-- https://github.com/mini2Dx/gdx-collections -->
-		<dependency>
-			<groupId>org.mini2Dx</groupId>
-			<artifactId>gdx-collections</artifactId>
-			<version>${gdx.collections.version}</version>
-		</dependency>
+        <!-- https://github.com/mini2Dx/gdx-collections -->
+        <dependency>
+            <groupId>org.mini2Dx</groupId>
+            <artifactId>gdx-collections</artifactId>
+            <version>${gdx.collections.version}</version>
+        </dependency>
 
-		<!-- ini4j -->
-		<dependency>
-			<groupId>org.ini4j</groupId>
-			<artifactId>ini4j</artifactId>
-			<version>${ini4j.version}</version>
-		</dependency>
+        <!-- ini4j -->
+        <dependency>
+            <groupId>org.ini4j</groupId>
+            <artifactId>ini4j</artifactId>
+            <version>${ini4j.version}</version>
+        </dependency>
 
-		<!-- org.json -->
-		<dependency>
-			<groupId>org.json</groupId>
-			<artifactId>json</artifactId>
-			<version>${org.json.version}</version>
-		</dependency>
-	</dependencies>
+        <!-- org.json -->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>${org.json.version}</version>
+        </dependency>
+    </dependencies>
 
-	<build>
-		<plugins>
-			<!-- Write the current git revision into ${buildnumber} and populate ${scmBranch} -->
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>buildnumber-maven-plugin</artifactId>
-				<version>1.4</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>create</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<!-- Get the scm revision once for all modules -->
-					<getRevisionOnlyOnce>true</getRevisionOnlyOnce>
-					<!-- Don't fail on modified local resources -->
-					<doCheck>false</doCheck>
-					<!-- Don't update SCM -->
-					<doUpdate>false</doUpdate>
-					<!-- Use short version of git revision -->
-					<shortRevisionLength>7</shortRevisionLength>
-				</configuration>
-			</plugin>
+    <build>
+        <plugins>
+            <!-- Write the current git revision into ${buildnumber} and populate ${scmBranch} -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>buildnumber-maven-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>create</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- Get the scm revision once for all modules -->
+                    <getRevisionOnlyOnce>true</getRevisionOnlyOnce>
+                    <!-- Don't fail on modified local resources -->
+                    <doCheck>false</doCheck>
+                    <!-- Don't update SCM -->
+                    <doUpdate>false</doUpdate>
+                    <!-- Use short version of git revision -->
+                    <shortRevisionLength>7</shortRevisionLength>
+                </configuration>
+            </plugin>
 
-			<!-- create jar artifact, add classpath and set main class -->
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.0.2</version>
-				<configuration>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>lib/</classpathPrefix>
+            <!-- create jar artifact, add classpath and set main class -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
 
-							<!-- update dependencie versions in MANIFEST.MF -->
-							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-						</manifest>
-						<manifestEntries>
-							<!-- https://www.youtube.com/watch?v=Rnmq_Jv-pe4 -->
-							<!-- http://www.javacreed.com/how-to-add-splash-screen-using-maven/ -->
-							<!-- <SplashScreen-Image>splash_screen.png</SplashScreen-Image> -->
+                            <!-- update dependencie versions in MANIFEST.MF -->
+                            <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+                        </manifest>
+                        <manifestEntries>
+                            <!-- https://www.youtube.com/watch?v=Rnmq_Jv-pe4 -->
+                            <!-- http://www.javacreed.com/how-to-add-splash-screen-using-maven/ -->
+                            <!-- <SplashScreen-Image>splash_screen.png</SplashScreen-Image> -->
 
-							<!-- http://maven.apache.org/shared/maven-archiver/index.html -->
+                            <!-- http://maven.apache.org/shared/maven-archiver/index.html -->
 
-							<!-- <key>value</key> -->
-							<Implementation-Time>${maven.build.timestamp}</Implementation-Time>
+                            <!-- <key>value</key> -->
+                            <Implementation-Time>${maven.build.timestamp}</Implementation-Time>
 
-							<Implementation-Build>${buildNumber}-${scmBranch}</Implementation-Build>
-						</manifestEntries>
-					</archive>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+                            <Implementation-Build>${buildNumber}-${scmBranch}</Implementation-Build>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 
 </project>

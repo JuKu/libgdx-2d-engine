@@ -2,8 +2,6 @@ package com.jukusoft.engine2d.view.assets;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.TextureAtlasLoader;
-import com.badlogic.gdx.assets.loaders.TextureLoader;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
@@ -20,7 +18,7 @@ public class ZipAssetManagerFactory {
 
     /**
      * create a new asset manager instance which loads assets from a specific zip archive
-     *
+     * <p>
      * Important! You have to cleanup later with assetManager.dispose()!
      *
      * @return

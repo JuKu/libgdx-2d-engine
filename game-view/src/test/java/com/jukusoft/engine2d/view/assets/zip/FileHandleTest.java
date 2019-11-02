@@ -1,16 +1,11 @@
 package com.jukusoft.engine2d.view.assets.zip;
 
-import com.badlogic.gdx.Files;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.GL20;
-import com.jukusoft.engine2d.view.GdxTestRunner;
 import com.jukusoft.engine2d.view.LibGDXTest;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.mock;
 
 public class FileHandleTest extends LibGDXTest {
 

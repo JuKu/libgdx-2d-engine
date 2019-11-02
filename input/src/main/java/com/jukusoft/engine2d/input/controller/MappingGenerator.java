@@ -10,11 +10,11 @@ import java.nio.charset.StandardCharsets;
 
 public class MappingGenerator {
 
-    protected MappingGenerator () {
+    protected MappingGenerator() {
         //
     }
 
-    public static void generateDefaultMapping (File file, String controllerName) throws IOException {
+    public static void generateDefaultMapping(File file, String controllerName) throws IOException {
         if (file.exists()) {
             throw new IllegalStateException("file already exists: " + file.getAbsolutePath());
         }

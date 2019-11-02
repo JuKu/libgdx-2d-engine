@@ -1,7 +1,6 @@
 package com.jukusoft.engine2d.core.task;
 
 import com.jukusoft.engine2d.core.logger.Log;
-import com.jukusoft.engine2d.core.task.TaskPriority;
 
 import java.util.Comparator;
 

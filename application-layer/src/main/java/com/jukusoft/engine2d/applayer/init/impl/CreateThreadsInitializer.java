@@ -2,8 +2,8 @@ package com.jukusoft.engine2d.applayer.init.impl;
 
 import com.jukusoft.engine2d.applayer.init.InitPriority;
 import com.jukusoft.engine2d.applayer.threads.GameThreadFactory;
-import com.jukusoft.engine2d.core.subsystem.SubSystemManager;
 import com.jukusoft.engine2d.core.init.Initializer;
+import com.jukusoft.engine2d.core.subsystem.SubSystemManager;
 import com.jukusoft.engine2d.core.utils.Threads;
 
 import java.util.Objects;

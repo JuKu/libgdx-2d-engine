@@ -1,9 +1,9 @@
 package com.jukusoft.engine2d.core.subsystem.impl;
 
 import com.carrotsearch.hppc.ObjectArrayList;
+import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.core.subsystem.SubSystem;
 import com.jukusoft.engine2d.core.subsystem.SubSystemManager;
-import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.core.utils.StringUtils;
 import com.jukusoft.engine2d.core.utils.Threads;
 import org.mini2Dx.gdx.utils.ObjectMap;

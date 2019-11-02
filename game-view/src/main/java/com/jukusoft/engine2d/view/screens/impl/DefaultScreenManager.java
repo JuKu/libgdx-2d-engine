@@ -33,14 +33,14 @@ public class DefaultScreenManager implements ScreenManager<IScreen> {
 
     /**
      * only for performance improvements!
-     *
+     * <p>
      * caching list
      */
     protected ObjectArrayList<IScreen> cachedScreenList = new ObjectArrayList<>(20);
 
     /**
-    * default constructor
-    */
+     * default constructor
+     */
     public DefaultScreenManager() {
         //
     }

@@ -1,7 +1,5 @@
 package com.jukusoft.engine2d.view.assets;
 
-import com.badlogic.gdx.assets.AssetDescriptor;
-import com.badlogic.gdx.assets.AssetErrorListener;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -54,8 +52,8 @@ public class AssetLoadingFromZipTest extends LibGDXTest {
     }
 
     /**
-    * this test verifys, that the atlas is correct
-    */
+     * this test verifys, that the atlas is correct
+     */
     @Test(timeout = 5000)
     public void testLoadTextureAtlasDirectly() throws IOException {
         AssetManager assetManager = new AssetManager();

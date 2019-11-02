@@ -1,11 +1,11 @@
 {
-	"name": "core",
-	"title": "Core",
-	"description": "the core game content",
-	"types": [
-		"gamepack"
-	],
-	"version": "0.0.1",
-	"url": "http://jukusoft.com",
-	"dependencies": []
+  "name": "core",
+  "title": "Core",
+  "description": "the core game content",
+  "types": [
+    "gamepack"
+  ],
+  "version": "0.0.1",
+  "url": "http://jukusoft.com",
+  "dependencies": []
 }
