@@ -10,8 +10,7 @@ import java.io.IOException;
 import java.nio.file.NoSuchFileException;
 import java.util.zip.ZipFile;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class ArchiveFileHandleTest extends LibGDXTest {
 
@@ -67,6 +66,21 @@ public class ArchiveFileHandleTest extends LibGDXTest {
 
         assertEquals("dir1/400x200.png", handle.path());
         assertEquals("dir1", handle.parent().path());
+    }
+
+    @Test
+    public void testSibling() throws IOException {
+        FileHandle handle = new ArchiveFileHandle(new ZipFile("../data/junit/test-zip.zip"), "dir1/400x200.png");
+        assertNotNull(handle);
+
+        assertEquals("dir1/400x200.png", handle.path());
+        assertEquals("dir1/test.png", handle.sibling("test.png").path());
+    }
+
+    @Test
+    public void testExists() throws IOException {
+        FileHandle handle = new ArchiveFileHandle(new ZipFile("../data/junit/test-zip.zip"), "dir1/400x200.png");
+        assertTrue(handle.exists());
     }
 
 }
