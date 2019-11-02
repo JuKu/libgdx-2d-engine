@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.jukusoft.engine2d.basegame.events.input.TakeScreenshotEvent;
 import com.jukusoft.engine2d.core.config.Config;
 import com.jukusoft.engine2d.core.events.Events;
+import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.core.memory.Pools;
 import com.jukusoft.engine2d.core.utils.FilePath;
 import com.jukusoft.engine2d.input.binding.InputMapper;
@@ -209,8 +210,15 @@ public class KeyboardInputProcessor extends InputAdapter {
         int keycode = Character.toLowerCase(character);
         keycode = keycode - 68;
 
+        if (keycode < 0) {
+            //this key isn't supported
+            Log.w(KeyboardInputProcessor.class.getSimpleName(), "unsupported keycode: " + keycode);
+            return false;
+        }
+
         if (keycode > this.bindings.length) {
             //this key isn't supported
+            Log.w(KeyboardInputProcessor.class.getSimpleName(), "unsupported keycode: " + keycode);
             return false;
         }
 
