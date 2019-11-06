@@ -1,9 +1,11 @@
 package com.jukusoft.engine2d.basegame.mods.impl;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.zip.ZipFile;
 
 public class Mod {
 
@@ -20,15 +22,17 @@ public class Mod {
     private final String description;
     private final Set<Type> types;
     private final String version;
+    private final File zipFile;
     private String url;
     private Map<String, String> dependencies = new HashMap<>();
 
-    protected Mod(String name, String title, String description, Set<String> typesString, String version) {
+    protected Mod(String name, String title, String description, Set<String> typesString, String version, File zipFile) {
         this.name = name;
         this.title = title;
         this.description = description;
         this.types = typesString.stream().map(type -> Type.valueOf(type.replace("_", "").toUpperCase())).collect(Collectors.toSet());
         this.version = version;
+        this.zipFile = zipFile;
     }
 
     public String getName() {
@@ -69,6 +73,10 @@ public class Mod {
 
     public void addDependency(String dependencyName, String version) {
         dependencies.put(dependencyName, version);
+    }
+
+    public File getArchiveFile() {
+        return zipFile;
     }
 
 }

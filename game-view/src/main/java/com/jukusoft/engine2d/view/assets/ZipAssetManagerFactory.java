@@ -5,7 +5,9 @@ import com.badlogic.gdx.assets.loaders.TextureAtlasLoader;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.jukusoft.engine2d.view.assets.zip.MultipleZipFileHandleResolver;
 import com.jukusoft.engine2d.view.assets.zip.ZipFileHandleResolver;
+import org.mini2Dx.gdx.utils.Array;
 
 import java.util.Objects;
 import java.util.zip.ZipFile;
@@ -33,6 +35,39 @@ public class ZipAssetManagerFactory {
         }
 
         ZipFileHandleResolver resolver = new ZipFileHandleResolver(zipFile);
+        AssetManager assetManager = new AssetManager(resolver);
+
+        assetManager.setLoader(TextureAtlas.class, new TextureAtlasLoader(resolver));
+        assetManager.setLoader(TiledMap.class, new TmxMapLoader(resolver));
+
+        //see also: https://github.com/libgdx/libgdx/wiki/Managing-your-assets
+        //assetManager.setLoader(TiledMap.class, new TmxMapLoader(resolver));
+        //assetManager.setLoader(Texture.class, new TextureLoader(resolver));
+
+        return assetManager;
+    }
+
+    /**
+     * create a new asset manager instance which loads assets from a specific zip archive
+     * <p>
+     * Important! You have to cleanup later with assetManager.dispose()!
+     *
+     * @return
+     */
+    public static AssetManager create(Array<ZipFile> zipFiles) {
+        Objects.requireNonNull(zipFiles);
+
+        if (zipFiles.size == 0) {
+            throw new IllegalStateException("no zip files in list");
+        }
+
+        for (ZipFile zipFile : zipFiles) {
+            if (zipFile.size() == 0) {
+                throw new IllegalStateException("zip file is empty: " + zipFile.getName());
+            }
+        }
+
+        MultipleZipFileHandleResolver resolver = new MultipleZipFileHandleResolver(zipFiles);
         AssetManager assetManager = new AssetManager(resolver);
 
         assetManager.setLoader(TextureAtlas.class, new TextureAtlasLoader(resolver));

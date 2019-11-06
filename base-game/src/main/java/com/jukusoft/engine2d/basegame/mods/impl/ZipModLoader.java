@@ -93,7 +93,8 @@ public class ZipModLoader implements ModLoader {
                     json.getString("title"),
                     json.getString("description"),
                     types,
-                    json.getString("version")
+                    json.getString("version"),
+                    modZip
             );
 
             if (json.has("url")) {

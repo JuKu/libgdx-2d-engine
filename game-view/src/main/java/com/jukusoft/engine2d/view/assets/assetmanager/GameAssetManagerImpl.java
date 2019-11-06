@@ -2,20 +2,27 @@ package com.jukusoft.engine2d.view.assets.assetmanager;
 
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.AbsoluteFileHandleResolver;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.jukusoft.engine2d.basegame.mods.ModManager;
+import com.jukusoft.engine2d.basegame.mods.impl.Mod;
+import com.jukusoft.engine2d.core.logger.Log;
+import com.jukusoft.engine2d.view.assets.ZipAssetManagerFactory;
+import org.mini2Dx.gdx.utils.Array;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.zip.ZipFile;
 
 /**
  * service for asset manager
  */
 public class GameAssetManagerImpl implements GameAssetManager {
+
+    private static final String LOG_TAG = "AssetManager";
 
     //instance of asset manager
     protected AssetManager assetManager = null;
@@ -32,11 +39,12 @@ public class GameAssetManagerImpl implements GameAssetManager {
     protected List<AssetInfo> loaderTasks = new ArrayList<>();
 
     protected List<AssetInfo> tmpList = new ArrayList<>();
-    protected final ModManager modManager;
+    private final ModManager modManager;
+    private final Array<ZipFile> zips = new Array<>(10);
 
     protected GameAssetManagerImpl() {
         //create new asset manager
-        this.assetManager = new AssetManager(new AbsoluteFileHandleResolver());
+        //this.assetManager = new AssetManagerProxy(new AbsoluteFileHandleResolver());
 
         this.modManager = ModManager.getInstance();
         Objects.requireNonNull(this.modManager);
@@ -44,12 +52,44 @@ public class GameAssetManagerImpl implements GameAssetManager {
         if (this.modManager.listMods().size == 0) {
             throw new IllegalStateException("no mod is registered, so no asset can be loaded");
         }
+
+        try {
+            init();
+        } catch (IOException e) {
+            Log.w(LOG_TAG, "IOException while initializing GameAssetManagerImpl: ", e);
+            throw new GdxRuntimeException(e);
+        }
+    }
+
+    private void init() throws IOException {
+        Array<Mod> mods = this.modManager.listMods(Mod.Type.ASSETPACK);
+
+        for (Mod mod : mods) {
+            if (!mod.getArchiveFile().exists()) {
+                throw new IllegalStateException("mod zip file does not exists: " + mod.getArchiveFile().getAbsolutePath());
+            }
+
+            zips.add(new ZipFile(mod.getArchiveFile()));
+        }
+
+        Log.d(LOG_TAG, "create asset manager with " + zips.size + " archives");
+
+        //create new asset manager
+        this.assetManager = ZipAssetManagerFactory.create(zips);
     }
 
     public void dispose() {
         //cleanup assets
         this.assetManager.dispose();
         this.assetManager = null;
+
+        for (ZipFile zip : zips) {
+            try {
+                zip.close();
+            } catch (IOException e) {
+                Log.w(LOG_TAG, "IOException while closing zip file: ", e);
+            }
+        }
     }
 
     public void update() {
@@ -196,7 +236,7 @@ public class GameAssetManagerImpl implements GameAssetManager {
         return this.assetManager.getProgress();
     }
 
-    public Array<String> listLoadedAssets() {
+    public com.badlogic.gdx.utils.Array<String> listLoadedAssets() {
         return assetManager.getAssetNames();
     }
 

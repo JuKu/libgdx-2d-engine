@@ -16,7 +16,8 @@ public class ModTest {
                 "test title",
                 "test description",
                 new HashSet<>(),
-                "1.0.0"
+                "1.0.0",
+                null
         );
     }
 
@@ -27,7 +28,8 @@ public class ModTest {
                 "test title",
                 "test description",
                 new HashSet<>(),
-                "1.0.0"
+                "1.0.0",
+                null
         );
 
         mod.addDependency("core", "1.0.1");
@@ -57,7 +59,8 @@ public class ModTest {
                 "test title",
                 "test description",
                 types,
-                "1.0.0"
+                "1.0.0",
+                null
         );
 
         assertFalse(mod.hasType(Mod.Type.MOD));
