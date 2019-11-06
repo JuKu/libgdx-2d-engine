@@ -1,6 +1,7 @@
 package com.jukusoft.engine2d.view.assets;
 
 import org.junit.Test;
+import org.mini2Dx.gdx.utils.Array;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,7 +15,14 @@ public class ZipAssetManagerFactoryTest {
 
     @Test(expected = NullPointerException.class)
     public void testCreateNull() {
-        ZipAssetManagerFactory.create(null);
+        ZipFile zipFile = null;
+        ZipAssetManagerFactory.create(zipFile);
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void testCreateNull1() {
+        Array<ZipFile> zipArray = null;
+        ZipAssetManagerFactory.create(zipArray);
     }
 
     @Test(expected = NoSuchFileException.class)
@@ -36,6 +44,21 @@ public class ZipAssetManagerFactoryTest {
     public void testCreateValidZip() throws IOException {
         assertTrue(new File("../data/mods/mod1.zip").exists());
         ZipAssetManagerFactory.create(new ZipFile("../data/mods/mod1.zip"));
+    }
+
+    @Test(expected = IllegalStateException.class)
+    public void testCreateEmptyZipFileArray() throws IOException {
+        Array<ZipFile> zipArray = new Array<>(0);
+        ZipAssetManagerFactory.create(zipArray);
+    }
+
+    @Test
+    public void testCreateValidZipArray() throws IOException {
+        Array<ZipFile> zipArray = new Array<>(1);
+        assertTrue(new File("../data/mods/mod1.zip").exists());
+        zipArray.add(new ZipFile("../data/mods/mod1.zip"));
+
+        ZipAssetManagerFactory.create(zipArray);
     }
 
 }
