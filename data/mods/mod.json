@@ -3,7 +3,8 @@
   "title": "Core",
   "description": "the core game content",
   "types": [
-    "gamepack"
+    "gamepack",
+    "assetpack"
   ],
   "version": "0.0.1",
   "url": "http://jukusoft.com",

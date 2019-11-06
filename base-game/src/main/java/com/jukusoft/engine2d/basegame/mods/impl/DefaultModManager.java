@@ -31,8 +31,12 @@ public class DefaultModManager implements ModManager {
 
         try {
             List<Mod> modList = modLoader.findMods(modDir);
-            Log.i(LOG_TAG, String.format("{} mods found in directory: {}", modList.size(), modDir.getAbsolutePath()));
+            Log.i(LOG_TAG, String.format("%d mods found in directory: %s", modList.size(), modDir.getAbsolutePath()));
             mods.addAll(modList.toArray(new Mod[0]));
+
+            if (mods.size == 0) {
+                throw new IllegalStateException("no mod found in mod dir: " + modDir.getAbsolutePath());
+            }
         } catch (IOException e) {
             Log.w(LOG_TAG, "IOException while loading mods: ", e);
         }
