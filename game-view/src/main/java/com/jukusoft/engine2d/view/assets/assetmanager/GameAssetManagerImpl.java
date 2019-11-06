@@ -4,6 +4,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.AbsoluteFileHandleResolver;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.jukusoft.engine2d.basegame.mods.ModManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +32,18 @@ public class GameAssetManagerImpl implements GameAssetManager {
     protected List<AssetInfo> loaderTasks = new ArrayList<>();
 
     protected List<AssetInfo> tmpList = new ArrayList<>();
+    protected final ModManager modManager;
 
     protected GameAssetManagerImpl() {
         //create new asset manager
         this.assetManager = new AssetManager(new AbsoluteFileHandleResolver());
+
+        this.modManager = ModManager.getInstance();
+        Objects.requireNonNull(this.modManager);
+
+        if (this.modManager.listMods().size == 0) {
+            throw new IllegalStateException("no mod is registered, so no asset can be loaded");
+        }
     }
 
     public void dispose() {
