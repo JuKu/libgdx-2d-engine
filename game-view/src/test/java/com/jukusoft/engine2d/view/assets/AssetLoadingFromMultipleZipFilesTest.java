@@ -58,6 +58,19 @@ public class AssetLoadingFromMultipleZipFilesTest extends LibGDXTest {
         return assetManager.get(fileName);
     }
 
+    private Texture loadTextureFromZipArray(Array<ZipFile> zipFiles, String fileName) throws IOException {
+        AssetManager assetManager = ZipAssetManagerFactory.create(zipFiles);
+        assetManager.setErrorListener((asset, throwable) -> {
+            System.err.println("Error while loading asset: " + asset);
+            throwable.printStackTrace();
+        });
+
+        assetManager.load(fileName, Texture.class);
+        assetManager.finishLoadingAsset(fileName);
+
+        return assetManager.get(fileName);
+    }
+
     /**
      * this test verifys, that the atlas is correct
      */
@@ -137,6 +150,41 @@ public class AssetLoadingFromMultipleZipFilesTest extends LibGDXTest {
         assetManager.load(fileName, TextureAtlas.class);
         assetManager.finishLoadingAsset(fileName);
         return assetManager.get(fileName);
+    }
+
+    private TextureAtlas loadTextureAtlasFromZipArray(Array<ZipFile> zipFiles, String fileName) throws IOException {
+        AssetManager assetManager = ZipAssetManagerFactory.create(zipFiles);
+        assetManager.setErrorListener((asset, throwable) -> {
+            System.err.println("Error while loading asset: " + asset);
+            throwable.printStackTrace();
+        });
+
+        assetManager.load(fileName, TextureAtlas.class);
+        assetManager.finishLoadingAsset(fileName);
+        return assetManager.get(fileName);
+    }
+
+    @Test(timeout = 5000)
+    public void testLoadAssetsWithZipArray() throws IOException {
+        Array<ZipFile> zipFiles = new Array<>();
+        zipFiles.add(new ZipFile("../data/junit/test-zip2.zip"));
+        zipFiles.add(new ZipFile("../data/junit/test-zip3.zip"));
+
+        TextureAtlas textureAtlas = loadTextureAtlasFromZipArray(zipFiles, "loadscreen/AnimationLoadingScreen.pack");
+        assertNotNull(textureAtlas);
+
+        assertEquals(5, textureAtlas.getTextures().size);
+
+        for (Texture texture : textureAtlas.getTextures()) {
+            assertEquals(1024, texture.getWidth());
+            assertEquals(1024, texture.getHeight());
+        }
+
+        //load another asset, but from a other zip file
+        Texture texture = loadTextureFromZipArray(zipFiles, "placeholderdir/placeholder2.png");
+        assertNotNull(texture);
+        assertEquals(640, texture.getWidth());
+        assertEquals(360, texture.getHeight());
     }
 
 }
