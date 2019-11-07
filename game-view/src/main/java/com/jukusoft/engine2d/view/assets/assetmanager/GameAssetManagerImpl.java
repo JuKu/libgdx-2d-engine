@@ -164,6 +164,15 @@ public class GameAssetManagerImpl implements GameAssetManager {
         this.assetManager.unload(path);
     }
 
+    @Override
+    public <T> T get(String fileName) {
+        if (!this.assetManager.isLoaded(fileName)) {
+            throw new AssetNotLoadedException("asset '" + fileName + "' isn't loaded yet.");
+        }
+
+        return this.assetManager.get(fileName);
+    }
+
     /**
      * get instance of loaded asset
      *

@@ -34,6 +34,13 @@ public interface GameAssetManager {
      * get instance of loaded asset
      *
      * @param fileName path to asset file
+     */
+    public <T> T get(String fileName);
+
+    /**
+     * get instance of loaded asset
+     *
+     * @param fileName path to asset file
      * @param type     asset type
      */
     public <T> T get(String fileName, Class<T> type);
