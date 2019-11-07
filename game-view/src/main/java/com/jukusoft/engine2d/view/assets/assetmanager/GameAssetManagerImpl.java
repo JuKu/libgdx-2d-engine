@@ -1,5 +1,6 @@
 package com.jukusoft.engine2d.view.assets.assetmanager;
 
+import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.AbsoluteFileHandleResolver;
 import com.badlogic.gdx.utils.GdxRuntimeException;
@@ -147,6 +148,19 @@ public class GameAssetManagerImpl implements GameAssetManager {
         }
 
         this.assetManager.load(path, cls);
+    }
+
+    @Override
+    public <T> void load(String path, Class<T> type, AssetLoaderParameters<T> parameter) {
+        Objects.requireNonNull(path);
+        Objects.requireNonNull(type);
+        Objects.requireNonNull(parameter);
+
+        if (path.isEmpty()) {
+            throw new IllegalArgumentException("path cannot be empty.");
+        }
+
+        this.assetManager.load(path, type, parameter);
     }
 
     /**
