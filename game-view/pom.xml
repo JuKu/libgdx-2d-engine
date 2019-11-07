@@ -60,6 +60,13 @@
             <version>${libgdx.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- easy i18n library -->
+        <dependency>
+            <groupId>com.jukusoft</groupId>
+            <artifactId>easy-i18n-gettext</artifactId>
+            <version>${easy.i18n.version}</version>
+        </dependency>
     </dependencies>
 
 
