@@ -35,15 +35,15 @@ public class MultipleZipFileHandleResolver implements FileHandleResolver {
         ZipFile zipFile = null;
 
         for (int i = 0; i < zips.size; i++) {
-            if (zips.items[i] == null) {
+            ZipFile zipFile1 = zips.get(i);
+
+            if (zipFile1 == null) {
                 continue;
             }
 
-            ZipFile zip = zips.get(i);
-
-            if (zip.getEntry(fileName) != null) {
+            if (zipFile1.getEntry(fileName) != null) {
                 //if there are multiple zip files with same filename, the zip file will be overriden (mod support)
-                zipFile = zip;
+                zipFile = zipFile1;
             }
         }
 
