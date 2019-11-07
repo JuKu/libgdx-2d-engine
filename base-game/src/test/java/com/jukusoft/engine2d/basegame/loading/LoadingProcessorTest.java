@@ -33,13 +33,13 @@ public class LoadingProcessorTest {
         AtomicInteger i = new AtomicInteger(0);
 
         LoadingProcessor processor = new LoadingProcessor();
-        processor.addTask(game -> i.incrementAndGet());
-        processor.addTask(game -> i.incrementAndGet());
-        processor.addTask(game -> i.incrementAndGet());
+        processor.addTask(() -> i.incrementAndGet());
+        processor.addTask(() -> i.incrementAndGet());
+        processor.addTask(() -> i.incrementAndGet());
 
         assertEquals(0, i.get());
 
-        processor.process(Mockito.mock(Game.class));
+        processor.process();
         assertEquals(1, i.get());
     }
 
@@ -48,13 +48,13 @@ public class LoadingProcessorTest {
         AtomicInteger i = new AtomicInteger(0);
 
         LoadingProcessor processor = new LoadingProcessor();
-        processor.addTask(game -> i.incrementAndGet());
-        processor.addTask(game -> i.incrementAndGet());
-        processor.addTask(game -> i.incrementAndGet());
+        processor.addTask(() -> i.incrementAndGet());
+        processor.addTask(() -> i.incrementAndGet());
+        processor.addTask(() -> i.incrementAndGet());
 
         assertEquals(0, i.get());
 
-        processor.processAll(Mockito.mock(Game.class));
+        processor.processAll();
         assertEquals(3, i.get());
     }
 
@@ -65,7 +65,7 @@ public class LoadingProcessorTest {
         LoadingProcessor processor = new LoadingProcessor();
 
         for (int k = 0; k < 3; k++) {
-            processor.addTask(game -> {
+            processor.addTask(() -> {
                 i.incrementAndGet();
                 Thread.sleep(100);
             });
@@ -73,10 +73,10 @@ public class LoadingProcessorTest {
 
         assertEquals(0, i.get());
 
-        processor.process(Mockito.mock(Game.class), 50);
+        processor.process(50);
         assertEquals(1, i.get());
 
-        processor.process(Mockito.mock(Game.class), 200);
+        processor.process(200);
         assertEquals(3, i.get());
     }
 
@@ -87,19 +87,19 @@ public class LoadingProcessorTest {
         LoadingProcessor processor = new LoadingProcessor();
         processor.addTask(new TaskWithPriority1() {
             @Override
-            public void load(Game game) throws Exception {
+            public void load() throws Exception {
                 i.set(1);
             }
         });
         processor.addTask(new TaskWithPriority3() {
             @Override
-            public void load(Game game) throws Exception {
+            public void load() throws Exception {
                 i.set(3);
             }
         });
         processor.addTask(new TaskWithPriority2() {
             @Override
-            public void load(Game game) throws Exception {
+            public void load() throws Exception {
                 i.set(2);
             }
         });
@@ -107,11 +107,11 @@ public class LoadingProcessorTest {
         assertEquals(0, i.get());
 
         //check execution order
-        processor.process(Mockito.mock(Game.class));
+        processor.process();
         assertEquals(3, i.get());
-        processor.process(Mockito.mock(Game.class));
+        processor.process();
         assertEquals(2, i.get());
-        processor.process(Mockito.mock(Game.class));
+        processor.process();
         assertEquals(1, i.get());
     }
 

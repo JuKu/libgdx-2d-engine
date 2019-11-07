@@ -1,6 +1,5 @@
 package com.jukusoft.engine2d.basegame.loading;
 
-import com.jukusoft.engine2d.basegame.Game;
 import com.jukusoft.engine2d.core.task.TaskPriorityComperator;
 
 import java.util.PriorityQueue;
@@ -27,10 +26,10 @@ public class LoadingProcessor {
      *
      * @return true, if there is a task to process
      */
-    public boolean process(Game game) throws Exception {
+    public boolean process() throws Exception {
         if (!queue.isEmpty()) {
             LoadingTask task = queue.poll();
-            task.load(game);
+            task.load();
         }
 
         return !hasFinished();
@@ -42,13 +41,13 @@ public class LoadingProcessor {
      * @param maxMillis max time in ms to execute
      * @return true, if there are other tasks remaining to execute
      */
-    public boolean process(Game game, int maxMillis) throws Exception {
+    public boolean process(int maxMillis) throws Exception {
         long startTime = System.currentTimeMillis();
         long endTime = 0;
         long diffTime = 0;
 
         while (!hasFinished()) {
-            process(game);
+            process();
 
             endTime = System.currentTimeMillis();
             diffTime = endTime - startTime;
@@ -62,9 +61,9 @@ public class LoadingProcessor {
         return !hasFinished();
     }
 
-    public void processAll(Game game) throws Exception {
+    public void processAll() throws Exception {
         while (!hasFinished()) {
-            process(game);
+            process();
         }
     }
 
