@@ -37,6 +37,13 @@
             <artifactId>gdx-collections</artifactId>
             <version>${gdx.collections.version}</version>
         </dependency>
+
+        <!-- easy i18n library -->
+        <dependency>
+            <groupId>com.jukusoft</groupId>
+            <artifactId>easy-i18n-gettext</artifactId>
+            <version>${easy.i18n.version}</version>
+        </dependency>
     </dependencies>
 
 
