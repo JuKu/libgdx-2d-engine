@@ -51,4 +51,8 @@ public interface Game {
 
     //TODO: add code here
 
+    public static Game getInstance() {
+        return GameInstanceHolder.getInstance();
+    }
+
 }

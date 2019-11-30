@@ -7,6 +7,7 @@ import com.jukusoft.engine2d.applayer.init.impl.SubSystemCreatorInitializer;
 import com.jukusoft.engine2d.applayer.init.impl.UIThreadSubSystemsInitializer;
 import com.jukusoft.engine2d.applayer.utils.SubSystemInitializer;
 import com.jukusoft.engine2d.basegame.Game;
+import com.jukusoft.engine2d.basegame.GameInstanceHolder;
 import com.jukusoft.engine2d.core.init.Initializer;
 import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.core.shutdown.ErrorHandler;
@@ -60,6 +61,7 @@ public abstract class BaseGame extends BaseApp {
     @Override
     protected final void onInitAfterSplashscreen() {
         this.game = createGame();
+        GameInstanceHolder.setInstance(this.game);
 
         //initialize subsystems
         SubSystemInitializer.init(subSystemsList);
