@@ -1,10 +1,12 @@
 package com.jukusoft.engine2d.basegame.mods;
 
+import com.jukusoft.engine2d.basegame.mods.credits.CreditEntry;
 import com.jukusoft.engine2d.basegame.mods.impl.DefaultModManager;
 import com.jukusoft.engine2d.basegame.mods.impl.Mod;
 import org.mini2Dx.gdx.utils.Array;
 
 import java.io.File;
+import java.util.List;
 
 public interface ModManager {
 
@@ -25,6 +27,8 @@ public interface ModManager {
      * @return list with mods which belongs to this mod type
      */
     public Array<Mod> listMods(Mod.Type type);
+
+    public List<CreditEntry> listCredits();
 
     public static ModManager getInstance() {
         return DefaultModManager.getInstance();
