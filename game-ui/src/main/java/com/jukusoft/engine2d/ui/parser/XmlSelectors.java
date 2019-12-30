@@ -14,7 +14,13 @@ public enum XmlSelectors {
     PROPERTY_WIDTH("width"),
     PROPERTY_HEIGHT("height"),
 
-    STYLE("styles/style");
+    STYLE("styles/style"),
+
+    SOUNDTRACK("music/soundtrack"),
+
+    ATTR_PATH("string(@path)"),
+    ATTR_LOOP("string(@loop)"),
+    ATTR_VOLUME("string(@volume)");
 
     private String xpath;
 

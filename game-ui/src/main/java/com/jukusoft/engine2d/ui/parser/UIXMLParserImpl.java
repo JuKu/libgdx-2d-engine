@@ -4,6 +4,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.jukusoft.engine2d.core.utils.StringUtils;
 import com.jukusoft.engine2d.ui.UIScreen;
+import com.jukusoft.engine2d.ui.dto.Soundtrack;
 import net.sf.saxon.s9api.*;
 
 import javax.xml.transform.stream.StreamSource;
@@ -86,6 +87,8 @@ public class UIXMLParserImpl implements UIXMLParser {
 
             parseStyles(uiScreen, screen);
 
+            parseSoundtracks(uiScreen, screen);
+
             //TODO: add code here
 
             screenList.add(uiScreen);
@@ -116,6 +119,19 @@ public class UIXMLParserImpl implements UIXMLParser {
 
         for (XdmItem style : styles) {
             uiScreen.addStyle(style.getStringValue());
+        }
+    }
+
+    private void parseSoundtracks(UIScreen uiScreen, XdmItem screen) throws SaxonApiException {
+        XdmValue soundtracks = selectorCompiler.getValue(XmlSelectors.SOUNDTRACK, screen);
+
+        for (XdmItem soundtrack : soundtracks) {
+            String path = getStringOrDefault(XmlSelectors.ATTR_PATH, soundtrack, null);
+            boolean loop = Boolean.parseBoolean(getStringOrDefault(XmlSelectors.ATTR_LOOP, soundtrack, "false"));
+            float volume = Float.parseFloat(getStringOrDefault(XmlSelectors.ATTR_VOLUME, soundtrack, "1.0"));
+            Soundtrack soundtrack1 = new Soundtrack(path, loop, volume);
+
+            uiScreen.addSoundtrack(soundtrack1);
         }
     }
 

@@ -4,6 +4,7 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.jukusoft.engine2d.core.utils.FileUtils;
 import com.jukusoft.engine2d.ui.UIScreen;
+import com.jukusoft.engine2d.ui.dto.Soundtrack;
 import com.jukusoft.engine2d.view.assets.zip.ArchiveFileHandle;
 import org.junit.Test;
 
@@ -69,6 +70,13 @@ public class UIXMLParserImplTest {
         assertEquals(2, screen.listStyles().size);
         assertEquals("style.xml", screen.listStyles().get(0));
         assertEquals("styles/style1.xml", screen.listStyles().get(1));
+
+        //check soundtracks
+        assertEquals(1, screen.listSoundtracks().size);
+        Soundtrack soundtrack = screen.listSoundtracks().get(0);
+        assertEquals("music1.ogg", soundtrack.getPath());
+        assertEquals(true, soundtrack.isLoop());
+        assertEquals(1.0f, soundtrack.getVolume(), 0.0001f);
 
         //TODO: add code here
     }

@@ -1,6 +1,7 @@
 package com.jukusoft.engine2d.ui;
 
 import com.badlogic.gdx.utils.Array;
+import com.jukusoft.engine2d.ui.dto.Soundtrack;
 
 public class UIScreen {
 
@@ -14,6 +15,7 @@ public class UIScreen {
 
     private String background = null;
     private Array<String> styles = new Array<>();
+    private Array<Soundtrack> soundtracks = new Array<>();
 
     public String getId() {
         return id;
@@ -81,6 +83,18 @@ public class UIScreen {
 
     public Array<String> listStyles() {
         return styles;
+    }
+
+    public void addSoundtrack(Soundtrack soundtrack) {
+        soundtracks.add(soundtrack);
+    }
+
+    public void removeSoundtrack(Soundtrack soundtrack) {
+        soundtracks.removeValue(soundtrack, false);
+    }
+
+    public Array<Soundtrack> listSoundtracks() {
+        return soundtracks;
     }
 
 }
