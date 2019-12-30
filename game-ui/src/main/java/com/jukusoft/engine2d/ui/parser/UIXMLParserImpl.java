@@ -70,12 +70,39 @@ public class UIXMLParserImpl implements UIXMLParser {
         for (XdmItem screen : screens) {
             UIScreen uiScreen = new UIScreen();
 
+            //parse screen id
+            XdmItem idAttr = selectorCompiler.getSingleValue(XmlSelectors.SCREEN_ID, screen);
+            String screenId = idAttr != null ? idAttr.getStringValue() : null;
+            uiScreen.setId(screenId);
+
+            //parse screen background
+            XdmItem backgroundAttr = selectorCompiler.getSingleValue(XmlSelectors.SCREEN_BACKGROUND, screen);
+            String background = backgroundAttr != null ? backgroundAttr.getStringValue() : null;
+            uiScreen.setBackground(background);
+
+            //parse properties
+            XdmItem properties = selectorCompiler.getSingleValue(XmlSelectors.PROPERTIES, screen);
+            uiScreen.setPosX(getIntegerOrDefault(XmlSelectors.PROPERTY_XPOS, properties, 0));
+            uiScreen.setPosY(getIntegerOrDefault(XmlSelectors.PROPERTY_YPOS, properties, 0));
+            uiScreen.setWidth(getStringOrDefault(XmlSelectors.PROPERTY_WIDTH, properties, "parent"));
+            uiScreen.setHeight(getStringOrDefault(XmlSelectors.PROPERTY_HEIGHT, properties, "parent"));
+
             //TODO: add code here
 
             screenList.add(uiScreen);
         }
 
         return screenList;
+    }
+
+    private String getStringOrDefault(final Enum<?> selector, XdmItem parentItem, String defaultContent) throws SaxonApiException {
+        XdmItem attr = selectorCompiler.getSingleValue(selector, parentItem);
+        return attr != null ? attr.getStringValue() : defaultContent;
+    }
+
+    private int getIntegerOrDefault(final Enum<?> selector, XdmItem parentItem, int defaultValue) throws SaxonApiException {
+        XdmItem attr = selectorCompiler.getSingleValue(selector, parentItem);
+        return attr != null ? Integer.parseInt(attr.getStringValue()) : defaultValue;
     }
 
 }

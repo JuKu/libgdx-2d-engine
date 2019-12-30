@@ -53,6 +53,18 @@ public class UIXMLParserImplTest {
 
         assertEquals(1, screens.size);
 
+        //get first screen
+        UIScreen screen = screens.get(0);
+        assertNotNull(screen);
+
+        assertEquals("testscreen", screen.getId());
+        assertEquals("wallpaper/bg.png", screen.getBackground());
+
+        assertEquals(0, screen.getPosX());
+        assertEquals(0, screen.getPosY());
+        assertEquals("parent", screen.getWidth());
+        assertEquals("parent", screen.getHeight());
+
         //TODO: add code here
     }
 
