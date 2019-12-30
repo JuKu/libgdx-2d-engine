@@ -3,10 +3,12 @@ package com.jukusoft.engine2d.ui;
 import com.badlogic.gdx.utils.Array;
 import com.jukusoft.engine2d.ui.dto.Soundtrack;
 
+import java.util.Objects;
+
 public class UIScreen {
 
     private String id;
-    private Array<Widget> childWidgets;
+    private Array<Widget> childWidgets = new Array<>();
 
     private int posX;
     private int posY;
@@ -26,10 +28,12 @@ public class UIScreen {
     }
 
     public void addWidget(Widget widget) {
+        Objects.requireNonNull(widget);
         childWidgets.add(widget);
     }
 
     public void removeWidgets(Widget widget) {
+        Objects.requireNonNull(widget);
         childWidgets.removeValue(widget, false);
     }
 

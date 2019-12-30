@@ -11,6 +11,7 @@ import net.sf.saxon.s9api.*;
 
 import javax.xml.transform.stream.StreamSource;
 import java.io.*;
+import java.util.Objects;
 
 public class UIXMLParserImpl implements UIXMLParser {
 
@@ -151,6 +152,8 @@ public class UIXMLParserImpl implements UIXMLParser {
         for (XdmItem customWidget : customWidgetList) {
             //call widget factory
             Widget widget = WidgetFactory.createCustomWidget(customWidget, selectorCompiler);
+            Objects.requireNonNull(widget);
+
             uiScreen.addWidget(widget);
         }
     }
