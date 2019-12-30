@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <properties>
+        <mainscreen>testscreen</mainscreen>
+    </properties>
+    <!-- this xml file can contain multiple screens, but only one screen per file is recommended -->
+    <screen id="testscreen">
+        <!-- screen -->
+
+        <properties>
+            <xPos>0</xPos>
+            <yPos>0</yPos>
+            <width>parent</width>
+            <height>parent</height>
+        </properties>
+        <styles>
+            <style>style.xml</style>
+        </styles>
+    </screen>
+</root>
