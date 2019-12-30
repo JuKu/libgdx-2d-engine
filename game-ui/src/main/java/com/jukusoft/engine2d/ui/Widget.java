@@ -2,6 +2,8 @@ package com.jukusoft.engine2d.ui;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.jukusoft.engine2d.ui.input.UIInputProcessor;
+import com.jukusoft.engine2d.ui.parser.SelectorCompiler;
+import net.sf.saxon.s9api.XdmItem;
 
 /**
  * widget base class
@@ -153,5 +155,14 @@ public abstract class Widget implements UIInputProcessor {
      * @param offsetY offset y, e.q. used for scrolling
      */
     public abstract void draw(SpriteBatch batch, float offsetX, float offsetY);
+
+    /**
+     * this method can be overriden, if custom widgets want to parse specific attributes from xml
+     * @param widgetItem
+     * @param selectorCompiler
+     */
+    public void parseFromXml(XdmItem widgetItem, SelectorCompiler selectorCompiler) {
+        //
+    }
 
 }

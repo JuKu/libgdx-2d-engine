@@ -32,6 +32,9 @@ public class WidgetFactory {
             Widget widget =
                     (Widget) cls.getConstructor().newInstance();
 
+            //call method, so custom widgets can parse custom attributes from xml tag
+            widget.parseFromXml(widgetItem, selectorCompiler);
+
             return widget;
         } catch (ClassNotFoundException e) {
             throw new WidgetFactoryException("widget class not found: " + widgetClass, e);
