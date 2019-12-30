@@ -1,14 +1,19 @@
 package com.jukusoft.engine2d.ui.parser;
 
-import java.net.URI;
+import com.badlogic.gdx.files.FileHandle;
+import com.badlogic.gdx.utils.Array;
+import com.jukusoft.engine2d.ui.UIScreen;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * parser to parse ui xml files
  */
 public interface UIXMLParser {
 
-    public void parse(URI uri);
+    public Array<UIScreen> parse(FileHandle handle);
 
-    public void parse(String content);
+    public Array<UIScreen> parse(File baseDir, String content) throws IOException;
 
 }
