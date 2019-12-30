@@ -15,10 +15,9 @@
         <module>application-layer</module>
         <module>input</module>
         <module>game-view</module>
+        <module>game-ui</module>
         <module>desktop</module>
         <module>test-desktop</module>
-        <module>engine2d-game-ui</module>
-        <module>game-ui</module>
     </modules>
 
     <name>Engine2D</name>
