@@ -1,6 +1,7 @@
 package com.jukusoft.engine2d.ui;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.Array;
 import com.jukusoft.engine2d.ui.input.UIInputProcessor;
 import com.jukusoft.engine2d.ui.parser.SelectorCompiler;
 import net.sf.saxon.s9api.XdmItem;
@@ -28,6 +29,7 @@ public abstract class Widget implements UIInputProcessor {
     private float scaleX = 1;
     private float scaleY = 1;
 
+    private Array<String> requiredFeaturesTags = new Array<>();
     private boolean visible;
 
     /**
@@ -111,6 +113,18 @@ public abstract class Widget implements UIInputProcessor {
 
     public void setScaleY(float scaleY) {
         this.scaleY = scaleY;
+    }
+
+    public void addRequiredFeatureTag(String featureTag) {
+        requiredFeaturesTags.add(featureTag);
+    }
+
+    public void removeRequiredFeatureTag(String featureTag) {
+        requiredFeaturesTags.removeValue(featureTag, false);
+    }
+
+    public Array<String> listRequiredFeatureTags() {
+        return requiredFeaturesTags;
     }
 
     public boolean isVisible() {

@@ -27,6 +27,8 @@ public enum XmlSelectors {
     BUTTON("button"),
     CUSTOM_WIDGETS("widget"),
     CUSTOM_WIDGETS_CLASS("string(@type)"),
+
+    FEATURE_TAGS("string(@featuretags)"),
     ;
 
     private String xpath;

@@ -145,6 +145,8 @@ public class UIXMLParserImpl implements UIXMLParser {
 
         for (XdmItem button : buttons) {
             //TODO: add code here
+
+            //TODO: parse feature tags
         }
 
         XdmValue customWidgetList = selectorCompiler.getValue(XmlSelectors.CUSTOM_WIDGETS, container);
@@ -154,7 +156,23 @@ public class UIXMLParserImpl implements UIXMLParser {
             Widget widget = WidgetFactory.createCustomWidget(customWidget, selectorCompiler);
             Objects.requireNonNull(widget);
 
+            parseFeatureTagsToWidget(widget, customWidget);
+
             uiScreen.addWidget(widget);
+        }
+    }
+
+    private void parseFeatureTagsToWidget(Widget widget, XdmItem widgetItem) throws SaxonApiException {
+        XdmItem featuretags = selectorCompiler.getSingleValue(XmlSelectors.FEATURE_TAGS, widgetItem);
+
+        if (featuretags != null) {
+            String list = featuretags.getStringValue();
+            String[] tags = list.split(",");
+
+            for (String featureTag : tags) {
+                featureTag = featureTag.trim();
+                widget.addRequiredFeatureTag(featureTag);
+            }
         }
     }
 

@@ -21,7 +21,7 @@
         </music>
         <container>
             <!-- button which is only enabled, if feature tag1 OR tag2 is available -->
-            <button id="button1" featuretags="tag1, tag2" />
+            <button id="button1" featuretags="tag1,tag2" />
 
             <widget type="button" />
         </container>
