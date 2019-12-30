@@ -67,6 +67,13 @@
             <artifactId>easy-i18n-gettext</artifactId>
             <version>${easy.i18n.version}</version>
         </dependency>
+
+        <!-- xml parser -->
+        <dependency>
+            <groupId>net.sf.saxon</groupId>
+            <artifactId>Saxon-HE</artifactId>
+            <version>9.9.1-6</version>
+        </dependency>
     </dependencies>
 
 

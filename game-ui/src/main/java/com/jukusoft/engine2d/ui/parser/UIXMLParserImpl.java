@@ -30,13 +30,15 @@ public class UIXMLParserImpl implements UIXMLParser {
 
         StringUtils.checkNotNullAndNotEmpty(content, "content");
 
-        //TODO: add code here
-
         return parseContent(content);
     }
 
     protected Array<UIScreen> parseContent(String content) {
-        return null;
+        Array<UIScreen> screens = new Array<>();
+
+        //TODO: add code here
+
+        return screens;
     }
 
 }
