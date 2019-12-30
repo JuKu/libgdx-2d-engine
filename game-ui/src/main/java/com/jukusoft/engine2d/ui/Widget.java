@@ -16,10 +16,15 @@ public abstract class Widget implements UIInputProcessor {
     //widget position
     private float xPos;
     private float yPos;
+    private float zPos = 1;
 
     //widget dimension (e.q. to detect, if mouse is inner widget)
     private int width;
     private int height;
+
+    //scaling
+    private float scaleX = 1;
+    private float scaleY = 1;
 
     private boolean visible;
 
@@ -78,12 +83,32 @@ public abstract class Widget implements UIInputProcessor {
         return yPos;
     }
 
+    public float getzPos() {
+        return zPos;
+    }
+
     public int getWidth() {
         return width;
     }
 
     public int getHeight() {
         return height;
+    }
+
+    public float getScaleX() {
+        return scaleX;
+    }
+
+    public void setScaleX(float scaleX) {
+        this.scaleX = scaleX;
+    }
+
+    public float getScaleY() {
+        return scaleY;
+    }
+
+    public void setScaleY(float scaleY) {
+        this.scaleY = scaleY;
     }
 
     public boolean isVisible() {

@@ -4,7 +4,9 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.jukusoft.engine2d.core.utils.StringUtils;
 import com.jukusoft.engine2d.ui.UIScreen;
+import com.jukusoft.engine2d.ui.Widget;
 import com.jukusoft.engine2d.ui.dto.Soundtrack;
+import com.jukusoft.engine2d.ui.factory.WidgetFactory;
 import net.sf.saxon.s9api.*;
 
 import javax.xml.transform.stream.StreamSource;
@@ -89,7 +91,7 @@ public class UIXMLParserImpl implements UIXMLParser {
 
             parseSoundtracks(uiScreen, screen);
 
-            //TODO: add code here
+            parseContainer(uiScreen, screen);
 
             screenList.add(uiScreen);
         }
@@ -132,6 +134,24 @@ public class UIXMLParserImpl implements UIXMLParser {
             Soundtrack soundtrack1 = new Soundtrack(path, loop, volume);
 
             uiScreen.addSoundtrack(soundtrack1);
+        }
+    }
+
+    private void parseContainer(UIScreen uiScreen, XdmItem screen) throws SaxonApiException {
+        XdmItem container = selectorCompiler.getSingleValue(XmlSelectors.CONTAINER, screen);
+
+        XdmValue buttons = selectorCompiler.getValue(XmlSelectors.BUTTON, container);
+
+        for (XdmItem button : buttons) {
+            //TODO: add code here
+        }
+
+        XdmValue customWidgetList = selectorCompiler.getValue(XmlSelectors.CUSTOM_WIDGETS, container);
+
+        for (XdmItem customWidget : customWidgetList) {
+            //call widget factory
+            Widget widget = WidgetFactory.createCustomWidget(customWidget, selectorCompiler);
+            uiScreen.addWidget(widget);
         }
     }
 

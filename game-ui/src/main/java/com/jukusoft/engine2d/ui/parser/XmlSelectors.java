@@ -20,7 +20,14 @@ public enum XmlSelectors {
 
     ATTR_PATH("string(@path)"),
     ATTR_LOOP("string(@loop)"),
-    ATTR_VOLUME("string(@volume)");
+    ATTR_VOLUME("string(@volume)"),
+
+    CONTAINER("container"),
+
+    BUTTON("button"),
+    CUSTOM_WIDGETS("custom"),
+    CUSTOM_WIDGETS_CLASS("type"),
+    ;
 
     private String xpath;
 
