@@ -4,12 +4,14 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.jukusoft.engine2d.core.utils.StringUtils;
 import com.jukusoft.engine2d.ui.UIScreen;
+import net.sf.saxon.s9api.*;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import javax.xml.transform.stream.StreamSource;
+import java.io.*;
 
 public class UIXMLParserImpl implements UIXMLParser {
+
+    private SelectorCompiler selectorCompiler;
 
     @Override
     public Array<UIScreen> parse(FileHandle handle) {
@@ -34,11 +36,46 @@ public class UIXMLParserImpl implements UIXMLParser {
     }
 
     protected Array<UIScreen> parseContent(String content) {
-        Array<UIScreen> screens = new Array<>();
+        XdmNode root;
 
-        //TODO: add code here
+        try {
+            root = getRootNode(content);
+            return parseRootNode(root);
+        } catch (SaxonApiException e) {
+            e.printStackTrace();
+            throw new IllegalStateException("Exception while parsing xml: ", e);
+        }
+    }
 
-        return screens;
+    private XdmNode getRootNode(String content) throws SaxonApiException {
+        Processor processor = new Processor(false);
+        DocumentBuilder saxBuilder = processor.newDocumentBuilder();
+        saxBuilder.setLineNumbering(true);
+
+        StringReader sr = new StringReader(content);
+        StreamSource stringSource = new StreamSource(sr);
+        //transformer.setParameter(name, ss);
+
+        XdmNode doc = saxBuilder.build(stringSource);
+        selectorCompiler = new SelectorCompiler(doc, processor);
+
+        return doc;
+    }
+
+    private Array<UIScreen> parseRootNode(XdmNode root) throws SaxonApiException {
+        Array<UIScreen> screenList = new Array<>();
+
+        XdmValue screens = selectorCompiler.getValue(XmlSelectors.SCREEN);
+
+        for (XdmItem screen : screens) {
+            UIScreen uiScreen = new UIScreen();
+
+            //TODO: add code here
+
+            screenList.add(uiScreen);
+        }
+
+        return screenList;
     }
 
 }

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <root>
     <!-- this xml file can contain multiple screens, but only one screen per file is recommended -->
     <screen id="testscreen" background="wallpaper/bg.png">

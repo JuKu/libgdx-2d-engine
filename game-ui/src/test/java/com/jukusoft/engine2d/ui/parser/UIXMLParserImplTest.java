@@ -29,7 +29,7 @@ public class UIXMLParserImplTest {
         File baseDir = FileUtils.getResourceAsFile("");
 
         UIXMLParser parser = new UIXMLParserImpl();
-        Array<UIScreen> screens = parser.parse(baseDir, FileUtils.readFile(baseDir.getAbsolutePath(), StandardCharsets.UTF_8));
+        Array<UIScreen> screens = parser.parse(baseDir, FileUtils.readFile(xmlFile.getAbsolutePath(), StandardCharsets.UTF_8));
         assertNotNull(screens);
         assertFalse(screens.isEmpty());
 
