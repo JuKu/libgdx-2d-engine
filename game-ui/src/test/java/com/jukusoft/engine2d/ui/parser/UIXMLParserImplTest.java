@@ -65,6 +65,11 @@ public class UIXMLParserImplTest {
         assertEquals("parent", screen.getWidth());
         assertEquals("parent", screen.getHeight());
 
+        //check styles
+        assertEquals(2, screen.listStyles().size);
+        assertEquals("style.xml", screen.listStyles().get(0));
+        assertEquals("styles/style1.xml", screen.listStyles().get(1));
+
         //TODO: add code here
     }
 

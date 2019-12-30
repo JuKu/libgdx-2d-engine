@@ -12,7 +12,9 @@ public enum XmlSelectors {
     PROPERTY_XPOS("xPos"),
     PROPERTY_YPOS("yPos"),
     PROPERTY_WIDTH("width"),
-    PROPERTY_HEIGHT("height");
+    PROPERTY_HEIGHT("height"),
+
+    STYLE("styles/style");
 
     private String xpath;
 

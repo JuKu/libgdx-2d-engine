@@ -82,10 +82,9 @@ public class UIXMLParserImpl implements UIXMLParser {
 
             //parse properties
             XdmItem properties = selectorCompiler.getSingleValue(XmlSelectors.PROPERTIES, screen);
-            uiScreen.setPosX(getIntegerOrDefault(XmlSelectors.PROPERTY_XPOS, properties, 0));
-            uiScreen.setPosY(getIntegerOrDefault(XmlSelectors.PROPERTY_YPOS, properties, 0));
-            uiScreen.setWidth(getStringOrDefault(XmlSelectors.PROPERTY_WIDTH, properties, "parent"));
-            uiScreen.setHeight(getStringOrDefault(XmlSelectors.PROPERTY_HEIGHT, properties, "parent"));
+            parseProperties(uiScreen, properties);
+
+            parseStyles(uiScreen, screen);
 
             //TODO: add code here
 
@@ -103,6 +102,21 @@ public class UIXMLParserImpl implements UIXMLParser {
     private int getIntegerOrDefault(final Enum<?> selector, XdmItem parentItem, int defaultValue) throws SaxonApiException {
         XdmItem attr = selectorCompiler.getSingleValue(selector, parentItem);
         return attr != null ? Integer.parseInt(attr.getStringValue()) : defaultValue;
+    }
+
+    private void parseProperties(UIScreen uiScreen, XdmItem properties) throws SaxonApiException {
+        uiScreen.setPosX(getIntegerOrDefault(XmlSelectors.PROPERTY_XPOS, properties, 0));
+        uiScreen.setPosY(getIntegerOrDefault(XmlSelectors.PROPERTY_YPOS, properties, 0));
+        uiScreen.setWidth(getStringOrDefault(XmlSelectors.PROPERTY_WIDTH, properties, "parent"));
+        uiScreen.setHeight(getStringOrDefault(XmlSelectors.PROPERTY_HEIGHT, properties, "parent"));
+    }
+
+    private void parseStyles(UIScreen uiScreen, XdmItem screen) throws SaxonApiException {
+        XdmValue styles = selectorCompiler.getValue(XmlSelectors.STYLE, screen);
+
+        for (XdmItem style : styles) {
+            uiScreen.addStyle(style.getStringValue());
+        }
     }
 
 }

@@ -13,6 +13,7 @@ public class UIScreen {
     private String height;
 
     private String background = null;
+    private Array<String> styles = new Array<>();
 
     public String getId() {
         return id;
@@ -72,6 +73,14 @@ public class UIScreen {
 
     public void setHeight(String height) {
         this.height = height;
+    }
+
+    public void addStyle(String fileName) {
+        styles.add(fileName);
+    }
+
+    public Array<String> listStyles() {
+        return styles;
     }
 
 }

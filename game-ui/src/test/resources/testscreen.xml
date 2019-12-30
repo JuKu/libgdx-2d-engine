@@ -14,6 +14,7 @@
         </properties>
         <styles>
             <style>style.xml</style>
+            <style>styles/style1.xml</style>
         </styles>
         <music>
             <soundtrack path="music1.ogg" loop="true" volume="1.0" />
