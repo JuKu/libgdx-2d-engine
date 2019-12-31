@@ -29,6 +29,13 @@ public enum XmlSelectors {
     CUSTOM_WIDGETS_CLASS("string(@type)"),
 
     FEATURE_TAGS("string(@featuretags)"),
+
+    POS_X("string(@x)"),
+    POS_Y("string(@y)"),
+    POS_Z("string(@z)"),
+
+    WIDTH("string(@width)"),
+    HEIGHT("string(@height)"),
     ;
 
     private String xpath;

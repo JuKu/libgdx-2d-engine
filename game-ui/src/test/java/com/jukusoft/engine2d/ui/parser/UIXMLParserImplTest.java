@@ -2,10 +2,13 @@ package com.jukusoft.engine2d.ui.parser;
 
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
+import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.core.utils.FileUtils;
 import com.jukusoft.engine2d.ui.UIScreen;
 import com.jukusoft.engine2d.ui.dto.Soundtrack;
 import com.jukusoft.engine2d.view.assets.zip.ArchiveFileHandle;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.io.File;
@@ -17,6 +20,16 @@ import java.util.zip.ZipFile;
 import static org.junit.Assert.*;
 
 public class UIXMLParserImplTest {
+
+    @BeforeClass
+    public static void beforeClass() {
+        Log.initJUnitLogger(Log.LEVEL.DEBUG);
+    }
+
+    @AfterClass
+    public static void afterClass() {
+        Log.shutdown();
+    }
 
     @Test
     public void testConstructor() {

@@ -5,6 +5,7 @@ import com.jukusoft.engine2d.ui.Widget;
 import com.jukusoft.engine2d.ui.WidgetFactoryException;
 import com.jukusoft.engine2d.ui.parser.SelectorCompiler;
 import com.jukusoft.engine2d.ui.parser.XmlSelectors;
+import com.jukusoft.engine2d.ui.utils.XMLUtils;
 import net.sf.saxon.s9api.SaxonApiException;
 import net.sf.saxon.s9api.XdmItem;
 import net.sf.saxon.s9api.XdmValue;
@@ -51,6 +52,9 @@ public class WidgetFactory {
             //call method, so custom widgets can parse custom attributes from xml tag
             widget.parseFromXml(widgetItem, selectorCompiler);
 
+            //parse widget attributes
+            parseWidgetAttributes(widgetItem, widget, selectorCompiler);
+
             return widget;
         } catch (ClassNotFoundException e) {
             throw new WidgetFactoryException("widget class not found: " + widgetClass, e);
@@ -63,6 +67,20 @@ public class WidgetFactory {
         } catch (IllegalAccessException e) {
             throw new WidgetFactoryException("IllegalAccessException: " + widgetClass, e);
         }
+    }
+
+    private static void parseWidgetAttributes(XdmItem widgetItem, Widget widget, SelectorCompiler selectorCompiler) throws SaxonApiException {
+        Log.d(WidgetFactory.class.getSimpleName(), "parse widget attributes [id: " + widget.getId() + "]: " + widget.getClass().getCanonicalName());
+
+        //set widget position
+        int xPos = XMLUtils.getInt(selectorCompiler.getSingleValue(XmlSelectors.POS_X, widgetItem), "x");
+        int yPos = XMLUtils.getInt(selectorCompiler.getSingleValue(XmlSelectors.POS_Y, widgetItem), "y");
+        float zPos = XMLUtils.getFloatOrDefault(selectorCompiler.getSingleValue(XmlSelectors.POS_Z, widgetItem), 1f);
+        widget.setPosition(xPos, yPos, zPos);
+
+        //set dimension
+        widget.setWidth(XMLUtils.getInt(selectorCompiler.getSingleValue(XmlSelectors.WIDTH, widgetItem), "width"));
+        widget.setHeight(XMLUtils.getInt(selectorCompiler.getSingleValue(XmlSelectors.HEIGHT, widgetItem), "height"));
     }
 
     public static void registerWidgetType(String xmlName, Class<? extends Widget> cls) {

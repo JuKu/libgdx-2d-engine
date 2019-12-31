@@ -83,20 +83,46 @@ public abstract class Widget implements UIInputProcessor {
         return xPos;
     }
 
+    public void setXPos(float xPos) {
+        this.xPos = xPos;
+    }
+
     public float getyPos() {
         return yPos;
+    }
+
+    public void setYPos(float yPos) {
+        this.yPos = yPos;
     }
 
     public float getzPos() {
         return zPos;
     }
 
+    public void setZPos(float zPos) {
+        this.zPos = zPos;
+    }
+
+    public void setPosition(float x, float y, float z) {
+        this.xPos = x;
+        this.yPos = y;
+        this.zPos = z;
+    }
+
     public int getWidth() {
         return width;
     }
 
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
     public int getHeight() {
         return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     public float getScaleX() {
