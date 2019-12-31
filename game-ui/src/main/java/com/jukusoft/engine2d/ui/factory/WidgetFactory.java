@@ -55,6 +55,8 @@ public class WidgetFactory {
             //parse widget attributes
             parseWidgetAttributes(widgetItem, widget, selectorCompiler);
 
+            //TODO: parse inner widgets (e.q. for scrolling pane)
+
             return widget;
         } catch (ClassNotFoundException e) {
             throw new WidgetFactoryException("widget class not found: " + widgetClass, e);
@@ -70,6 +72,8 @@ public class WidgetFactory {
     }
 
     private static void parseWidgetAttributes(XdmItem widgetItem, Widget widget, SelectorCompiler selectorCompiler) throws SaxonApiException {
+        widget.setId(XMLUtils.getString(selectorCompiler.getSingleValue(XmlSelectors.WIDGET_ID, widgetItem), "id"));
+
         Log.d(WidgetFactory.class.getSimpleName(), "parse widget attributes [id: " + widget.getId() + "]: " + widget.getClass().getCanonicalName());
 
         //set widget position

@@ -6,6 +6,8 @@ import com.jukusoft.engine2d.ui.input.UIInputProcessor;
 import com.jukusoft.engine2d.ui.parser.SelectorCompiler;
 import net.sf.saxon.s9api.XdmItem;
 
+import java.util.Objects;
+
 /**
  * widget base class
  */
@@ -77,6 +79,11 @@ public abstract class Widget implements UIInputProcessor {
 
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        Objects.requireNonNull(id);
+        this.id = id;
     }
 
     public float getxPos() {

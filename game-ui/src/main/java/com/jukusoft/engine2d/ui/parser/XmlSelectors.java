@@ -30,6 +30,8 @@ public enum XmlSelectors {
 
     FEATURE_TAGS("string(@featuretags)"),
 
+    WIDGET_ID("string(@id)"),
+
     POS_X("string(@x)"),
     POS_Y("string(@y)"),
     POS_Z("string(@z)"),
