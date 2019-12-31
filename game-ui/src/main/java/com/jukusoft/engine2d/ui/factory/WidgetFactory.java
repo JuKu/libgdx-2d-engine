@@ -6,6 +6,7 @@ import com.jukusoft.engine2d.ui.WidgetFactoryException;
 import com.jukusoft.engine2d.ui.parser.SelectorCompiler;
 import com.jukusoft.engine2d.ui.parser.XmlSelectors;
 import com.jukusoft.engine2d.ui.utils.XMLUtils;
+import com.jukusoft.engine2d.ui.widgets.WidgetGroup;
 import net.sf.saxon.s9api.SaxonApiException;
 import net.sf.saxon.s9api.XdmItem;
 import net.sf.saxon.s9api.XdmValue;
@@ -55,7 +56,17 @@ public class WidgetFactory {
             //parse widget attributes
             parseWidgetAttributes(widgetItem, widget, selectorCompiler);
 
-            //TODO: parse inner widgets (e.q. for scrolling pane)
+            //parse inner widgets (e.q. for scrolling pane)
+            if (widget instanceof WidgetGroup) {
+                WidgetGroup widgetGroup = (WidgetGroup) widget;
+
+                XdmValue innerWidgets = selectorCompiler.getValue(XmlSelectors.CUSTOM_WIDGETS, widgetItem);
+
+                for (XdmItem childWidgetItem : innerWidgets) {
+                    Widget childWidget = createCustomWidget(childWidgetItem, selectorCompiler);
+                    widgetGroup.addWidget(childWidget);
+                }
+            }
 
             return widget;
         } catch (ClassNotFoundException e) {
