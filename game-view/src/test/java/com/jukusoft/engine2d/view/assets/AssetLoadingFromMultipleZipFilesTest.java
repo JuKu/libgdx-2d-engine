@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.util.zip.ZipFile;
 
 import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
 
 public class AssetLoadingFromMultipleZipFilesTest extends LibGDXTest {
 

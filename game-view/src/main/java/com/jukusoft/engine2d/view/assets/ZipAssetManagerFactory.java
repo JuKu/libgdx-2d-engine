@@ -1,15 +1,21 @@
 package com.jukusoft.engine2d.view.assets;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.AssetLoader;
+import com.badlogic.gdx.assets.loaders.FileHandleResolver;
 import com.badlogic.gdx.assets.loaders.TextureAtlasLoader;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.jukusoft.engine2d.core.logger.Log;
+import com.jukusoft.engine2d.core.shutdown.ErrorHandler;
 import com.jukusoft.engine2d.view.assets.zip.MultipleZipFileHandleResolver;
 import com.jukusoft.engine2d.view.assets.zip.ZipFileHandleResolver;
 import org.mini2Dx.gdx.utils.Array;
 
+import java.util.Iterator;
 import java.util.Objects;
+import java.util.ServiceLoader;
 import java.util.zip.ZipFile;
 
 public class ZipAssetManagerFactory {
@@ -72,6 +78,33 @@ public class ZipAssetManagerFactory {
 
         assetManager.setLoader(TextureAtlas.class, new TextureAtlasLoader(resolver));
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(resolver));
+
+        //find all asset loader implementation with SPI and register them
+        Log.d(ZipAssetManagerFactory.class.getSimpleName(), "search for SPI asset loader classes...");
+        ServiceLoader<SPIAssetLoader> loader = ServiceLoader.load(SPIAssetLoader.class);
+        Iterator<SPIAssetLoader> iterator = loader.iterator();
+        iterator.forEachRemaining(spiAssetLoader -> {
+            Log.d(ZipAssetManagerFactory.class.getSimpleName(), "register SPI asset loader: " + spiAssetLoader.getClass().getCanonicalName());
+
+            if (!(spiAssetLoader instanceof AssetLoader)) {
+                Log.e(ZipAssetManagerFactory.class.getSimpleName(), "SPI asset loader is not an instance of libGDX AssetLoader: " + spiAssetLoader.getClass().getCanonicalName());
+                ErrorHandler.shutdownWithException(new RuntimeException("SPI asset loader is not an instance of libGDX AssetLoader: " + spiAssetLoader.getClass().getCanonicalName()));
+
+                return;
+            }
+
+            AssetLoader assetLoader = null;
+            try {
+                assetLoader = (AssetLoader) spiAssetLoader.getClass().getConstructor(FileHandleResolver.class).newInstance(resolver);
+            } catch (Exception e) {
+                e.printStackTrace();
+                ErrorHandler.shutdownWithException(new RuntimeException("Cannot create instance of SPI asset loader: " + spiAssetLoader.getClass().getCanonicalName()));
+
+                return;
+            }
+
+            assetManager.setLoader(spiAssetLoader.getLoadableAssetClass(), assetLoader);
+        });
 
         //see also: https://github.com/libgdx/libgdx/wiki/Managing-your-assets
         //assetManager.setLoader(TiledMap.class, new TmxMapLoader(resolver));

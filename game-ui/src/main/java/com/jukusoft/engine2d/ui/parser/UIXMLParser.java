@@ -16,4 +16,6 @@ public interface UIXMLParser {
 
     public Array<UIScreen> parse(File baseDir, String content) throws IOException;
 
+    public UIScreen parseScreen(FileHandle handle) throws IOException;
+
 }

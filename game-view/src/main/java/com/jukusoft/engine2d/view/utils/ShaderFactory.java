@@ -10,8 +10,8 @@ import java.io.IOException;
  */
 public class ShaderFactory {
 
-    public static ShaderProgram createShader (final FileHandle vertexShaderPath, final FileHandle fragmentShaderPath)
-        throws IOException {
+    public static ShaderProgram createShader(final FileHandle vertexShaderPath, final FileHandle fragmentShaderPath)
+            throws IOException {
         //read shader programs to string
         final String vertexShader = vertexShaderPath.readString("UTF-8");
         final String fragmentShader = fragmentShaderPath.readString("UTF-8");
@@ -19,7 +19,7 @@ public class ShaderFactory {
         return createShader(vertexShader, fragmentShader);
     }
 
-    public static ShaderProgram createShader (final String vertexShader, final String fragmentShader)
+    public static ShaderProgram createShader(final String vertexShader, final String fragmentShader)
             throws IOException {
         //create new shader
         ShaderProgram shaderProgram = new ShaderProgram(vertexShader, fragmentShader);

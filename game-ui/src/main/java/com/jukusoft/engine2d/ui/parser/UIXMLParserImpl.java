@@ -39,6 +39,21 @@ public class UIXMLParserImpl implements UIXMLParser {
         return parseContent(content);
     }
 
+    @Override
+    public UIScreen parseScreen(FileHandle handle) throws IOException {
+        Array<UIScreen> screens = parse(handle);
+
+        if (screens.isEmpty()) {
+            throw new IllegalStateException("xml file does not contain any screen: " + handle.path());
+        }
+
+        if (screens.size > 1) {
+            throw new IllegalStateException("xml file does contains more than one screen: " + handle.path());
+        }
+
+        return screens.first();
+    }
+
     protected Array<UIScreen> parseContent(String content) {
         XdmNode root;
 

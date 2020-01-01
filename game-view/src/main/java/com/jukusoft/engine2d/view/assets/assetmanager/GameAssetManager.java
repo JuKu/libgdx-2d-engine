@@ -1,7 +1,6 @@
 package com.jukusoft.engine2d.view.assets.assetmanager;
 
 import com.badlogic.gdx.assets.AssetLoaderParameters;
-import com.badlogic.gdx.assets.loaders.AssetLoader;
 import com.badlogic.gdx.utils.Array;
 
 public interface GameAssetManager {
@@ -25,13 +24,14 @@ public interface GameAssetManager {
      */
     public void load(String path, Class<?> cls);
 
-    /** Adds the given asset to the loading queue of the AssetManager.
+    /**
+     * Adds the given asset to the loading queue of the AssetManager.
      *
-     * @param path relative asset path (in zip file)
-     * @param type the type of the asset
-     * @param parameter parameters for the AssetLoader
+     * @param path      relative asset path (in zip file)
+     * @param type      the type of the asset
+     * @param parameter parameters for the SPIAssetLoader
      */
-    public <T> void load (String path, Class<T> type, AssetLoaderParameters<T> parameter);
+    public <T> void load(String path, Class<T> type, AssetLoaderParameters<T> parameter);
 
     /**
      * cleanup memory for asset

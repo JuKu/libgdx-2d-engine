@@ -2,7 +2,6 @@ package com.jukusoft.engine2d.view.assets.assetmanager;
 
 import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.resolvers.AbsoluteFileHandleResolver;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.jukusoft.engine2d.basegame.mods.ModManager;
 import com.jukusoft.engine2d.basegame.mods.impl.Mod;
