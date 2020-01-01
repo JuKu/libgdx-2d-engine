@@ -18,14 +18,14 @@ public interface UIDrawer {
      *
      * @param widget widget to add
      */
-    public void addWidget(Widget widget);
+    //public void addWidget(Widget widget);
 
     /**
      * remove a widget from ui drawer
      *
      * @param widget widget to remove
      */
-    public void removeWidget(Widget widget);
+    //public void removeWidget(Widget widget);
 
     /**
      * reload all widgets from xml file completely

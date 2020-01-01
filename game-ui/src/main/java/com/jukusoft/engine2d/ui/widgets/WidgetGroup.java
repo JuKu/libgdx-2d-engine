@@ -141,5 +141,22 @@ public class WidgetGroup extends WidgetAdapter {
 
         return false;
     }
-    
+
+    @Override
+    public <T extends Widget> T findWidgetbyId(String id, Class<T> cls) {
+        if (this.getId().equals(id)) {
+            return cls.cast(this);
+        }
+
+        //search inner widgets
+        for (Widget widget : childWidgets) {
+            T widget1 = widget.findWidgetbyId(id, cls);
+
+            if (widget1 != null) {
+                return widget1;
+            }
+        }
+
+        return null;
+    }
 }

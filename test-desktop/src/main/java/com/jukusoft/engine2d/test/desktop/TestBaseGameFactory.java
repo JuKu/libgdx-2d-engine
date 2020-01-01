@@ -42,6 +42,8 @@ public class TestBaseGameFactory implements BaseGameFactory {
 
                     //add game-view-layer
                     ScreenSubSystem screenSubSystem = new ScreenSubSystem();
+                    screenSubSystem.getScreenManager().addScreen("test", new TestUIScreen());
+                    screenSubSystem.getScreenManager().leaveAllAndEnter("test");
                     manager.addSubSystem(screenSubSystem, Threads.UI_THREAD);
                 };
             }
