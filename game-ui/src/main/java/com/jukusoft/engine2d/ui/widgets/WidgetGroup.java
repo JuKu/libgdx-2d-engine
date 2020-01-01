@@ -13,6 +13,9 @@ public class WidgetGroup extends WidgetAdapter {
 
     private Array<Widget> childWidgets;
 
+    private float offsetX = 0;
+    private float offsetY = 0;
+
     public void addWidget(Widget widget) {
         childWidgets.add(widget);
     }
@@ -21,6 +24,21 @@ public class WidgetGroup extends WidgetAdapter {
         childWidgets.removeValue(widget, false);
     }
 
+    public float getOffsetX() {
+        return offsetX;
+    }
+
+    public void setOffsetX(float offsetX) {
+        this.offsetX = offsetX;
+    }
+
+    public float getOffsetY() {
+        return offsetY;
+    }
+
+    public void setOffsetY(float offsetY) {
+        this.offsetY = offsetY;
+    }
 
     @Override
     public void update(float delta, float offsetX, float offsetY) {
@@ -29,7 +47,7 @@ public class WidgetGroup extends WidgetAdapter {
                 continue;
             }
 
-            widget.update(delta, offsetX, offsetY);
+            widget.update(delta, offsetX + this.getOffsetX(), offsetY + this.getOffsetY());
         }
     }
 
@@ -42,6 +60,86 @@ public class WidgetGroup extends WidgetAdapter {
 
             widget.draw(batch, offsetX, offsetY);
         }
+    }
+
+    @Override
+    public boolean keyDown(int keycode) {
+        for (Widget widget : childWidgets) {
+            if (widget.keyDown(keycode))
+                return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean keyUp(int keycode) {
+        for (Widget widget : childWidgets) {
+            if (widget.keyUp(keycode))
+                return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean keyTyped(char character) {
+        for (Widget widget : childWidgets) {
+            if (widget.keyTyped(character))
+                return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        for (Widget widget : childWidgets) {
+            if (widget.touchDown(screenX, screenY, pointer, button))
+                return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        for (Widget widget : childWidgets) {
+            if (widget.touchUp(screenX, screenY, pointer, button))
+                return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
+        for (Widget widget : childWidgets) {
+            if (widget.touchDragged(screenX, screenY, pointer))
+                return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean mouseMoved(int screenX, int screenY) {
+        for (Widget widget : childWidgets) {
+            if (widget.mouseMoved(screenX, screenY))
+                return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean scrolled(int amount) {
+        for (Widget widget : childWidgets) {
+            if (widget.scrolled(amount))
+                return true;
+        }
+
+        return false;
     }
     
 }

@@ -1,8 +1,8 @@
 package com.jukusoft.engine2d.ui;
 
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
-import com.jukusoft.engine2d.ui.input.UIInputProcessor;
 import com.jukusoft.engine2d.ui.parser.SelectorCompiler;
 import net.sf.saxon.s9api.XdmItem;
 
@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * widget base class
  */
-public abstract class Widget implements UIInputProcessor {
+public abstract class Widget extends InputAdapter {
 
     /**
      * widget id like in JavaFX
