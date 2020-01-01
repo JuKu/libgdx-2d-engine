@@ -20,6 +20,7 @@ import java.util.Objects;
 public class UIDrawerImpl extends InputAdapter implements UIDrawer {
 
     private String uiScreenXMLPath;
+    private String oldUiScreenXMLPath;
     private UIScreen screen;
     private boolean debugMode = false;
 
@@ -49,6 +50,7 @@ public class UIDrawerImpl extends InputAdapter implements UIDrawer {
 
     @Override
     public void load(String xmlPath) {
+        this.oldUiScreenXMLPath = this.uiScreenXMLPath;
         this.uiScreenXMLPath = xmlPath;
         reload();
     }
@@ -89,8 +91,8 @@ public class UIDrawerImpl extends InputAdapter implements UIDrawer {
         GameAssetManager assetManager = GameAssetManager.getInstance();
 
         //unload old screen
-        if (assetManager.isLoaded(uiScreenXMLPath)) {
-            assetManager.unload(uiScreenXMLPath);
+        if (assetManager.isLoaded(oldUiScreenXMLPath)) {
+            assetManager.unload(oldUiScreenXMLPath);
         }
 
         //load screen from xml

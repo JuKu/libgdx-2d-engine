@@ -26,6 +26,7 @@ public class TestUIScreen extends ScreenAdapter {
         ModManager.getInstance().loadFromDir(new File("data/maindata"));
 
         this.uiDrawer = new UIDrawerImpl();
+        this.uiDrawer.setDebug(true);
         this.uiDrawer.load("testscreen.xml");
 
         InputManager.getInstance().addFirst(uiDrawer);
