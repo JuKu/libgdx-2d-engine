@@ -1,10 +1,11 @@
 package com.jukusoft.engine2d.ui;
 
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.net.URI;
 
-public interface UIDrawer {
+public interface UIDrawer extends InputProcessor {
 
     /**
      * load from xml file#

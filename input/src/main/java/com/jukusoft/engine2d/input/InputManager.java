@@ -6,6 +6,8 @@ import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.utils.Array;
 import com.jukusoft.engine2d.core.logger.Log;
 
+import java.util.Objects;
+
 public class InputManager {
 
     //singleton instance
@@ -23,6 +25,8 @@ public class InputManager {
     }
 
     public void add(InputProcessor processor) {
+        Objects.requireNonNull(processor);
+
         //check, that processor wasnt registered before
         this.verifyUnique(processor);
 
@@ -30,6 +34,8 @@ public class InputManager {
     }
 
     public void addFirst(InputProcessor processor) {
+        Objects.requireNonNull(processor);
+
         //check, that processor wasnt registered before
         this.verifyUnique(processor);
 
