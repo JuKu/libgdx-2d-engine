@@ -9,7 +9,9 @@ The content of the file should containt eh full name of the asset loader class, 
 com.jukusoft.engine2d.ui.loader.UIScreenLoader
 ```
 
-For SPI, see also: https://www.baeldung.com/java-spi
+Every line should contain only one implementation class.\
+\
+For additional information about SPI, see also: https://www.baeldung.com/java-spi
 
 ## Example asset loader
 
