@@ -27,11 +27,13 @@ public class UIDrawerImpl extends InputAdapter implements UIDrawer {
     private Viewport viewport;
 
     private final SpriteBatch batch;
+    private boolean ownSpriteBatch = false;
 
     private Texture backgroundTexture;
 
     public UIDrawerImpl() {
         this(new SpriteBatch());
+        ownSpriteBatch = true;
     }
 
     public UIDrawerImpl(SpriteBatch batch) {
@@ -116,6 +118,10 @@ public class UIDrawerImpl extends InputAdapter implements UIDrawer {
 
     @Override
     public void draw() {
+        if (ownSpriteBatch) {
+            batch.begin();
+        }
+
         //draw background, if available
         if (backgroundTexture != null) {
             batch.draw(backgroundTexture, 0, 0, getWidth(), getHeight());
@@ -126,6 +132,10 @@ public class UIDrawerImpl extends InputAdapter implements UIDrawer {
             if (widget != null && widget.isVisible()) {
                 widget.draw(batch, 0, 0);
             }
+        }
+
+        if (ownSpriteBatch) {
+            batch.end();
         }
     }
 
