@@ -1,22 +1,26 @@
 package com.jukusoft.engine2d.view.utils;
 
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
-import com.jukusoft.engine2d.core.utils.FileUtils;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
 /**
  * Created by Justin on 09.02.2017.
  */
 public class ShaderFactory {
 
-    public static ShaderProgram createShader (final String vertexShaderPath, final String fragmentShaderPath)
+    public static ShaderProgram createShader (final FileHandle vertexShaderPath, final FileHandle fragmentShaderPath)
         throws IOException {
         //read shader programs to string
-        final String vertexShader = FileUtils.readFile(vertexShaderPath, StandardCharsets.ISO_8859_1);//TODO: use UTF-8 instead?
-        final String fragmentShader = FileUtils.readFile(fragmentShaderPath, StandardCharsets.ISO_8859_1);//TODO: use UTF-8 instead?
+        final String vertexShader = vertexShaderPath.readString("UTF-8");
+        final String fragmentShader = fragmentShaderPath.readString("UTF-8");
 
+        return createShader(vertexShader, fragmentShader);
+    }
+
+    public static ShaderProgram createShader (final String vertexShader, final String fragmentShader)
+            throws IOException {
         //create new shader
         ShaderProgram shaderProgram = new ShaderProgram(vertexShader, fragmentShader);
 
