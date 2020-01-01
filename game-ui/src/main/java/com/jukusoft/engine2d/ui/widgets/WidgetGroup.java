@@ -159,4 +159,5 @@ public class WidgetGroup extends WidgetAdapter {
 
         return null;
     }
+
 }

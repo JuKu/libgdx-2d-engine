@@ -102,6 +102,32 @@ public class UIScreen extends InputAdapter {
         return soundtracks;
     }
 
+    /**
+     * find widget by id
+     *
+     * @param id id of the widget
+     * @param cls return class
+     * @param <T> widget type
+     *
+     * @return widget with the specific id
+     */
+    public <T extends Widget> T findWidgetbyId(String id, Class<T> cls) {
+        if (this.getId().equals(id)) {
+            return cls.cast(this);
+        }
+
+        //search inner widgets
+        for (Widget widget : childWidgets) {
+            T widget1 = widget.findWidgetbyId(id, cls);
+
+            if (widget1 != null) {
+                return widget1;
+            }
+        }
+
+        return null;
+    }
+
     @Override
     public boolean keyDown(int keycode) {
         for (Widget widget : childWidgets) {

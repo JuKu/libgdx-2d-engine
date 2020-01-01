@@ -6,6 +6,7 @@ import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.core.utils.FileUtils;
 import com.jukusoft.engine2d.ui.UIScreen;
 import com.jukusoft.engine2d.ui.dto.Soundtrack;
+import com.jukusoft.engine2d.ui.widgets.Button;
 import com.jukusoft.engine2d.view.assets.zip.ArchiveFileHandle;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -90,6 +91,10 @@ public class UIXMLParserImplTest {
         assertEquals("music1.ogg", soundtrack.getPath());
         assertEquals(true, soundtrack.isLoop());
         assertEquals(1.0f, soundtrack.getVolume(), 0.0001f);
+
+        //check findWidgetById()
+        Button button = screen.findWidgetbyId("button1", Button.class);
+        assertNotNull(button);
 
         //TODO: add code here
     }

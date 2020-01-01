@@ -15,15 +15,15 @@ public class UIDrawerImpl implements UIDrawer {
 
     }
 
-    @Override
+    /*@Override
     public void addWidget(Widget widget) {
 
-    }
+    }*/
 
-    @Override
+    /*@Override
     public void removeWidget(Widget widget) {
 
-    }
+    }*/
 
     @Override
     public void reload() {
