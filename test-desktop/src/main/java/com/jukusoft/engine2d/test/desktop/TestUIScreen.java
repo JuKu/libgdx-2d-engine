@@ -10,6 +10,7 @@ import com.jukusoft.engine2d.view.screens.ScreenAdapter;
 import com.jukusoft.engine2d.view.screens.ScreenManager;
 
 import java.io.File;
+import java.util.Objects;
 
 public class TestUIScreen extends ScreenAdapter {
 
@@ -25,6 +26,9 @@ public class TestUIScreen extends ScreenAdapter {
         //parse screen
         GameAssetManager.getInstance().load("testscreen.xml", UIScreen.class);
         GameAssetManager.getInstance().finishLoading("testscreen.xml");
+
+        UIScreen uiScreen = GameAssetManager.getInstance().get("testscreen.xml");
+        Objects.requireNonNull(uiScreen);
 
         //InputManager.getInstance().addFirst(uiDrawer);
     }

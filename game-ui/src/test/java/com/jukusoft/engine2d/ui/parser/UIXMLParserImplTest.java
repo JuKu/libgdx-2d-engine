@@ -92,6 +92,10 @@ public class UIXMLParserImplTest {
         assertEquals(true, soundtrack.isLoop());
         assertEquals(1.0f, soundtrack.getVolume(), 0.0001f);
 
+        //check findWidgetById() with not existing button
+        Button btn = screen.findWidgetbyId("not-existing-button", Button.class);
+        assertNull(btn);
+
         //check findWidgetById()
         Button button = screen.findWidgetbyId("button1", Button.class);
         assertNotNull(button);
