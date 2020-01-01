@@ -1,50 +1,132 @@
 package com.jukusoft.engine2d.ui.impl;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputAdapter;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
+import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.ui.UIDrawer;
 import com.jukusoft.engine2d.ui.UIScreen;
 import com.jukusoft.engine2d.ui.Widget;
+import com.jukusoft.engine2d.view.assets.assetmanager.GameAssetManager;
 
 import java.net.URI;
+import java.util.Objects;
 
 public class UIDrawerImpl extends InputAdapter implements UIDrawer {
 
+    private String uiScreenXMLPath;
     private UIScreen screen;
     private boolean debugMode = false;
 
-    public UIDrawerImpl(UIScreen screen) {
-        this.screen = screen;
+    private OrthographicCamera camera;
+    private Viewport viewport;
+
+    private final SpriteBatch batch;
+
+    private Texture backgroundTexture;
+
+    public UIDrawerImpl() {
+        this(new SpriteBatch());
+    }
+
+    public UIDrawerImpl(SpriteBatch batch) {
+        camera = new OrthographicCamera();
+
+        viewport = new ScreenViewport(camera);
+        viewport.apply();
+        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
+        camera.update();
+
+        this.batch = batch;
     }
 
     @Override
-    public void load(URI uri) {
-
+    public void load(String xmlPath) {
+        this.uiScreenXMLPath = xmlPath;
+        reload();
     }
 
-    /*@Override
-    public void addWidget(Widget widget) {
+    protected void loadAssets() {
+        GameAssetManager assetManager = GameAssetManager.getInstance();
 
-    }*/
+        //load background, if neccessary
+        if (!screen.getBackground().isEmpty()) {
+            assetManager.load(screen.getBackground(), Texture.class);
+            assetManager.finishLoading(screen.getBackground());
+            this.backgroundTexture = assetManager.get(screen.getBackground());
+        }
+    }
 
-    /*@Override
-    public void removeWidget(Widget widget) {
+    protected void unloadAssets() {
+        //unload background, if neccessary
+        if (!screen.getBackground().isEmpty()) {
+            GameAssetManager.getInstance().unload(screen.getBackground());
+        }
+    }
 
-    }*/
+    public int getWidth() {
+        return Gdx.graphics.getWidth();
+    }
+
+    public int getHeight() {
+        return Gdx.graphics.getHeight();
+    }
 
     @Override
     public void reload() {
+        //unload assets, if neccessary
+        if (screen != null) {
+            unloadAssets();
+        }
 
+        GameAssetManager assetManager = GameAssetManager.getInstance();
+
+        //unload old screen
+        if (assetManager.isLoaded(uiScreenXMLPath)) {
+            assetManager.unload(uiScreenXMLPath);
+        }
+
+        //load screen from xml
+        assetManager.load(uiScreenXMLPath, UIScreen.class);
+        assetManager.finishLoading(uiScreenXMLPath);
+        this.screen = assetManager.get(uiScreenXMLPath);
+        Objects.requireNonNull(this.screen);
+
+        //load assets
+        loadAssets();
     }
 
     @Override
     public void update(float delta) {
+        camera.update();
+        batch.setProjectionMatrix(camera.combined);
 
+        //update all widgets
+        for (Widget widget : screen.listWidgets()) {
+            if (widget != null) {
+                widget.update(delta, 0, 0);
+            }
+        }
     }
 
     @Override
-    public void draw(SpriteBatch batch) {
+    public void draw() {
+        //draw background, if available
+        if (backgroundTexture != null) {
+            batch.draw(backgroundTexture, 0, 0, getWidth(), getHeight());
+        }
 
+        //draw all widgets
+        for (Widget widget : screen.listWidgets()) {
+            if (widget != null && widget.isVisible()) {
+                widget.draw(batch, 0, 0);
+            }
+        }
     }
 
     @Override
@@ -78,12 +160,24 @@ public class UIDrawerImpl extends InputAdapter implements UIDrawer {
     }
 
     @Override
+    public void onResize(int oldWidth, int oldHeight, int newWidth, int newHeight) {
+        viewport.update(newWidth, newHeight, true);
+    }
+
+    @Override
     public boolean keyDown(int keycode) {
         return screen.keyDown(keycode);
     }
 
     @Override
     public boolean keyUp(int keycode) {
+        if (debugMode) {
+            //refresh screen on F5
+            if (keycode == Input.Keys.F5) {
+                Log.d(UIDrawerImpl.class.getSimpleName(), "refresh screen now");
+            }
+        }
+
         return screen.keyUp(keycode);
     }
 

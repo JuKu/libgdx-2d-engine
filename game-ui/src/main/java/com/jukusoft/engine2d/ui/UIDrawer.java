@@ -8,11 +8,9 @@ import java.net.URI;
 public interface UIDrawer extends InputProcessor {
 
     /**
-     * load from xml file#
-     *
-     * @param uri uri to xml file
+     * load from xml file
      */
-    public void load(URI uri);
+    public void load(String xmlPath);
 
     /**
      * add a widget to ui drawer and draw it
@@ -42,10 +40,8 @@ public interface UIDrawer extends InputProcessor {
 
     /**
      * draw widget
-     *
-     * @param batch sprite batch
      */
-    public void draw(SpriteBatch batch);
+    public void draw();
 
     /**
      * find widget by id
@@ -96,5 +92,15 @@ public interface UIDrawer extends InputProcessor {
      * @return true, if feature tag is available
      */
     public boolean hasFeatureTag(String featureTag);
+
+    /**
+     * window was resized
+     *
+     * @param oldWidth  old window width
+     * @param oldHeight old window height
+     * @param newWidth  new window width
+     * @param newHeight new window height
+     */
+    public void onResize(int oldWidth, int oldHeight, int newWidth, int newHeight);
 
 }
