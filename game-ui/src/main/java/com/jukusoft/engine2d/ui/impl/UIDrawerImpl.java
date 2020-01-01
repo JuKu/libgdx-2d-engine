@@ -187,6 +187,7 @@ public class UIDrawerImpl extends InputAdapter implements UIDrawer {
             //refresh screen on F5
             if (keycode == Input.Keys.F5) {
                 Log.d(UIDrawerImpl.class.getSimpleName(), "refresh screen now");
+                reload();
             }
         }
 
