@@ -3,9 +3,8 @@ package com.jukusoft.engine2d.ui;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.Disposable;
 import com.jukusoft.engine2d.ui.parser.SelectorCompiler;
-import com.jukusoft.engine2d.ui.style.StyleManager;
+import com.jukusoft.engine2d.ui.style.UIStyleManager;
 import com.jukusoft.engine2d.view.assets.assetmanager.GameAssetManager;
 import net.sf.saxon.s9api.XdmItem;
 
@@ -40,7 +39,7 @@ public abstract class Widget extends InputAdapter {
     /**
      * initialize widget with ui drawer, load required assets, if neccessary
      */
-    protected final void init(StyleManager styleManager, GameAssetManager assetManager) {
+    protected final void init(UIStyleManager styleManager, GameAssetManager assetManager) {
         initWidget(styleManager, assetManager);
     }
 
@@ -213,7 +212,7 @@ public abstract class Widget extends InputAdapter {
         //
     }
 
-    public final void disposeWidget(StyleManager styleManager, GameAssetManager assetManager) {
+    public final void disposeWidget(UIStyleManager styleManager, GameAssetManager assetManager) {
         dispose(styleManager, assetManager);
     }
 
@@ -223,7 +222,7 @@ public abstract class Widget extends InputAdapter {
      * @param styleManager style manager to get current style
      * @param assetManager asset manager to load and unload assets
      */
-    protected void initWidget(StyleManager styleManager, GameAssetManager assetManager) {
+    protected void initWidget(UIStyleManager styleManager, GameAssetManager assetManager) {
         //
     }
 
@@ -233,7 +232,7 @@ public abstract class Widget extends InputAdapter {
      * @param styleManager style manager to get current style
      * @param assetManager asset manager to load and unload assets
      */
-    protected void dispose(StyleManager styleManager, GameAssetManager assetManager) {
+    protected void dispose(UIStyleManager styleManager, GameAssetManager assetManager) {
         //
     }
 

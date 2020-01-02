@@ -14,10 +14,9 @@ import com.jukusoft.engine2d.ui.UIDrawer;
 import com.jukusoft.engine2d.ui.UIScreen;
 import com.jukusoft.engine2d.ui.Widget;
 import com.jukusoft.engine2d.ui.dto.Soundtrack;
-import com.jukusoft.engine2d.ui.style.StyleManager;
+import com.jukusoft.engine2d.ui.style.UIStyleManager;
 import com.jukusoft.engine2d.view.assets.assetmanager.GameAssetManager;
 
-import java.net.URI;
 import java.util.Objects;
 
 public class UIDrawerImpl extends InputAdapter implements UIDrawer {
@@ -35,7 +34,7 @@ public class UIDrawerImpl extends InputAdapter implements UIDrawer {
 
     private Texture backgroundTexture;
 
-    private StyleManager styleManager;
+    private UIStyleManager styleManager;
 
     public UIDrawerImpl() {
         this(new SpriteBatch());

@@ -67,6 +67,27 @@ public class DefaultModManager implements ModManager {
     }
 
     @Override
+    public Array<Mod> findModsWithSpecificFile(String filePath) {
+        Array<Mod> modsWithFile = new Array<>();
+
+        for (Mod mod : mods) {
+            try (ZipFile zipFile = new ZipFile(mod.getArchiveFile())) {
+                if (zipFile.getEntry(filePath) != null) {
+                    modsWithFile.add(mod);
+                }
+            } catch (ZipException e) {
+                e.printStackTrace();
+                Log.w(DefaultModManager.class.getSimpleName(), "ZipException while trying to open mod zip file: " + mod.getArchiveFile());
+            } catch (IOException e) {
+                e.printStackTrace();
+                Log.w(DefaultModManager.class.getSimpleName(), "IOException while trying to open mod zip file: " + mod.getArchiveFile());
+            }
+        }
+
+        return modsWithFile;
+    }
+
+    @Override
     public List<CreditEntry> listCredits() {
         List<CreditEntry> list = new ArrayList<>();
 

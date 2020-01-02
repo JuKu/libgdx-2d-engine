@@ -7,6 +7,7 @@ import org.mini2Dx.gdx.utils.Array;
 
 import java.io.File;
 import java.util.List;
+import java.util.zip.ZipFile;
 
 public interface ModManager {
 
@@ -27,6 +28,15 @@ public interface ModManager {
      * @return list with mods which belongs to this mod type
      */
     public Array<Mod> listMods(Mod.Type type);
+
+    /**
+     * search for a specific file in every mod zip file and return all zip files, which contains this file
+     *
+     * @param filePath file path to search in zip file
+     *
+     * @return list with all mods, which contains this file
+     */
+    public Array<Mod> findModsWithSpecificFile(String filePath);
 
     public List<CreditEntry> listCredits();
 
