@@ -39,10 +39,8 @@ public abstract class Widget extends InputAdapter {
 
     /**
      * initialize widget with ui drawer, load required assets, if neccessary
-     *
-     * @param uiDrawer instance of ui drawer
      */
-    protected final void init(UIDrawer uiDrawer, StyleManager styleManager, GameAssetManager assetManager) {
+    protected final void init(StyleManager styleManager, GameAssetManager assetManager) {
         initWidget(styleManager, assetManager);
     }
 

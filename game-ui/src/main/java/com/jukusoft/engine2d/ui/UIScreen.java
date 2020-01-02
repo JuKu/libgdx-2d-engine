@@ -213,7 +213,7 @@ public class UIScreen extends InputAdapter {
 
     public void init(StyleManager styleManager, GameAssetManager assetManager) {
         for (Widget widget : childWidgets) {
-            widget.disposeWidget(styleManager, assetManager);
+            widget.init(styleManager, assetManager);
         }
     }
 
