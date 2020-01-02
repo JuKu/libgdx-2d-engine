@@ -64,6 +64,7 @@ public abstract class BaseGame extends BaseApp {
         this.game = createGame();
         GameInstanceHolder.setInstance(this.game);
 
+        //remove this to fix bug #170504239
         //initialize subsystems
         //SubSystemInitializer.init(subSystemsList);
     }
