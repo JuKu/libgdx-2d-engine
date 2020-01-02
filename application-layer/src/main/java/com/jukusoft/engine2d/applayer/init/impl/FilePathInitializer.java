@@ -17,7 +17,7 @@ public class FilePathInitializer implements Initializer {
 
     @Override
     public void init() throws Exception {
-        String dataDir = FilePath.parse(Config.get(SECTION_PATHS, "dataDir"));
+        String dataDir = FilePath.parse(Config.get(SECTION_PATHS, "dataDir"), false);
 
         //check, if data directory exists
         if (!new File(dataDir).exists()) {

@@ -11,8 +11,8 @@ import com.jukusoft.engine2d.core.utils.Utils;
 
 import java.io.File;
 
-@InitBeforeSplashScreen
-@InitPriority(8)
+//@InitBeforeSplashScreen
+@InitPriority(9)
 public class ModManagerInitializer implements Initializer {
 
     private static final String LOG_TAG = "ModLoader";

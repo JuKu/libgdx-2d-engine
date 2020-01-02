@@ -76,7 +76,7 @@ public class Log {
 
         //first check, if logging is enabled
         if (Log.enabled && (Config.getBool(LOGGER_TAG, "writeToFile") || Config.getBool(LOGGER_TAG, "printToConsole"))) {
-            String filePath = FilePath.parse(Config.get(LOGGER_TAG, "file"));
+            String filePath = FilePath.parse(Config.get(LOGGER_TAG, "file"), false);
 
             File file = new File(filePath);
 

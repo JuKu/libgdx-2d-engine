@@ -39,6 +39,14 @@ public class FilePath {
     }
 
     public static String parse(String path) {
+        return parse(path, true);
+    }
+
+    public static String parse(String path, boolean warnIfNotInitialized) {
+        if (dataDir.isEmpty() && warnIfNotInitialized) {
+            throw new IllegalStateException("data directory was not set before");
+        }
+
         path = path.replace("{user.home}", System.getProperty("user.home") + "/");
         path = path.replace("{user.dir}", System.getProperty("user.dir") + "/");
         path = path.replace("{user.name}", System.getProperty("user.name") + "/");

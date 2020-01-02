@@ -1,6 +1,7 @@
 package com.jukusoft.engine2d.applayer.init;
 
 import com.jukusoft.engine2d.core.init.Initializer;
+import com.jukusoft.engine2d.core.logger.Log;
 
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +27,7 @@ public class InitializerProcessor {
 
         for (Initializer initializer : initializerArray) {
             if (initializer.getClass().isAnnotationPresent(InitBeforeSplashScreen.class)) {
+                Log.d(InitializerProcessor.class.getSimpleName(), "execute initializer: " + initializer.getClass().getSimpleName());
                 initializer.init();
             }
         }
@@ -42,6 +44,7 @@ public class InitializerProcessor {
 
             //don't execute @InitBeforeSplashScreen initializers again
             if (!initializer.getClass().isAnnotationPresent(InitBeforeSplashScreen.class)) {
+                Log.d(InitializerProcessor.class.getSimpleName(), "execute initializer: " + initializer.getClass().getSimpleName());
                 initializer.init();
             }
         }
