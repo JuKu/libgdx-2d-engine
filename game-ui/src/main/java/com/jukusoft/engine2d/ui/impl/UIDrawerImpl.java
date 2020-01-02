@@ -85,6 +85,8 @@ public class UIDrawerImpl extends InputAdapter implements UIDrawer {
 
     @Override
     public void reload() {
+        Log.d(UIDrawerImpl.class.getSimpleName(), "reload ui screen");
+
         //unload assets, if neccessary
         if (screen != null) {
             unloadAssets();
@@ -111,6 +113,8 @@ public class UIDrawerImpl extends InputAdapter implements UIDrawer {
             //get random soundtrack
             Soundtrack soundtrack = screen.listSoundtracks().random();
             SoundEngineController.playBackgroundSoundtrack(soundtrack.getPath());
+
+            //TODO: set all soundtracks to sound engine to play
         }
     }
 

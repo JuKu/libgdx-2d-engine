@@ -4,6 +4,7 @@ import com.badlogic.gdx.audio.Music;
 import com.jukusoft.engine2d.basegame.events.BaseEvents;
 import com.jukusoft.engine2d.core.events.EventListener;
 import com.jukusoft.engine2d.core.events.Events;
+import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.core.memory.Pools;
 import com.jukusoft.engine2d.core.subsystem.SubSystem;
 import com.jukusoft.engine2d.core.time.GameTime;
@@ -72,8 +73,11 @@ public class SoundEngineSubSystem implements SubSystem {
     }
 
     private void playBackgroundSoundtrack(PlaySoundtrackEvent event) {
+        Log.i(SoundEngineSubSystem.class.getSimpleName(), "load and start soundtrack: " + event.filePath);
+
         if (backgroundSoundtrack != null) {
             if (backgroundSoundtrack.isPlaying()) {
+                Log.d(SoundEngineSubSystem.class.getSimpleName(), "stop old soundtrack: " + currentBackgroundSoundtrackPath);
                 backgroundSoundtrack.stop();
             }
         }
@@ -82,6 +86,7 @@ public class SoundEngineSubSystem implements SubSystem {
 
         //unload old soundtrack
         if (currentBackgroundSoundtrackPath != null) {
+            Log.d(SoundEngineSubSystem.class.getSimpleName(), "unload old soundtrack: " + currentBackgroundSoundtrackPath);
             assetManager.unload(currentBackgroundSoundtrackPath);
         }
 
