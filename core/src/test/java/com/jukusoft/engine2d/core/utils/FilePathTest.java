@@ -15,11 +15,11 @@ public class FilePathTest {
     @Test
     public void testParse() {
         //test string without placeholder
-        assertEquals("test", FilePath.parse("test"));
+        assertEquals("test", FilePath.parse("test", false));
 
-        assertEquals("C:/User/test/my-app", FilePath.parse("C:\\User\\test\\my-app"));
-        assertNotNull(FilePath.parse("{user.home}test"));
-        assertEquals(true, FilePath.parse("{user.home}test").endsWith("/test"));
+        assertEquals("C:/User/test/my-app", FilePath.parse("C:\\User\\test\\my-app", false));
+        assertNotNull(FilePath.parse("{user.home}test", false));
+        assertEquals(true, FilePath.parse("{user.home}test", false).endsWith("/test"));
     }
 
     @Test
