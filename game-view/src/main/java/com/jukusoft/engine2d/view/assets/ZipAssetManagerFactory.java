@@ -9,8 +9,12 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.core.shutdown.ErrorHandler;
+import com.jukusoft.engine2d.view.assets.loader.JSONArrayLoader;
+import com.jukusoft.engine2d.view.assets.loader.JSONObjectLoader;
 import com.jukusoft.engine2d.view.assets.zip.MultipleZipFileHandleResolver;
 import com.jukusoft.engine2d.view.assets.zip.ZipFileHandleResolver;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.mini2Dx.gdx.utils.Array;
 
 import java.util.Iterator;
@@ -45,6 +49,10 @@ public class ZipAssetManagerFactory {
 
         assetManager.setLoader(TextureAtlas.class, new TextureAtlasLoader(resolver));
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(resolver));
+
+        //set additional loader for json files
+        assetManager.setLoader(JSONObject.class, new JSONObjectLoader(resolver));
+        assetManager.setLoader(JSONArray.class, new JSONArrayLoader(resolver));
 
         //see also: https://github.com/libgdx/libgdx/wiki/Managing-your-assets
         //assetManager.setLoader(TiledMap.class, new TmxMapLoader(resolver));
