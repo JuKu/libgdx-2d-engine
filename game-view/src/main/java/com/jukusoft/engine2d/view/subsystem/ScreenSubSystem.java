@@ -15,15 +15,12 @@ import com.jukusoft.engine2d.view.screens.impl.DefaultScreenManager;
 public class ScreenSubSystem implements SubSystem {
 
     private ScreenManager<IScreen> screenManager = new DefaultScreenManager();
-    private GameAssetManager assetManager;
 
     @Override
     public void init() {
         Events.addListener(Threads.UI_THREAD, BaseEvents.RESIZE_WINDOW, (EventListener<ResizeWindowEvent>) resizeEvent -> {
             screenManager.resize(resizeEvent.getOldWidth(), resizeEvent.getOldHeight(), resizeEvent.getNewWidth(), resizeEvent.getNewHeight());
         });
-
-        assetManager = GameAssetManager.getInstance();
     }
 
     @Override
@@ -32,7 +29,7 @@ public class ScreenSubSystem implements SubSystem {
 
         //update asset manager
         //TODO: maybe call this method in another class instead
-        assetManager.update();
+        GameAssetManager.getInstance().update();
 
         this.screenManager.update(delta);
         this.screenManager.draw(delta);
