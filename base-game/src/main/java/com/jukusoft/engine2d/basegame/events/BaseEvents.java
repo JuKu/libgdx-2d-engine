@@ -17,4 +17,8 @@ public class BaseEvents {
     //player / camera movement (e.q. used by controllers)
     public static final int MOVE_PLAYER = 7;
 
+    //sound engine
+    public static final int PLAY_SOUNDTRACK = 8;
+    public static final int SOUNDTRACK_FINISHED = 9;
+
 }

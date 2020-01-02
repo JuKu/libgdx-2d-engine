@@ -26,6 +26,12 @@
 
         <dependency>
             <groupId>com.jukusoft</groupId>
+            <artifactId>engine2d-game-sound</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jukusoft</groupId>
             <artifactId>engine2d-input</artifactId>
             <version>${project.version}</version>
         </dependency>

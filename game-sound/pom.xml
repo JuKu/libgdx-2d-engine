@@ -30,6 +30,12 @@
             <version>${project.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.jukusoft</groupId>
+            <artifactId>engine2d-game-view</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- https://github.com/mini2Dx/gdx-collections -->
         <dependency>
             <groupId>org.mini2Dx</groupId>

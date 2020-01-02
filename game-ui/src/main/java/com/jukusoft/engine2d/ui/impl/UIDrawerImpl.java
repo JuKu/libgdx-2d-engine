@@ -9,9 +9,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.jukusoft.engine2d.core.logger.Log;
+import com.jukusoft.engine2d.sound.controller.SoundEngineController;
 import com.jukusoft.engine2d.ui.UIDrawer;
 import com.jukusoft.engine2d.ui.UIScreen;
 import com.jukusoft.engine2d.ui.Widget;
+import com.jukusoft.engine2d.ui.dto.Soundtrack;
 import com.jukusoft.engine2d.view.assets.assetmanager.GameAssetManager;
 
 import java.net.URI;
@@ -105,6 +107,11 @@ public class UIDrawerImpl extends InputAdapter implements UIDrawer {
         loadAssets();
 
         //set soundtrack
+        if (!screen.listSoundtracks().isEmpty()) {
+            //get random soundtrack
+            Soundtrack soundtrack = screen.listSoundtracks().random();
+            SoundEngineController.playBackgroundSoundtrack(soundtrack.getPath());
+        }
     }
 
     @Override
