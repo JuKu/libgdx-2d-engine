@@ -61,7 +61,7 @@ public class I18NHelper {
 
     public static File getI18NDir() {
         String dir = getI18NDirPath();
-        File i18nFolder = new File(FilePath.parse(dir));
+        File i18nFolder = new File(FilePath.parse(dir, false));
 
         return i18nFolder;
     }
