@@ -103,6 +103,8 @@ public class UIDrawerImpl extends InputAdapter implements UIDrawer {
 
         //load assets
         loadAssets();
+
+        //set soundtrack
     }
 
     @Override

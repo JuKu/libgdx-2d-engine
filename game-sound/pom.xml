@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>engine2d-parent</artifactId>
+        <groupId>com.jukusoft</groupId>
+        <version>1.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>engine2d-game-sound</artifactId>
+
+    <properties>
+        <!-- don't skip this module, instead deploy this module to maven central -->
+        <maven.deploy.skip>false</maven.deploy.skip>
+        <maven.deploy.uniqueVersion>false</maven.deploy.uniqueVersion>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.jukusoft</groupId>
+            <artifactId>engine2d-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jukusoft</groupId>
+            <artifactId>engine2d-base-game</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- https://github.com/mini2Dx/gdx-collections -->
+        <dependency>
+            <groupId>org.mini2Dx</groupId>
+            <artifactId>gdx-collections</artifactId>
+            <version>${gdx.collections.version}</version>
+        </dependency>
+
+        <!-- libGDX -->
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx</artifactId>
+            <version>${libgdx.version}</version>
+        </dependency>
+
+        <!-- libGDX platform for JUnit tests -->
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-platform</artifactId>
+            <version>${libgdx.version}</version>
+            <classifier>natives-desktop</classifier>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- libGDX for junit tests -->
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-backend-headless</artifactId>
+            <version>${libgdx.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- easy i18n library -->
+        <dependency>
+            <groupId>com.jukusoft</groupId>
+            <artifactId>easy-i18n-gettext</artifactId>
+            <version>${easy.i18n.version}</version>
+        </dependency>
+    </dependencies>
+
+
+</project>

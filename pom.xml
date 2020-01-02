@@ -18,6 +18,7 @@
         <module>game-ui</module>
         <module>desktop</module>
         <module>test-desktop</module>
+        <module>game-sound</module>
     </modules>
 
     <name>Engine2D</name>
