@@ -9,6 +9,7 @@ import com.jukusoft.engine2d.core.memory.Pools;
 import com.jukusoft.engine2d.core.subsystem.SubSystem;
 import com.jukusoft.engine2d.core.time.GameTime;
 import com.jukusoft.engine2d.core.utils.Threads;
+import com.jukusoft.engine2d.sound.events.PlayMultipleSoundtracksEvent;
 import com.jukusoft.engine2d.sound.events.PlaySoundtrackEvent;
 import com.jukusoft.engine2d.sound.events.SoundtrackFinishedEvent;
 import com.jukusoft.engine2d.view.assets.assetmanager.GameAssetManager;
@@ -39,6 +40,10 @@ public class SoundEngineSubSystem implements SubSystem {
 
         Events.addListener(Threads.UI_THREAD, BaseEvents.PLAY_SOUNDTRACK, (EventListener<PlaySoundtrackEvent>) event -> {
             playBackgroundSoundtrack(event);
+        });
+
+        Events.addListener(Threads.UI_THREAD, BaseEvents.PLAY_MULTIPLE_SOUNDTRACKS, (EventListener<PlayMultipleSoundtracksEvent>) event -> {
+            playMultipleBackgroundSoundtracks(event);
         });
 
         initialized = true;
@@ -108,6 +113,12 @@ public class SoundEngineSubSystem implements SubSystem {
         Log.d(SoundEngineSubSystem.class.getSimpleName(), "load new soundtrack: " + currentBackgroundSoundtrackPath);
         assetManager.load(currentBackgroundSoundtrackPath, Music.class);
         soundtrackLoading = true;
+    }
+
+    private void playMultipleBackgroundSoundtracks(PlayMultipleSoundtracksEvent event) {
+        //TODO: add code here
+
+        throw new UnsupportedOperationException("method is not implemented yet");
     }
 
 }

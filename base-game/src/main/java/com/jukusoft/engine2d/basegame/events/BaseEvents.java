@@ -19,6 +19,7 @@ public class BaseEvents {
 
     //sound engine
     public static final int PLAY_SOUNDTRACK = 8;
-    public static final int SOUNDTRACK_FINISHED = 9;
+    public static final int PLAY_MULTIPLE_SOUNDTRACKS = 9;
+    public static final int SOUNDTRACK_FINISHED = 10;
 
 }
