@@ -83,8 +83,9 @@ public class SoundEngineSubSystem implements SubSystem {
             }
         }
 
+        //we do not need to unload assets here, because asset manager does this automatically itself
         //unload soundtrack
-        assetManager.unload(currentBackgroundSoundtrackPath);
+        //assetManager.unload(currentBackgroundSoundtrackPath);
     }
 
     private void playBackgroundSoundtrack(PlaySoundtrackEvent event) {
