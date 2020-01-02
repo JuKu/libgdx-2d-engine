@@ -14,6 +14,7 @@ import com.jukusoft.engine2d.ui.UIDrawer;
 import com.jukusoft.engine2d.ui.UIScreen;
 import com.jukusoft.engine2d.ui.Widget;
 import com.jukusoft.engine2d.ui.dto.Soundtrack;
+import com.jukusoft.engine2d.ui.style.StyleManager;
 import com.jukusoft.engine2d.view.assets.assetmanager.GameAssetManager;
 
 import java.net.URI;
@@ -33,6 +34,8 @@ public class UIDrawerImpl extends InputAdapter implements UIDrawer {
     private boolean ownSpriteBatch = false;
 
     private Texture backgroundTexture;
+
+    private StyleManager styleManager;
 
     public UIDrawerImpl() {
         this(new SpriteBatch());
@@ -87,12 +90,14 @@ public class UIDrawerImpl extends InputAdapter implements UIDrawer {
     public void reload() {
         Log.d(UIDrawerImpl.class.getSimpleName(), "reload ui screen");
 
-        //unload assets, if neccessary
+        GameAssetManager assetManager = GameAssetManager.getInstance();
+
+        //dispose old screen and unload assets, if neccessary
         if (screen != null) {
+            screen.dispose(styleManager, assetManager);
+
             unloadAssets();
         }
-
-        GameAssetManager assetManager = GameAssetManager.getInstance();
 
         //unload old screen
         if (assetManager.isLoaded(oldUiScreenXMLPath)) {
@@ -104,6 +109,9 @@ public class UIDrawerImpl extends InputAdapter implements UIDrawer {
         assetManager.finishLoading(uiScreenXMLPath);
         this.screen = assetManager.get(uiScreenXMLPath);
         Objects.requireNonNull(this.screen);
+
+        //initialize screen
+        screen.init(styleManager, assetManager);
 
         //load assets
         loadAssets();

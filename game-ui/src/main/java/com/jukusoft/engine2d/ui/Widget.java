@@ -3,7 +3,10 @@ package com.jukusoft.engine2d.ui;
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Disposable;
 import com.jukusoft.engine2d.ui.parser.SelectorCompiler;
+import com.jukusoft.engine2d.ui.style.StyleManager;
+import com.jukusoft.engine2d.view.assets.assetmanager.GameAssetManager;
 import net.sf.saxon.s9api.XdmItem;
 
 import java.util.Objects;
@@ -39,8 +42,8 @@ public abstract class Widget extends InputAdapter {
      *
      * @param uiDrawer instance of ui drawer
      */
-    protected final void init(UIDrawer uiDrawer) {
-        //
+    protected final void init(UIDrawer uiDrawer, StyleManager styleManager, GameAssetManager assetManager) {
+        initWidget(styleManager, assetManager);
     }
 
     /**
@@ -209,6 +212,30 @@ public abstract class Widget extends InputAdapter {
      * @param selectorCompiler
      */
     public void parseFromXml(XdmItem widgetItem, SelectorCompiler selectorCompiler) {
+        //
+    }
+
+    public final void disposeWidget(StyleManager styleManager, GameAssetManager assetManager) {
+        dispose(styleManager, assetManager);
+    }
+
+    /**
+     * this method can be overriden to do some things on widget initialization
+     *
+     * @param styleManager style manager to get current style
+     * @param assetManager asset manager to load and unload assets
+     */
+    protected void initWidget(StyleManager styleManager, GameAssetManager assetManager) {
+        //
+    }
+
+    /**
+     * this method can be overriden to dispose widget, e.q. unload assets and so on
+     *
+     * @param styleManager style manager to get current style
+     * @param assetManager asset manager to load and unload assets
+     */
+    protected void dispose(StyleManager styleManager, GameAssetManager assetManager) {
         //
     }
 

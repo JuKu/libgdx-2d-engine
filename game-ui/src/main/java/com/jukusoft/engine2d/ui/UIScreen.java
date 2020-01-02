@@ -2,7 +2,10 @@ package com.jukusoft.engine2d.ui;
 
 import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Disposable;
 import com.jukusoft.engine2d.ui.dto.Soundtrack;
+import com.jukusoft.engine2d.ui.style.StyleManager;
+import com.jukusoft.engine2d.view.assets.assetmanager.GameAssetManager;
 
 import java.util.Objects;
 
@@ -206,6 +209,18 @@ public class UIScreen extends InputAdapter {
         }
 
         return false;
+    }
+
+    public void init(StyleManager styleManager, GameAssetManager assetManager) {
+        for (Widget widget : childWidgets) {
+            widget.disposeWidget(styleManager, assetManager);
+        }
+    }
+
+    public void dispose(StyleManager styleManager, GameAssetManager assetManager) {
+        for (Widget widget : childWidgets) {
+            widget.disposeWidget(styleManager, assetManager);
+        }
     }
 
 }
