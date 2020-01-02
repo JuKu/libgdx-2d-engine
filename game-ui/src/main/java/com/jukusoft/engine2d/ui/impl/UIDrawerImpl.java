@@ -112,7 +112,9 @@ public class UIDrawerImpl extends InputAdapter implements UIDrawer {
         if (!screen.listSoundtracks().isEmpty()) {
             //get random soundtrack
             Soundtrack soundtrack = screen.listSoundtracks().random();
-            SoundEngineController.playBackgroundSoundtrack(soundtrack.getPath());
+            Log.d(UIDrawerImpl.class.getSimpleName(), "set soundtrack: " + soundtrack.getPath());
+
+            SoundEngineController.playBackgroundSoundtrack(soundtrack.getPath(), soundtrack.isLoop(), soundtrack.getVolume());
 
             //TODO: set all soundtracks to sound engine to play
         }

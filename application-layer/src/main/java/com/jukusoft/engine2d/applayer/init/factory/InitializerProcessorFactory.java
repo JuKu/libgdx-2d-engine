@@ -52,6 +52,11 @@ public class InitializerProcessorFactory {
 
     public static void addGlobalInitializer(Initializer initializer) {
         Objects.requireNonNull(initializer);
+
+        if (globalInitializers.contains(initializer)) {
+            throw new IllegalStateException("global initializer list already contains initializer: " + initializer.getClass().getSimpleName());
+        }
+
         globalInitializers.add(initializer);
     }
 

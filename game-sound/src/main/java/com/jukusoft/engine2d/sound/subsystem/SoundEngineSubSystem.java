@@ -25,13 +25,23 @@ public class SoundEngineSubSystem implements SubSystem {
     private float soundtrackVolume = 1.0f;
     private boolean soundtrackLoop = false;
 
+    private boolean initialized = false;
+
     @Override
     public void init() {
+        Log.d(SoundEngineSubSystem.class.getSimpleName(), "initialize sound engine");
+
+        if (initialized) {
+            throw new IllegalStateException("sound engine was already initialized");
+        }
+
         this.assetManager = GameAssetManager.getInstance();
 
         Events.addListener(Threads.UI_THREAD, BaseEvents.PLAY_SOUNDTRACK, (EventListener<PlaySoundtrackEvent>) event -> {
             playBackgroundSoundtrack(event);
         });
+
+        initialized = true;
     }
 
     @Override
@@ -95,7 +105,8 @@ public class SoundEngineSubSystem implements SubSystem {
         soundtrackLoop = event.loop;
 
         //load new soundtrack
-        assetManager.load(event.filePath, Music.class);
+        Log.d(SoundEngineSubSystem.class.getSimpleName(), "load new soundtrack: " + currentBackgroundSoundtrackPath);
+        assetManager.load(currentBackgroundSoundtrackPath, Music.class);
         soundtrackLoading = true;
     }
 

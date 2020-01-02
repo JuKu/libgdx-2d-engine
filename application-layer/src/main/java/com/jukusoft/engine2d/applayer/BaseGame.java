@@ -15,6 +15,7 @@ import com.jukusoft.engine2d.core.subsystem.SubSystem;
 import com.jukusoft.engine2d.core.subsystem.SubSystemManager;
 import com.jukusoft.engine2d.core.subsystem.impl.DefaultSubSystemManager;
 import com.jukusoft.engine2d.core.time.GameTime;
+import com.jukusoft.engine2d.core.utils.Threads;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -46,11 +47,11 @@ public abstract class BaseGame extends BaseApp {
             Consumer<SubSystemManager> subSystemCreator = this.addSubSystems(/*subSystemManager*/);
 
             //get subsystems for UI-thread
-            this.subSystemsList = subSystemManager.listSubSystemsByThread(1);
+            this.subSystemsList = subSystemManager.listSubSystemsByThread(Threads.UI_THREAD);
 
             //initialize subsystems for UI-thread
             initializerList.add(new SubSystemCreatorInitializer(subSystemManager, subSystemCreator));
-            initializerList.add(new UIThreadSubSystemsInitializer(subSystemManager.listSubSystemsByThread(1)));
+            initializerList.add(new UIThreadSubSystemsInitializer(subSystemManager.listSubSystemsByThread(Threads.UI_THREAD)));
             initializerList.add(new CreateThreadsInitializer(subSystemManager));
         } catch (Throwable e) {
             Log.e("BaseGame", "error occured during initialization: ", e);
@@ -64,7 +65,7 @@ public abstract class BaseGame extends BaseApp {
         GameInstanceHolder.setInstance(this.game);
 
         //initialize subsystems
-        SubSystemInitializer.init(subSystemsList);
+        //SubSystemInitializer.init(subSystemsList);
     }
 
     @Override

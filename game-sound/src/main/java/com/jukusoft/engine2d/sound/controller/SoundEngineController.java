@@ -20,12 +20,14 @@ public class SoundEngineController {
      *
      * @param fileName fileName to search in asset packs
      */
-    public static void playBackgroundSoundtrack(String fileName) {
+    public static void playBackgroundSoundtrack(String fileName, boolean loop, float volume) {
         StringUtils.checkNotNullAndNotEmpty(fileName, "soundtrack filename");
 
         //fire event to load an play the soundtrack
         PlaySoundtrackEvent event = Pools.get(PlaySoundtrackEvent.class);
         event.filePath = fileName;
+        event.loop = loop;
+        event.volume = volume;
         Events.queueEvent(event);
     }
 
