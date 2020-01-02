@@ -10,6 +10,7 @@ import com.jukusoft.engine2d.core.subsystem.SubSystemManager;
 import com.jukusoft.engine2d.core.utils.Threads;
 import com.jukusoft.engine2d.input.subsystem.InputSubSystem;
 import com.jukusoft.engine2d.plugin.PluginApi;
+import com.jukusoft.engine2d.sound.subsystem.SoundEngineSubSystem;
 import com.jukusoft.engine2d.view.subsystem.ScreenSubSystem;
 
 import java.util.function.Consumer;
@@ -45,6 +46,9 @@ public class TestBaseGameFactory implements BaseGameFactory {
                     screenSubSystem.getScreenManager().addScreen("test", new TestUIScreen());
                     screenSubSystem.getScreenManager().leaveAllAndEnter("test");
                     manager.addSubSystem(screenSubSystem, Threads.UI_THREAD);
+
+                    //add sound engine
+                    manager.addSubSystem(new SoundEngineSubSystem(), Threads.UI_THREAD);
                 };
             }
 
