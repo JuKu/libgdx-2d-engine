@@ -39,6 +39,7 @@ public class InitializerProcessorFactory {
         initializerList.add(new TaskManagerInitializer());
         initializerList.add(new ThreadsInitializer());
         initializerList.add(new FilePathInitializer());
+        initializerList.add(new ModManagerInitializer());
         initializerList.addAll(globalInitializers);
 
         //add initializers which should be executed after splashscreen is shown
