@@ -22,9 +22,6 @@ public class TestUIScreen extends ScreenAdapter {
     public void onResume(ScreenManager<IScreen> screenManager) {
         super.onResume(screenManager);
 
-        //load maindata mods
-        ModManager.getInstance().loadFromDir(new File("data/maindata"));
-
         this.uiDrawer = new UIDrawerImpl();
         this.uiDrawer.setDebug(true);
         this.uiDrawer.load("testscreen.xml");

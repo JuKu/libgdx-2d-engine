@@ -24,6 +24,9 @@ public class UIStyleManagerImpl implements UIStyleManager {
     //available style paths in asset packs
     Array<String> stylePaths = null;
 
+    private UIStyle currentStyle;
+    private boolean loaded = false;
+
     private UIStyleManagerImpl() {
         //find all available ui styles
         this.stylePaths = listStylePaths();
@@ -57,11 +60,28 @@ public class UIStyleManagerImpl implements UIStyleManager {
         //call asset manager to load ui style
 
         //TODO: add code here
+
+        loaded = true;
+    }
+
+    @Override
+    public void unload() {
+        if (!loaded) {
+            return;
+        }
+
+        //TODO: unload assets
+
+        loaded = false;
     }
 
     @Override
     public UIStyle getCurrentStyle() {
-        return null;
+        if (currentStyle == null) {
+            throw new IllegalStateException("method load() was not called before");
+        }
+
+        return currentStyle;
     }
 
     @Override
@@ -69,13 +89,23 @@ public class UIStyleManagerImpl implements UIStyleManager {
         return null;
     }
 
+    @Override
+    public void reload() {
+        unload();
+        load();
+    }
+
     private Array<String> listStylePaths() {
+        Log.d(UIStyleManagerImpl.class.getSimpleName(), "listStylePaths()");
+
         Array<String> stylePaths = new Array<>();
 
         String listFileName = Config.get("UIStyles", "stylesName");
 
         //search for available styles in mods
         for (Mod mod : ModManager.getInstance().findModsWithSpecificFile(listFileName)) {
+            Log.d(UIStyleManagerImpl.class.getSimpleName(), "find mod: " + mod.getArchiveFile());
+
             try (ZipFile zipFile = new ZipFile(mod.getArchiveFile())) {
                 ZipEntry zipEntry = zipFile.getEntry(listFileName);
 
@@ -101,7 +131,7 @@ public class UIStyleManagerImpl implements UIStyleManager {
         }
 
         if (stylePaths.size == 0) {
-            throw new IllegalStateException("no ui styles found in mods");
+            throw new IllegalStateException("no ui styles found in mods (asset filePath: " + listFileName + ")");
         }
 
         return stylePaths;

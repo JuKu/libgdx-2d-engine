@@ -90,6 +90,8 @@ public class UIDrawerImpl extends InputAdapter implements UIDrawer {
         Log.d(UIDrawerImpl.class.getSimpleName(), "reload ui screen");
 
         GameAssetManager assetManager = GameAssetManager.getInstance();
+        styleManager = UIStyleManager.getInstance();
+        styleManager.reload();
 
         //dispose old screen and unload assets, if neccessary
         if (screen != null) {

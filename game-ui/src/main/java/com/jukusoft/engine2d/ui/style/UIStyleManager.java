@@ -16,9 +16,16 @@ public interface UIStyleManager {
      */
     public void load();
 
+    /**
+     * unload current style
+     */
+    public void unload();
+
     public UIStyle getCurrentStyle();
 
     public Array<UIStyle> listAllStyles();
+
+    public void reload();
 
     public static UIStyleManager getInstance() {
         return UIStyleManagerImpl.getInstance();
