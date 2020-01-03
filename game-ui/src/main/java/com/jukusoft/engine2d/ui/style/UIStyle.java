@@ -37,4 +37,12 @@ public class UIStyle {
         return null;
     }
 
+    public JSONObject getStyleJSON(String key) {
+        if (json.has(key)) {
+            return json.getJSONObject(key);
+        }
+
+        return null;
+    }
+
 }
