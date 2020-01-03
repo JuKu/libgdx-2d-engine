@@ -26,9 +26,12 @@ public class UIStyle {
 
     public JSONObject getWidgetStyle(Class<? extends Widget> cls) {
         String key = cls.getCanonicalName();
+        String className = cls.getSimpleName();
 
         if (json.has(key)) {
             return json.getJSONObject(key);
+        } else if (json.has(className)) {
+            return json.getJSONObject(className);
         }
 
         return null;
