@@ -1,4 +1,4 @@
 package com.jukusoft.engine2d.ui.style;
 
-public class Style {
+public class UIStyle {
 }

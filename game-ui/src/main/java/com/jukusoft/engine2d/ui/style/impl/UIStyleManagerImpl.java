@@ -6,7 +6,7 @@ import com.jukusoft.engine2d.basegame.mods.impl.Mod;
 import com.jukusoft.engine2d.core.config.Config;
 import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.core.utils.StringUtils;
-import com.jukusoft.engine2d.ui.style.Style;
+import com.jukusoft.engine2d.ui.style.UIStyle;
 import com.jukusoft.engine2d.ui.style.UIStyleManager;
 import org.json.JSONArray;
 
@@ -60,12 +60,12 @@ public class UIStyleManagerImpl implements UIStyleManager {
     }
 
     @Override
-    public Style getCurrentStyle() {
+    public UIStyle getCurrentStyle() {
         return null;
     }
 
     @Override
-    public Array<Style> listAllStyles() {
+    public Array<UIStyle> listAllStyles() {
         return null;
     }
 
