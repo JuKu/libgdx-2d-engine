@@ -87,6 +87,10 @@ public class ZipAssetManagerFactory {
         assetManager.setLoader(TextureAtlas.class, new TextureAtlasLoader(resolver));
         assetManager.setLoader(TiledMap.class, new TmxMapLoader(resolver));
 
+        //set additional loader for json files
+        assetManager.setLoader(JSONObject.class, new JSONObjectLoader(resolver));
+        assetManager.setLoader(JSONArray.class, new JSONArrayLoader(resolver));
+
         //find all asset loader implementation with SPI and register them
         Log.d(ZipAssetManagerFactory.class.getSimpleName(), "search for SPI asset loader classes...");
         ServiceLoader<SPIAssetLoader> loader = ServiceLoader.load(SPIAssetLoader.class);

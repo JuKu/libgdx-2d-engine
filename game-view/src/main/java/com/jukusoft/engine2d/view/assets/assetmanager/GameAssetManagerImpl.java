@@ -2,6 +2,7 @@ package com.jukusoft.engine2d.view.assets.assetmanager;
 
 import com.badlogic.gdx.assets.AssetLoaderParameters;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.assets.loaders.AssetLoader;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.jukusoft.engine2d.basegame.mods.ModManager;
 import com.jukusoft.engine2d.basegame.mods.impl.Mod;
@@ -260,6 +261,10 @@ public class GameAssetManagerImpl implements GameAssetManager {
 
     public com.badlogic.gdx.utils.Array<String> listLoadedAssets() {
         return assetManager.getAssetNames();
+    }
+
+    public <T, P extends AssetLoaderParameters<T>> void setLoader (Class<T> type, AssetLoader<T, P> loader) {
+        assetManager.setLoader(type, loader);
     }
 
 }

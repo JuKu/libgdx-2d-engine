@@ -3,6 +3,7 @@ package com.jukusoft.engine2d.ui.style;
 import com.badlogic.gdx.files.FileHandle;
 import com.jukusoft.engine2d.core.utils.StringUtils;
 import com.jukusoft.engine2d.ui.Widget;
+import com.jukusoft.engine2d.view.assets.assetmanager.GameAssetManager;
 import org.json.JSONObject;
 
 import java.util.Objects;
@@ -43,6 +44,14 @@ public class UIStyle {
         }
 
         return null;
+    }
+
+    public void load(GameAssetManager assetManager) {
+        //
+    }
+
+    public void unload(GameAssetManager assetManager) {
+        //
     }
 
 }

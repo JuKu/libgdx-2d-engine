@@ -8,7 +8,9 @@ import com.jukusoft.engine2d.core.logger.Log;
 import com.jukusoft.engine2d.core.utils.StringUtils;
 import com.jukusoft.engine2d.ui.style.UIStyle;
 import com.jukusoft.engine2d.ui.style.UIStyleManager;
+import com.jukusoft.engine2d.view.assets.assetmanager.GameAssetManager;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.zip.ZipEntry;
@@ -19,7 +21,7 @@ public class UIStyleManagerImpl implements UIStyleManager {
 
     private static UIStyleManagerImpl instance;
 
-    private String currentStylePath = "styles/default.xml";
+    private String currentStylePath = Config.get("UIStyles", "defaultStyle");
 
     //available style paths in asset packs
     Array<String> stylePaths = null;
@@ -30,11 +32,6 @@ public class UIStyleManagerImpl implements UIStyleManager {
     private UIStyleManagerImpl() {
         //find all available ui styles
         this.stylePaths = listStylePaths();
-
-        for (String stylePath : stylePaths) {
-            Log.d(UIStyleManagerImpl.class.getSimpleName(), "style path found: " + stylePath);
-        }
-
         Log.i(UIStyleManagerImpl.class.getSimpleName(), "" + stylePaths.size + " styles found in asset packs");
     }
 
@@ -55,7 +52,20 @@ public class UIStyleManagerImpl implements UIStyleManager {
 
     @Override
     public void load() {
-        //TODO: find current style
+        //check, if current style is available
+        if (!stylePaths.contains(currentStylePath, false)) {
+            throw new IllegalStateException("selected ui style is not available in asset packs: " + currentStylePath);
+        }
+
+        Log.d(UIStyleManagerImpl.class.getSimpleName(), "found current ui style in asset packs: " + currentStylePath);
+
+        GameAssetManager assetManager = GameAssetManager.getInstance();
+
+        //load current style
+        assetManager.load(currentStylePath, JSONObject.class);
+        assetManager.finishLoading(currentStylePath);
+        JSONObject json = assetManager.get(currentStylePath);
+        this.currentStyle = new UIStyle(json);
 
         //call asset manager to load ui style
 
@@ -68,6 +78,10 @@ public class UIStyleManagerImpl implements UIStyleManager {
     public void unload() {
         if (!loaded) {
             return;
+        }
+
+        if (currentStyle != null) {
+            currentStyle.unload(GameAssetManager.getInstance());
         }
 
         //TODO: unload assets
