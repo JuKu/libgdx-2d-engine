@@ -68,8 +68,7 @@ public class UIStyleManagerImpl implements UIStyleManager {
         this.currentStyle = new UIStyle(json);
 
         //call asset manager to load ui style
-
-        //TODO: add code here
+        this.currentStyle.load(assetManager);
 
         loaded = true;
     }
