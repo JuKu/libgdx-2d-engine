@@ -124,10 +124,15 @@ public class DesktopLauncher {
 
         //allow user to set config values per properties, see #172165495
         for (String propertyName : System.getProperties().stringPropertyNames()) {
-            String[] array = propertyName.split(".");
+            String[] array = propertyName.split("\\.");
 
             if (array.length != 2) {
                 //property does not contain section
+                continue;
+            }
+
+            //don't parse system paramaters
+            if (array[0].contains("sun") || array[0].contains("awt") || array[0].contains("user") || array[0].contains("os") || array[0].contains("jdk") || array[0].contains("java") || array[0].contains("file") || array[0].contains("line") || array[0].contains("path")) {
                 continue;
             }
 
