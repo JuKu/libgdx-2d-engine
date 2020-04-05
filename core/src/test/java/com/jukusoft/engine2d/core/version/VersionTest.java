@@ -48,4 +48,38 @@ public class VersionTest {
         assertEquals(version, Version.getInstance());
     }
 
+    @Test (expected = NullPointerException.class)
+    public void testLoadFromNullJson() {
+        new Version().loadFromJson(null);
+    }
+
+    @Test (expected = IllegalArgumentException.class)
+    public void testLoadFromEmptyJson() {
+        new Version().loadFromJson("");
+    }
+
+    @Test
+    public void testLoadFromJson() {
+        String jsonStr = "{" +
+                "revision: \"1\"," +
+                "version: \"1.2.3\"," +
+                "buildJdk: \"test\"," +
+                "buildTime: \"n/a\"," +
+                "createdBy: \"JuKuSoft\"," +
+                "vendorID: \"com.jukusoft\"," +
+                "vendor: \"test2\"" +
+                "}";
+
+        Version version = new Version();
+        version.loadFromJson(jsonStr);
+
+        assertEquals("1", version.getRevision());
+        assertEquals("1.2.3", version.getVersion());
+        assertEquals("test", version.getBuildJdk());
+        assertEquals("n/a", version.getBuildTime());
+        assertEquals("JuKuSoft", version.getCreatedBy());
+        assertEquals("com.jukusoft", version.getVendorID());
+        assertEquals("test2", version.getVendor());
+    }
+
 }

@@ -1,9 +1,11 @@
 package com.jukusoft.engine2d.core.version;
 
 import com.jukusoft.engine2d.core.utils.JarUtils;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 
@@ -74,6 +76,23 @@ public class Version {
             e.printStackTrace();
             //TODO: use logged instead, for example LocalLogger.printStacktrace(e);
         }
+    }
+
+    public void loadFromJson(String jsonString) {
+        Objects.requireNonNull(jsonString);
+
+        if (jsonString.isEmpty()) {
+            throw new IllegalArgumentException("json string cannot be empty");
+        }
+
+        JSONObject json = new JSONObject(jsonString);
+        this.revision = json.getString("revision");
+        this.version = json.getString("version");
+        this.buildJdk = json.getString("buildJdk");
+        this.buildTime = json.getString("buildTime");
+        this.createdBy = json.getString("createdBy");
+        this.vendorID = json.getString("vendorID");
+        this.vendor = json.getString("vendor");
     }
 
     protected String getOrDefault(final Attributes attrs, String key, String defaultStr) {
