@@ -122,6 +122,22 @@ public class DesktopLauncher {
             throw new IllegalStateException("multiple SPI implementations for " + BaseGameFactory.class.getSimpleName() + " found");
         }
 
+        //allow user to set config values per properties, see #172165495
+        for (String propertyName : System.getProperties().stringPropertyNames()) {
+            String[] array = propertyName.split(".");
+
+            if (array.length != 2) {
+                //property does not contain section
+                continue;
+            }
+
+            String value = System.getProperty(propertyName);
+
+            if (value != null && !value.isEmpty()) {
+                Config.set(array[0], array[1], value);
+            }
+        }
+
         return factories.get(0).createGame();
     }
 
