@@ -62,7 +62,7 @@
 
     <properties>
         <!-- testing -->
-        <junit.version>4.12</junit.version>
+        <junit.version>4.13.1</junit.version>
         <mockito.version>2.2.7</mockito.version>
 
         <!-- hppc, high performance lists & maps, https://github.com/carrotsearch/hppc -->
